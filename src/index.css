@@ -2,49 +2,49 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neutral-black-2: #F8FAFB;
-  --color-neutral-black-3: #F6F8FA;
-  --color-neutral-black-4: #ECEFF3;
-  --color-neutral-black-5: #DFE1E7;
-  --color-neutral-black-6: #C1C7D0;
-  --color-neutral-black-7: #A4ACB9;
+  --color-neutral-black-2: #f8fafb;
+  --color-neutral-black-3: #f6f8fa;
+  --color-neutral-black-4: #eceff3;
+  --color-neutral-black-5: #dfe1e7;
+  --color-neutral-black-6: #c1c7d0;
+  --color-neutral-black-7: #a4acb9;
   --color-neutral-black-8: #818898;
-  --color-neutral-black-9: #666D80;
-  --color-neutral-black-10: #36394A;
+  --color-neutral-black-9: #666d80;
+  --color-neutral-black-10: #36394a;
   --color-neutral-black-11: #272835;
-  --color-neutral-black-12: #1A1B25;
-  --color-neutral-black-13: #0D0D12;
+  --color-neutral-black-12: #1a1b25;
+  --color-neutral-black-13: #0d0d12;
 
-  --color-primary-50: #E8F2FF;
-  --color-primary-100: #D0E4FC;
-  --color-primary-200: #A2C9FA;
-  --color-primary-300: #73AEF7;
-  --color-primary-400: #4593F5;
-  --color-primary-500: #1678F2;
+  --color-primary-50: #e8f2ff;
+  --color-primary-100: #d0e4fc;
+  --color-primary-200: #a2c9fa;
+  --color-primary-300: #73aef7;
+  --color-primary-400: #4593f5;
+  --color-primary-500: #1678f2;
 
-  --color-secondary-50: #FFF3E5;
-  --color-secondary-100: #FFE8CC;
-  --color-secondary-200: #FFD199;
-  --color-secondary-300: #FFBA66;
-  --color-secondary-400: #FFA333;
-  --color-secondary-500: #FF8C00;
+  --color-secondary-50: #fff3e5;
+  --color-secondary-100: #ffe8cc;
+  --color-secondary-200: #ffd199;
+  --color-secondary-300: #ffba66;
+  --color-secondary-400: #ffa333;
+  --color-secondary-500: #ff8c00;
 
-  --color-success-50: #EFFEFA;
-  --color-success-100: #DDF3EF;
-  --color-success-200: #9EE1D4;
-  --color-success-300: #40C4AA;
-  --color-success-400: #28806F;
-  --color-success-500: #184E44;
+  --color-success-50: #effefa;
+  --color-success-100: #ddf3ef;
+  --color-success-200: #9ee1d4;
+  --color-success-300: #40c4aa;
+  --color-success-400: #28806f;
+  --color-success-500: #184e44;
 
-  --color-error-50: #FFF0F3;
-  --color-error-50: #FADBE1;
-  --color-error-50: #ED8296;
-  --color-error-50: #DF1C41;
-  --color-error-50: #96132C;
-  --color-error-50: #710E21;
+  --color-error-50: #fff0f3;
+  --color-error-50: #fadbe1;
+  --color-error-50: #ed8296;
+  --color-error-50: #df1c41;
+  --color-error-50: #96132c;
+  --color-error-50: #710e21;
 
-  --color-warning-50: #FFF6E0;
-  --color-warning-100: #FAEDCC;
+  --color-warning-50: #fff6e0;
+  --color-warning-100: #faedcc;
   --color-warning-200: #fdd993;
   --color-warning-300: #fcc862;
   --color-warning-400: #fbbd43;
@@ -56,6 +56,8 @@
   --color-info-300: #65b5ff;
   --color-info-400: #47a6ff;
   --color-info-500: #1990ff;
+  --shadow-sm: "0px 0px 0px 1px #1678F2";
+  --drop-shadow-sm: "0px 0px 1px 3px #1678F215";
 }
 @theme {
   --font-manrope: "Manrope", sans-serif;
