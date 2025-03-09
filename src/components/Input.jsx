@@ -16,10 +16,10 @@ const TextInput = ({
         </label>
       )}
       <div
-        className="px-3 py-2 rounded-full border border-neutral-black-5  shadow-sm shadow-[#1678F2]  drop-shadow-sm  "
+        className="px-3 py-2 rounded-full border border-neutral-black-5   focus-within:inset-shadow-custom-sm focus-within:drop-shadow-sm w-fit min-w-[300px] flex"
         tabIndex={0}
       >
-        <input type="text" />
+        <input type="text" className="focus-within:outline-0 flex" />
       </div>
     </div>
   );
