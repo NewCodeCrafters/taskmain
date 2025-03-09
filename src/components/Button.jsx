@@ -19,7 +19,7 @@ const Button = ({
         return "border border-primary-400 text-primary-500 hover:bg-primary-100";
       case "ghost":
         return "bg-transparent text-primary-500 hover:bg-primary-50";
-      default: 
+      default:
         return "bg-primary-500 text-white hover:bg-primary-400";
     }
   };
