@@ -1,26 +1,8 @@
-import flash from "./assets/flash.svg";
-import eye from "./assets/eye.svg";
-import Input from "./components/Input";
-function App() {
-  return (
-    <div>
-      <Input
-        placeholder="Placeholder"
-        lefticon={
-          <div>
-            <img src={flash} />
-          </div>
-        }
-        rightIcon={
-          <div>
-            <img src={eye} />
-          </div>
-        }
-        label={"Label"}
-        hint={"This is a hint"}
-      />
-    </div>
-  );
-}
+
+import React from "react";
+
+const App = () => {
+  return <div>hello</div>;
+};
 
 export default App;
