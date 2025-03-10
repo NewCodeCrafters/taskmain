@@ -21,6 +21,7 @@ const SubNav = () => {
         <RouteLink
           src="/images/layers-two-02.svg"
           linkDesc="Development stuff"
+          IconSrc="images/chevron-down.svg"
         />
         <div className="flex gap-2">
           <figure className="pl-6">
