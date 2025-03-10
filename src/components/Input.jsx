@@ -6,6 +6,7 @@ const TextInput = ({
   rightIcon,
   hint,
   error,
+  // eslint-disable-next-line no-unused-vars
   ...inputProps
 }) => {
   return (
