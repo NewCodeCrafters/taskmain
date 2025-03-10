@@ -2,8 +2,8 @@ import React, { Children } from "react";
 
 const TextInput = ({
   label,
-  leftIcon,
-  rightIcon,
+  leftIcon = null,
+  rightIcon = null,
   hint,
   error,
   // eslint-disable-next-line no-unused-vars
@@ -20,9 +20,9 @@ const TextInput = ({
         className="px-3 py-2 rounded-full border border-neutral-black-5 focus-within:inset-shadow-custom-sm focus-within:drop-shadow-sm w-fit flex"
         tabIndex={0}
       >
-        <img src={leftIcon} alt="" />
+        <figure>{leftIcon}</figure>
         <input type="text" className="focus-within:outline-0 flex" />
-        <img className="" src={rightIcon} alt="" />
+        <figure>{rightIcon}</figure>
       </div>
       <div>
         <p className="body-small-regular text-neutral-black-9 ">{hint}</p>
