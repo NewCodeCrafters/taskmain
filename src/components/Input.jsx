@@ -20,9 +20,9 @@ const TextInput = ({
         className="px-3 py-2 rounded-full border border-neutral-black-5 focus-within:inset-shadow-custom-sm focus-within:drop-shadow-sm w-fit flex"
         tabIndex={0}
       >
-        <figure>{leftIcon}</figure>
+        {leftIcon}
         <input type="text" className="focus-within:outline-0 flex" />
-        <figure>{rightIcon}</figure>
+        {rightIcon}
       </div>
       <div>
         <p className="body-small-regular text-neutral-black-9 ">{hint}</p>
