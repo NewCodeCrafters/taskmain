@@ -1,8 +1,4 @@
 import React, { Children } from "react";
-import eye from "../assets/eye.svg";
-import flash from "../assets/flash.svg";
-import error from "../components/error.svg";
-"
 
 const TextInput = ({
   label,
@@ -28,14 +24,10 @@ const TextInput = ({
         <img className="" src={rightIcon} alt="" />
       </div>
       <div>
-        <p className="body-small-regular text-neutral-black-9 ">
-          This is a hint text to help user
-        </p>
+        <p className="body-small-regular text-neutral-black-9 ">{hint}</p>
         <div>
           <img src="" alt="" />
-          <p className="body-small-regular ">
-            This is a hint text to help user
-          </p>
+          <p className="body-small-regular ">{error}</p>
         </div>
       </div>
     </div>
