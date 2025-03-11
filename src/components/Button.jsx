@@ -28,7 +28,7 @@ const Button = ({
     <button
       onClick={onClick}
       disabled={isLoading || isDisabled}
-      className={`flex items-center justify-center gap-2 px-4 py-2 rounded-md transition
+      className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full transition
         ${
           isDisabled
             ? "bg-neutral-black-5 text-neutral-black-8 cursor-not-allowed"

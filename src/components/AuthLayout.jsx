@@ -3,8 +3,8 @@ import icon from "../assets/icon.svg";
 
 const AuthLayout = () => {
   return (
-    <div className="bg-black min-h-screen w-full h-full grid  grid-cols-2 p-5  ">
-      <section className=" text-white flex flex-col justify-between h-full ">
+    <div className="bg-black min-h-screen w-full h-full grid  lg:grid-cols-2 md:grid-cols-2 p-5  ">
+      <section className=" text-white lg:flex flex-col justify-between h-full md:flex hidden ">
         <div className="text-white flex gap-2 items-center">
           <figure>
             <img className="" src={icon} alt="" />
