@@ -10,7 +10,7 @@ const MainNav = () => {
         <div className="flex flex-col gap-3 border-b border-neutral-black-5 pb-4">
           <span className="text-neutral-black-8">General</span>
           <RouteLink
-            src="/images/pie-chart-02.svg"
+            leftIcon={<img src="/images/pie-chart-02.svg" />}
             linkDesc="Overview"
             LinkTo="/"
           />

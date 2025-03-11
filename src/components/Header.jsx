@@ -1,9 +1,14 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({ handleSideBar, sideBar }) => {
   return (
     <div className="px-6 flex justify-between items-center border- border-neutral-black-5  h-[76px] top-0  sticky z-50">
       <div className="flex gap-3 heading-5 bg-white">
+        {!sideBar && (
+          <button onClick={handleSideBar}>
+            <img src="/images/Closebar.svg" alt="" />
+          </button>
+        )}
         <span className=" text-paragraph">Development Stuff</span>
         <span>/</span>
         <span>Team daily Task</span>
