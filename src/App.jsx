@@ -1,12 +1,12 @@
 import React from "react";
-import AuthLayout from "./components/authLayout";
+import Modal from "./components/modal";
 
 const App = () => {
   return (
     <div className="">
-      <AuthLayout />
+      <Modal />
     </div>
   );
 };
 
-export default App; 
+export default App;
