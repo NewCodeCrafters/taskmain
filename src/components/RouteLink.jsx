@@ -1,28 +1,31 @@
 import React from "react";
-import { Link } from "react-router";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router";
 
 const RouteLink = ({ leftIcon, linkDesc, LinkTo, rightIcon = null }) => {
-  const [selectedLink, setSelectedLink] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname;
+  // console.log(LinkTo, currentPath);
 
-  function handleSelectedLink() {
-    setSelectedLink((link) => !link);
-  }
+  const isActive = LinkTo === currentPath;
+
   return (
     <Link
       to={LinkTo || "#"}
-      onClick={handleSelectedLink}
       className={
-        selectedLink ? "bg-primary-50 rounded-xl border-l border-l-black" : ""
+        isActive
+          ? "bg-primary-50 py-3 px-4 rounded-xl flex w-full gap-3 relative"
+          : "flex py-3 px-4 hover:cursor-pointer rounded-4  items-center w-full gap-3 "
       }
     >
-      <button className="flex py-3 px-4 hover:cursor-pointer rounded-4  items-center w-full gap-3">
-        <div className="flex items-center gap-3 w-full">
-          {leftIcon}
-          <span>{linkDesc}</span>
-        </div>
-        {rightIcon}
-      </button>
+      {isActive && (
+        <div className="absolute  h-full w-[10px] bg-primary-500 left-[-25px] top-1/2 -translate-y-1/2 rounded-r-full"></div>
+      )}
+      <div className="flex items-center gap-3 w-full">
+        {leftIcon}
+        <span>{linkDesc}</span>
+      </div>
+      {rightIcon}
     </Link>
   );
 };

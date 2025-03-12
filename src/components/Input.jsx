@@ -21,7 +21,11 @@ const TextInput = ({
         tabIndex={0}
       >
         {leftIcon}
-        <input type="text" className="focus-within:outline-0 flex" />
+        <input
+          type="text"
+          className="focus-within:outline-0 flex"
+          {...inputProps}
+        />
         {rightIcon}
       </div>
       <div>

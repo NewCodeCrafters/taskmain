@@ -19,6 +19,11 @@ const Button = ({
         return "border border-primary-400 text-primary-500 hover:bg-primary-100";
       case "ghost":
         return "bg-transparent text-primary-500 hover:bg-primary-50";
+<<<<<<< HEAD
+=======
+      case "black":
+        return "bg-black text-white hover:bg-neutral-black-9";
+>>>>>>> e0f372c (chore: App layout on)
       default:
         return "bg-primary-500 text-white hover:bg-primary-400";
     }
@@ -28,7 +33,11 @@ const Button = ({
     <button
       onClick={onClick}
       disabled={isLoading || isDisabled}
+<<<<<<< HEAD
       className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full transition
+=======
+      className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full transition hover:cursor-pointer
+>>>>>>> e0f372c (chore: App layout on)
         ${
           isDisabled
             ? "bg-neutral-black-5 text-neutral-black-8 cursor-not-allowed"

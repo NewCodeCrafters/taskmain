@@ -1,5 +1,6 @@
 import React from "react";
 import RouteLink from "./RouteLink";
+import Button from "./Button";
 
 const SubNav = () => {
   return (
@@ -16,10 +17,16 @@ const SubNav = () => {
             </button>
           </div>
         </div>
-        <RouteLink src="/images/users-plus.svg" linkDesc="Human Resources" />
-        <RouteLink src="/images/building-06.svg" linkDesc="Agency branding" />
         <RouteLink
-          src="/images/layers-two-02.svg"
+          leftIcon={<img src="/images/users-plus.svg" />}
+          linkDesc="Human Resources"
+        />
+        <RouteLink
+          leftIcon={<img src="/images/building-06.svg" />}
+          linkDesc="Agency branding"
+        />
+        <RouteLink
+          leftIcon={<img src="/images/layers-two-02.svg" />}
           linkDesc="Development stuff"
           IconSrc="images/chevron-down.svg"
         />
@@ -39,9 +46,7 @@ const SubNav = () => {
               Unlock all features on Pixelcraft
             </span>
           </article>
-          {/* ///////////// */}
-          <button>Button here</button>
-          {/* ///////////////// */}
+          <Button>Upgrade Here</Button>
         </div>
       </section>
     </div>

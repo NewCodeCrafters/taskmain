@@ -3,9 +3,8 @@ import ProfileDropDown from "../components/ProfileDropDown";
 
 const MembersSetttings = () => {
   return (
-    <div>
+    <div className="relative">
       <span>MembersSetttings</span>
-      <ProfileDropDown />
     </div>
   );
 };

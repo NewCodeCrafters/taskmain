@@ -16,21 +16,21 @@ const MainNav = () => {
           />
 
           <RouteLink
-            src="/images/users-01.svg"
+            leftIcon={<img src="/images/users-01.svg" />}
             linkDesc="Member settings"
-            LinkTo="membersettings"
+            LinkTo="/membersettings"
           />
 
           <RouteLink
-            src="/images/star-01.svg"
+            leftIcon={<img src="/images/star-01.svg" />}
             linkDesc="Favourites"
-            LinkTo="favourites"
+            LinkTo="/favourites"
           />
 
           <RouteLink
-            src="/images/message-text-circle-02.svg"
+            leftIcon={<img src="/images/message-text-circle-02.svg" />}
             linkDesc="Messages"
-            LinkTo="messages"
+            LinkTo="/messages"
           />
         </div>
       </section>

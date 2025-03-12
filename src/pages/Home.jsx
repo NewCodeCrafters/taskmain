@@ -5,7 +5,6 @@ const Home = () => {
   return (
     <div className="relative w-full">
       <span>Home</span>
-      <ProfileDropDown />
     </div>
   );
 };
