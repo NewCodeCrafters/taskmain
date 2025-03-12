@@ -10,7 +10,7 @@ const Button = ({
   variant = "primary", // Default to primary
   className = "",
 }) => {
-  // Function to return classes based on the variant
+  // Function to return classes based on the variantsm
   const getVariantClasses = (variant) => {
     switch (variant) {
       case "secondary":
@@ -19,7 +19,7 @@ const Button = ({
         return "border border-primary-400 text-primary-500 hover:bg-primary-100";
       case "ghost":
         return "bg-transparent text-primary-500 hover:bg-primary-50";
-      default: 
+      default:
         return "bg-primary-500 text-white hover:bg-primary-400";
     }
   };
@@ -28,7 +28,7 @@ const Button = ({
     <button
       onClick={onClick}
       disabled={isLoading || isDisabled}
-      className={`flex items-center justify-center gap-2 px-4 py-2 rounded-md transition
+      className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full transition
         ${
           isDisabled
             ? "bg-neutral-black-5 text-neutral-black-8 cursor-not-allowed"
