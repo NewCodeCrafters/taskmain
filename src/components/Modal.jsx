@@ -3,13 +3,12 @@ import Button from "./Button";
 import TickIcon from "../assets/icon(3).svg";
 import CloseIcon from "../assets/x-close.svg";
 
-const Modal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
+const Modal = () => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-index-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white rounded-lg p-6 max-w-sm w-full shadow-lg relative">
         {/* Close Button */}
-        <button onClick={onClose} className="absolute top-4 right-4">
+        <button className="absolute top-4 right-4">
           <img
             src={CloseIcon}
             alt="Close"
@@ -27,14 +26,17 @@ const Modal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Title & Description */}
-        <h2 className="text-center text-lg font-semibold mt-4">Success!</h2>
+        <h2 className="text-center text-lg font-semibold mt-4">
+          Congratulations, You're in
+        </h2>
         <p className="text-center text-gray-600 mt-2">
-          Your account has been successfully created.
+          Get ready to organize, prioritize, and conquer your-to-do list like
+          never before. Let's make everyday productive!
         </p>
 
         {/* Get Started Button */}
         <div className="mt-6">
-          <Button variant="primary" className="w-full" onClick={onClose}>
+          <Button variant="primary" className="w-full">
             Get Started
           </Button>
         </div>
