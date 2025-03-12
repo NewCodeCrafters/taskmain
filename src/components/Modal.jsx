@@ -6,7 +6,7 @@ import CloseIcon from "../assets/x-close.svg";
 const Modal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-index-50">
       <div className="bg-white rounded-lg p-6 max-w-sm w-full shadow-lg relative">
         {/* Close Button */}
         <button onClick={onClose} className="absolute top-4 right-4">
