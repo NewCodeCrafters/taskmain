@@ -14,6 +14,7 @@
   --color-neutral-black-11: #272835;
   --color-neutral-black-12: #1a1b25;
   --color-neutral-black-13: #0d0d12;
+  --color-paragraph: #6f6f6f;
 
   --color-primary-50: #e8f2ff;
   --color-primary-100: #d0e4fc;
@@ -34,7 +35,7 @@
   --color-success-200: #9ee1d4;
   --color-success-300: #40c4aa;
   --color-success-400: #28806f;
-  --color-success-500: #184e44;
+  --color-success -500: #184e44;
 
   --color-error-50: #fff0f3;
   --color-error-50: #fadbe1;
