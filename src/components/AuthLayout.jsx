@@ -1,5 +1,6 @@
 import React from "react";
 import icon from "../assets/icon.svg";
+import { Outlet } from "react-router";
 
 const AuthLayout = () => {
   return (
@@ -21,7 +22,9 @@ const AuthLayout = () => {
           </p>
         </div>
       </section>
-      <section className="bg-white rounded-3xl"></section>
+      <section className="bg-white rounded-3xl">
+        <Outlet />
+      </section>
     </div>
   );
 };
