@@ -17,10 +17,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "react-router": "^7.3.0",
-<<<<<<< HEAD
     "react-router-dom": "^7.3.0",
-=======
->>>>>>> e3e0ef8dfccc2c56943b922118d62a266ba9b3e5
     "tailwindcss": "^4.0.11",
     "zod": "^3.24.2",
     "zustand": "^5.0.3"
