@@ -2,7 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 
-const RouteLink = ({ leftIcon, linkDesc, LinkTo, rightIcon = null }) => {
+const RouteLink = ({
+  leftIcon,
+  linkDesc,
+  LinkTo,
+  rightIcon = null,
+  onClick,
+}) => {
   const location = useLocation();
   const currentPath = location.pathname;
   // console.log(LinkTo, currentPath);
@@ -11,6 +17,7 @@ const RouteLink = ({ leftIcon, linkDesc, LinkTo, rightIcon = null }) => {
 
   return (
     <Link
+      onClick={onClick}
       to={LinkTo || "#"}
       className={
         isActive

@@ -1,11 +1,20 @@
 import React from "react";
 import Button from "./Button";
 
-const Header = ({ handleSideBar, sideBar, handleDropDown, dropDown }) => {
+const Header = ({
+  handleSideBar,
+  sideBar,
+  handleDropDown,
+  dropDown,
+  handleSetMobileBar,
+}) => {
   return (
-    <div className="px-6 flex justify-between items-center border- border-neutral-black-5  h-[76px] top-0  sticky z-50 ">
+    <div className="px-3 md:px-6 flex justify-between items-center border- border-neutral-black-5  h-[76px] top-0  sticky z-50 ">
       <div className="flex gap-3 heading-5 bg-white lg:items-end">
-        <button onClick={handleSideBar} className="">
+        <button onClick={handleSetMobileBar} className="block md:hidden">
+          <img src="images/grid-01.svg" alt="" />
+        </button>
+        <button onClick={handleSideBar} className="hidden md:block">
           {sideBar ? <img src="/images/Closebar.svg" alt="" /> : null}
         </button>
 
