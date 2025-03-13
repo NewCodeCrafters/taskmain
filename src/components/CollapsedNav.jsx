@@ -8,7 +8,11 @@ const CollapsedNav = () => {
       {/* <div className="flex flex-col items-center justify-between pt-1 top-0 left-0 z-100 bg-white "> */}
       <figure>
         <Link to="/home">
-          <img src="/images/logo.svg" alt="" className="p-[12px] m-auto " />
+          <img
+            src="/images/logo.svg"
+            alt=""
+            className="p-[12px] m-auto hidden md:grid "
+          />
         </Link>
         <img src="/images/search-lg.svg" alt="" className="max-w-15 p-[12px]" />
       </figure>
