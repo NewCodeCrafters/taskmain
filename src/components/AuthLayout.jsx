@@ -10,7 +10,7 @@ const AuthLayout = () => {
           <figure>
             <img className="" src={icon} alt="" />
           </figure>
-          <div className="heading-5">Task</div>
+          <div className="heading-5">TaskTonic</div>
         </div>
         <div className="flex flex-col max-w-[572px] gap-[17px] mb-8">
           <p className="heading-3 ">
