@@ -5,10 +5,11 @@ const Button = ({
   onClick,
   isLoading = false,
   isDisabled = false,
-  leftIcon: LeftIcon,
-  rightIcon: RightIcon,
+  leftIcon,
+  rightIcon,
   variant = "primary", // Default to primary
   className = "",
+  ...buttonProps
 }) => {
   // Function to return classes based on the variantsm
   const getVariantClasses = (variant) => {
@@ -21,6 +22,8 @@ const Button = ({
         return "bg-transparent text-primary-500 hover:bg-primary-50";
       case "black":
         return "bg-black text-white hover:bg-neutral-black-9";
+      case "signIn":
+        return "bg-neutral-black-2 text-black hover:bg-neutral-black-9";
       default:
         return "bg-primary-500 text-white hover:bg-primary-400";
     }
@@ -38,14 +41,15 @@ const Button = ({
         }
         ${isLoading ? "opacity-50 cursor-not-allowed" : ""}
         ${className}`}
+      {...buttonProps}
     >
       {isLoading ? (
         <span className="animate-spin border-2 border-neutral-black-2 border-t-transparent rounded-full w-4 h-4"></span>
       ) : (
         <>
-          {LeftIcon && <LeftIcon className="w-5 h-5" />}
+          {leftIcon && <span>{leftIcon}</span>}
           {children}
-          {RightIcon && <RightIcon className="w-5 h-5" />}
+          {rightIcon && <span>{rightIcon}</span>}
         </>
       )}
     </button>
