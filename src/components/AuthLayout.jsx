@@ -22,7 +22,7 @@ const AuthLayout = () => {
           </p>
         </div>
       </section>
-      <section className="bg-white rounded-3xl">
+      <section className="bg-white rounded-3xl flex items-center justify-center p-8">
         <Outlet />
       </section>
     </div>
