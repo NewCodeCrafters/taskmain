@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import TextInput from "../components/Input";
 import userIcon from "../assets/user-01.svg";
 import lock from "../assets/lock-03.svg";
 import mail from "../assets/mail-01.svg";
-import eye from "../assets/eye.svg";
-import google from "../assets/google.svg";
-import apple from "../assets/aaaple.svg";
+import eyeon from "../assets/eye-on.svg";
+import eyeoff from "../assets/eye-off.svg";
 import Button from "../components/Button";
 import { Link } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../schemas/auth.schema";
 import { useForm } from "react-hook-form";
+import OrSignIn from "../components/OrSignIn";
 
 const SignUpPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [type, setType] = useState("password");
+
+  function handleType() {
+    setType((prev) => !prev);
+  }
+
+  function handleShowPassword() {
+    setShowPassword((prev) => !prev);
+  }
+
   const {
     handleSubmit,
     register,
@@ -77,39 +88,21 @@ const SignUpPage = () => {
           {...register("password")}
           label="Password"
           leftIcon={<img src={lock} />}
-          rightIcon={<img src={eye} />}
+          rightIcon={
+            <img
+              src={showPassword ? eyeon : eyeoff}
+              onClick={handleShowPassword}
+            />
+          }
           placeholder="Your password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           error={errors.password?.message}
         />
         <Button className="mt-3" type="submit">
           Register
         </Button>
       </form>
-      <section className="flex items-center my-2 w-full">
-        <div className="flex-1 border-t border-neutral-black-8"></div>
-        <span className="px-3 text-neutral-black-8 text-sm">
-          Or Sign in with
-        </span>
-        <div className="flex-1 border-t border-neutral-black-8"></div>
-      </section>
-      <section className="flex justify-between w-full gap-3 ">
-        <Button
-          className="w-full"
-          variant="signIn"
-          leftIcon={<img src={google} alt="Google" className="w-5 h-5" />}
-        >
-          Sign Up with Google
-        </Button>
-
-        <Button
-          variant="signIn"
-          className="w-full"
-          leftIcon={<img src={apple} alt="Apple" className="w-5 h-5" />}
-        >
-          Sign Up with Apple
-        </Button>
-      </section>
+      <OrSignIn />
       <div className="flex items-center gap-2">
         <span className="body-small-medium">Already have an account?</span>
         <Link to="/login" className="text-primary-300 body-medium-semibold">
