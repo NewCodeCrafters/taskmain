@@ -12,6 +12,7 @@ import { registerSchema } from "../schemas/auth.schema";
 import { useForm } from "react-hook-form";
 import OrSignIn from "../components/OrSignIn";
 import { signup } from "../utils/api";
+import Logo from "../components/Logo";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -52,8 +53,9 @@ const SignUpPage = () => {
   };
   return (
     <div className="flex flex-col items-center justify-center gap-6 w-full max-w-[550px]">
+      <Logo className="md:hidden" />
       <div className="flex flex-col gap-3 items-center ">
-        <h1 className="heading-3">Create Your Account</h1>
+        <h1 className="heading-4 md:heading-3">Create Your Account</h1>
         <span className="text-paragraph body-medium-medium">
           Please input to your account
         </span>
@@ -62,7 +64,7 @@ const SignUpPage = () => {
         onSubmit={handleSubmit(submitHandler, errorHandler)}
         className="flex flex-col flex-1 gap-3 w-full"
       >
-        <section className="flex gap-3 w-full">
+        <section className="flex flex-col lg:flex-row gap-3 w-full">
           <TextInput
             {...register("first_name")}
             label="First name"
@@ -106,7 +108,9 @@ const SignUpPage = () => {
         />
 
         {isLoading ? (
-          <Button className="mt-3" type="submit" isLoading></Button>
+          <Button className="mt-3 h-10" type="submit" isLoading>
+            Register
+          </Button>
         ) : (
           <Button className="mt-3" type="submit">
             Register
