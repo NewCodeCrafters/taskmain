@@ -15,6 +15,7 @@ import { signup } from "../utils/api";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleShowPassword() {
     setShowPassword((prev) => !prev);
@@ -36,11 +37,15 @@ const SignUpPage = () => {
 
   const submitHandler = async (val) => {
     try {
+      setIsLoading(true);
+
       console.log(val);
       const response = await signup(val);
       console.log(response);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -101,9 +106,14 @@ const SignUpPage = () => {
           type={showPassword ? "text" : "password"}
           error={errors.password?.message}
         />
-        <Button className="mt-3" type="submit">
-          Register
-        </Button>
+
+        {isLoading ? (
+          <Button className="mt-3" type="submit" isLoading></Button>
+        ) : (
+          <Button className="mt-3" type="submit">
+            Register
+          </Button>
+        )}
       </form>
       <OrSignIn />
       <div className="flex items-center gap-2">
