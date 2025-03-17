@@ -14,11 +14,6 @@ import OrSignIn from "../components/OrSignIn";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [type, setType] = useState("password");
-
-  function handleType() {
-    setType((prev) => !prev);
-  }
 
   function handleShowPassword() {
     setShowPassword((prev) => !prev);
