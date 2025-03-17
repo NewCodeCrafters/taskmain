@@ -39,9 +39,7 @@ const SignUpPage = () => {
     try {
       setIsLoading(true);
 
-      console.log(val);
-      const response = await signup(val);
-      console.log(response);
+      await signup(val);
     } catch (error) {
       console.error(error);
     } finally {
