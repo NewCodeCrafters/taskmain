@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../schemas/auth.schema";
 import { useForm } from "react-hook-form";
 import OrSignIn from "../components/OrSignIn";
+import { signup } from "../utils/api";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -33,9 +34,16 @@ const SignUpPage = () => {
     },
   });
 
-  const submitHandler = (val) => {
-    console.log(val);
+  const submitHandler = async (val) => {
+    try {
+      console.log(val);
+      const response = await signup(val);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   const errorHandler = (val) => {
     console.log("Validation Errors:", val);
   };
