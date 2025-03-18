@@ -9,10 +9,12 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import ForgetPassword from "./pages/Forgetpassword";
 import OtpPage from "./pages/OtpPage";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <main>
+      <Toaster />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -32,4 +34,4 @@ function App() {
   );
 }
 
-export default App;  
+export default App;
