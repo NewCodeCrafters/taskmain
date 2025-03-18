@@ -79,7 +79,7 @@
   --color-primary-50: #e8f2ff;
   --color-primary-100: #d0e4fc;
   --color-primary-200: #a2c9fa;
-  --color-primary-300: #73aef7;
+  --color-primary-300: #1678f2;
   --color-primary-400: #4593f5;
   --color-primary-500: #1678f2;
 
@@ -121,6 +121,11 @@
 }
 @theme {
   --font-manrope: "Manrope", sans-serif;
+}
+@layer base {
+  body {
+    @apply font-manrope;
+  }
 }
 @layer components {
   .heading-1 {
