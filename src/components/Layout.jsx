@@ -48,7 +48,7 @@ const Layout = () => {
             handleSetMobileBar={handleSetMobileBar}
           />
         </div>
-        <div className="flex-1 bg-neutral-black-4 overflow-y-auto relative">
+        <div className="flex-1 bg-neutral-black-4 overflow-y-auto relative py-5 px-6">
           <Outlet />
           {dropDown && <ProfileDropDown />}
         </div>

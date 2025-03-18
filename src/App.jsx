@@ -10,6 +10,7 @@ import SignUpPage from "./pages/SignUpPage";
 import ForgetPassword from "./pages/Forgetpassword";
 import OtpPage from "./pages/OtpPage";
 import { Toaster } from "react-hot-toast";
+import { routes } from "./utils/constant";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <Route path="/messages" element={<Messages />} />
         </Route>
         <Route element={<AuthLayout />}>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path={routes.login} element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/forgotpassword" element={<ForgetPassword />} />
           <Route path="/confirmotp" element={<OtpPage />} />

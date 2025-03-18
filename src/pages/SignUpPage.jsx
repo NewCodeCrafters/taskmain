@@ -11,9 +11,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../schemas/auth.schema";
 import { useForm } from "react-hook-form";
 import OrSignIn from "../components/OrSignIn";
+import { signup } from "../utils/api";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleShowPassword() {
     setShowPassword((prev) => !prev);
@@ -33,9 +35,18 @@ const SignUpPage = () => {
     },
   });
 
-  const submitHandler = (val) => {
-    console.log(val);
+  const submitHandler = async (val) => {
+    try {
+      setIsLoading(true);
+
+      await signup(val);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   const errorHandler = (val) => {
     console.log("Validation Errors:", val);
   };
@@ -93,7 +104,8 @@ const SignUpPage = () => {
           type={showPassword ? "text" : "password"}
           error={errors.password?.message}
         />
-        <Button className="mt-3" type="submit">
+
+        <Button className="mt-3" type="submit" isLoading={isLoading}>
           Register
         </Button>
       </form>
