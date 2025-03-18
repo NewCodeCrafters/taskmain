@@ -12,6 +12,10 @@ import eyeon from "../assets/eye-on.svg";
 import eyeoff from "../assets/eye-off.svg";
 import { toast } from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
+import { logIn } from "../utils/api";
+import { setProjectAnnotations } from "@storybook/react";
+import { ACCESS_TOKEN_KEY } from "../utils/constant";
+import logo from "../assets/logo.svg";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,18 +35,29 @@ const LoginPage = () => {
       password: "",
     },
   });
-  const submitHandler = (val) => {
-    console.log(val);
-    toast.error("Your username or Password is incorrect");
+  const submitHandler = async (val) => {
+    try {
+      await logIn(val);
+      localStorage.setItem(ACCESS_TOKEN_KEY, Response.access_token);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  // logIn();
+  // console.log(val);
+  // toast.error("Your username or Password is incorrect");
+
   const errorHandler = (val) => {
     console.log(val);
   };
 
   return (
-    <div className="h-full flex flex-col w-full justify-center">
+    <div className="h-full flex flex-col w-full justify-center max-w-[550px] ">
       <Toaster position="top-center" reverseOrder={false} />
       <div className=" flex flex-col gap-3 items-center">
+        <figure className="flex justify-center lg:hidden md:hidden">
+          <img src={logo} alt="" />
+        </figure>
         <div className="heading-3">Hi, Welcome</div>
         <p className="text-neutral-black-9 body-medium-medium">
           Please login your account
@@ -102,7 +117,7 @@ const LoginPage = () => {
         <span className="text-neutral-900 body-small-medium ">
           Don't have an account?
         </span>
-        <Link to="/signup" className="text-primary-300 body-medium-semibold ">
+        <Link to="/signup" className="text-primary-500 body-medium-semibold ">
           Sign Up
         </Link>
       </div>
