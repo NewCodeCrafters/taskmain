@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <main>
+      <Toaster />
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
@@ -39,4 +40,4 @@ function App() {
   );
 }
 
-export default App;  
+export default App;
