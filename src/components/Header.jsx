@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
+import { getUserProfile } from "../utils/api";
 
 const Header = ({
   handleSideBar,
@@ -8,6 +9,19 @@ const Header = ({
   dropDown,
   handleSetMobileBar,
 }) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUserProfile();
+        setUser(userData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUserData();
+  }, []);
   return (
     <div className="px-3 md:px-6 flex justify-between items-center border- border-neutral-black-5  h-[76px] top-0  sticky z-50 ">
       <div className="flex gap-3 heading-5 bg-white lg:items-end">

@@ -10,16 +10,22 @@ import SignUpPage from "./pages/SignUpPage";
 import ForgetPassword from "./pages/Forgetpassword";
 import OtpPage from "./pages/OtpPage";
 import { routes } from "./utils/constant";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <main>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path={routes.home} element={<Home />} />
-          <Route path={routes.membersettings} element={<MembersSetttings />} />
-          <Route path={routes.favourites} element={<Favourites />} />
-          <Route path={routes.messages} element={<Messages />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route path={routes.home} element={<Home />} />
+            <Route
+              path={routes.membersettings}
+              element={<MembersSetttings />}
+            />
+            <Route path={routes.favourites} element={<Favourites />} />
+            <Route path={routes.messages} element={<Messages />} />
+          </Route>
         </Route>
         <Route element={<AuthLayout />}>
           <Route path={routes.login} element={<LoginPage />} />
