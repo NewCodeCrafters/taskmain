@@ -1,5 +1,7 @@
 import axios from "axios";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, routes } from "./constant";
+import { Toaster, toast } from "react-hot-toast";
+import { Navigate } from "react-router";
 
 export const api = axios.create({
   baseURL: "https://ncc-task-management-backend.onrender.com",
@@ -47,8 +49,22 @@ export const signup = async (userData) => {
     localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
 
     return res.data;
+
+    // Navigate(/)
   } catch (error) {
-    throw error.response?.data?.message || "Signup failed";
+    console.error("Full Error Object:", error);
+    if (!error.response) {
+      toast.error("Network error, please check your internet connection");
+      throw new Error("Network error");
+    }
+    const errorData = error.response.data;
+    const firstKey = Object.keys(errorData)[0];
+    const errorMessage = Array.isArray(errorData[firstKey])
+      ? errorData[firstKey][0]
+      : errorData[firstKey];
+
+    toast.error(errorMessage || "Signup failed");
+    throw new Error(errorMessage || "Signup failed");
   }
 };
 
