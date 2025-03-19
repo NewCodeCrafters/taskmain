@@ -10,22 +10,28 @@ import SignUpPage from "./pages/SignUpPage";
 import ForgetPassword from "./pages/Forgetpassword";
 import OtpPage from "./pages/OtpPage";
 import { routes } from "./utils/constant";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <main>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/membersettings" element={<MembersSetttings />} />
-          <Route path="/favourites" element={<Favourites />} />
-          <Route path="/messages" element={<Messages />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route path={routes.home} element={<Home />} />
+            <Route
+              path={routes.membersettings}
+              element={<MembersSetttings />}
+            />
+            <Route path={routes.favourites} element={<Favourites />} />
+            <Route path={routes.messages} element={<Messages />} />
+          </Route>
         </Route>
         <Route element={<AuthLayout />}>
           <Route path={routes.login} element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/forgotpassword" element={<ForgetPassword />} />
-          <Route path="/confirmotp" element={<OtpPage />} />
+          <Route path={routes.signup} element={<SignUpPage />} />
+          <Route path={routes.forgotpassword} element={<ForgetPassword />} />
+          <Route path={routes.confirmotp} element={<OtpPage />} />
           {/* <Route path="/confirmotp" element={<OtpPage />} /> */}
         </Route>
       </Routes>
