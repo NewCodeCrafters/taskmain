@@ -10,15 +10,16 @@ import OrSignIn from "../components/OrSignIn";
 import { Link } from "react-router";
 import eyeon from "../assets/eye-on.svg";
 import eyeoff from "../assets/eye-off.svg";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import { logIn } from "../utils/api";
-import { setProjectAnnotations } from "@storybook/react";
+// import { setProjectAnnotations } from "@storybook/react";
 import { ACCESS_TOKEN_KEY } from "../utils/constant";
 import logo from "../assets/logo.svg";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleShowPassword() {
     setShowPassword((prev) => !prev);
@@ -37,10 +38,13 @@ const LoginPage = () => {
   });
   const submitHandler = async (val) => {
     try {
+      setIsLoading(true);
       await logIn(val);
       localStorage.setItem(ACCESS_TOKEN_KEY, Response.access_token);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   // logIn();
@@ -92,7 +96,11 @@ const LoginPage = () => {
             type={showPassword ? "text" : "password"}
             error={errors.password?.message}
           />
-          <Button className="w-full mt-3" type="submit">
+          <Button
+            className="w-full mt-3 h-10"
+            type="submit"
+            isLoading={isLoading}
+          >
             {" "}
             Login
           </Button>

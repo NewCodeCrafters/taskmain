@@ -11,6 +11,7 @@ import ForgetPassword from "./pages/Forgetpassword";
 import OtpPage from "./pages/OtpPage";
 import { routes } from "./utils/constant";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (

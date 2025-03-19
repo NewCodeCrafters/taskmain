@@ -13,15 +13,9 @@ const OrSignIn = () => {
         </span>
         <div className="flex-1 border-t border-neutral-black-8"></div>
       </section>
-<<<<<<< HEAD
       <section className="flex flex-col lg:flex-row md:justify-between w-full gap-3 ">
         <Button
           className="w-full text-base font-semibold border border-neutral-black-5"
-=======
-      <section className="flex flex-col md:flex-row justify-between w-full mt-4 gap-3 ">
-        <Button
-          className="w-full md:auto "
->>>>>>> b4a022f ( chore: login-page)
           variant="signIn"
           leftIcon={<img src={google} alt="Google" className="w-5 h-5 " />}
         >
@@ -30,13 +24,8 @@ const OrSignIn = () => {
 
         <Button
           variant="signIn"
-<<<<<<< HEAD
           className="w-full text-base font-semibold border border-neutral-black-5"
           leftIcon={<img src={apple} alt="Apple" className="w-5 h-5 " />}
-=======
-          className="w-full md:auto"
-          leftIcon={<img src={apple} alt="Apple" className="w-5 h-5" />}
->>>>>>> b4a022f ( chore: login-page)
         >
           Sign Up with Apple
         </Button>

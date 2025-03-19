@@ -52,7 +52,31 @@ export const signup = async (userData) => {
 
     // Navigate(/)
   } catch (error) {
-    console.error("Full Error Object:", error);
+    // console.error("Full Error Object:", error);
+    if (!error.response) {
+      toast.error("Network error, please check your internet connection");
+      throw new Error("Network error");
+    }
+    const errorData = error.response.data;
+    const firstKey = Object.keys(errorData)[0];
+    const errorMessage = Array.isArray(errorData[firstKey])
+      ? errorData[firstKey][0]
+      : errorData[firstKey];
+
+    toast.error(errorMessage || "Login failed");
+    throw new Error(errorMessage || "Login failed");
+  }
+};
+
+export const logIn = async (credentials) => {
+  try {
+    const res = await api.post("/accounts/login/", credentials);
+    const { refresh_token, access_token } = res.data;
+    localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
+    localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
+    return res.data;
+  } catch (error) {
+    // console.log(error);
     if (!error.response) {
       toast.error("Network error, please check your internet connection");
       throw new Error("Network error");
@@ -65,18 +89,7 @@ export const signup = async (userData) => {
 
     toast.error(errorMessage || "Signup failed");
     throw new Error(errorMessage || "Signup failed");
-  }
-};
-
-export const logIn = async (credentials) => {
-  try {
-    const res = await api.post("/accounts/login/", credentials);
-    const { refresh_token, access_token } = res.data;
-    localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
-    localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
-    return res.data;
-  } catch (error) {
-    throw error.response?.data?.message || "Login failed";
+    // throw error.response?.data?.message || "Login failed";
   }
 };
 
