@@ -12,7 +12,6 @@ import OtpPage from "./pages/OtpPage";
 import { Toaster } from "react-hot-toast";
 import { routes } from "./utils/constant";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
