@@ -54,8 +54,8 @@ const SignUpPage = () => {
     console.log("Validation Errors:", val);
   };
   return (
-    <>
-      <Toaster />
+  
+
       <div className="flex flex-col items-center justify-center gap-6 w-full max-w-[550px]">
         <Logo className="md:hidden" />
         <div className="flex flex-col gap-3 items-center ">
@@ -111,25 +111,18 @@ const SignUpPage = () => {
             error={errors.password?.message}
           />
 
-          {isLoading ? (
-            <Button className="mt-3 h-10" type="submit" isLoading>
-              Register
-            </Button>
-          ) : (
-            <Button className="mt-3" type="submit">
-              Register
-            </Button>
-          )}
-        </form>
-        <OrSignIn />
-        <div className="flex items-center gap-2">
-          <span className="body-small-medium">Already have an account?</span>
-          <Link to="/login" className="text-primary-300 body-medium-semibold">
-            Sign In
-          </Link>
-        </div>
+        <Button className="mt-3" type="submit" isLoading={isLoading}>
+          Register
+        </Button>
+      </form>
+      <OrSignIn />
+      <div className="flex items-center gap-2">
+        <span className="body-small-medium">Already have an account?</span>
+        <Link to="/login" className="text-primary-300 body-medium-semibold">
+          Sign In
+        </Link>
       </div>
-    </>
+    </div>
   );
 };
 

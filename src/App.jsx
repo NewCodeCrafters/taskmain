@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import ForgetPassword from "./pages/Forgetpassword";
 import OtpPage from "./pages/OtpPage";
+import { Toaster } from "react-hot-toast";
 import { routes } from "./utils/constant";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
