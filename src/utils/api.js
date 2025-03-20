@@ -10,6 +10,7 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+  // console.log(token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -26,7 +27,7 @@ api.interceptors.response.use(
         return Promise.reject(error);
       }
       try {
-        const res = await axios.post("/accounts/refresh/", {
+        const res = await api.post("/accounts/refresh/", {
           refresh: refreshToken,
         });
         const newAccessToken = res.data.access_token;
@@ -95,7 +96,10 @@ export const logIn = async (credentials) => {
 
 export const getUserProfile = async () => {
   try {
-    const res = await api.get("/accounts/profile/");
+    // const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+    // console.log(token);
+    const res = await api.get("/auth/users/");
+    console.log(res.data);
     return res.data;
   } catch (error) {
     throw error.response?.data?.message || "Unauthorized";

@@ -6,7 +6,7 @@ import CloseIcon from "../assets/x-close.svg";
 const Modal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-background/50 z-50">
       <div className="bg-white rounded-lg p-6 max-w-sm w-full shadow-lg relative">
         {/* Close Button */}
         <button onClick={onClose} className="absolute top-4 right-4">
@@ -27,9 +27,12 @@ const Modal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Title & Description */}
-        <h2 className="text-center text-lg font-semibold mt-4">Success!</h2>
+        <h2 className="text-center text-lg font-semibold mt-4">
+          Congratulations, You're In
+        </h2>
         <p className="text-center text-gray-600 mt-2">
-          Your account has been successfully created.
+          Get ready to organize, prioritize, and conquer your to-do list like
+          never before. Let’s make every day productive!
         </p>
 
         {/* Get Started Button */}

@@ -10,12 +10,13 @@ const Header = ({
   handleSetMobileBar,
 }) => {
   const [user, setUser] = useState(null);
-
+  console.log(user);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const userData = await getUserProfile();
         setUser(userData);
+        console.log(userData);
       } catch (error) {
         console.error(error);
       }
@@ -62,7 +63,7 @@ const Header = ({
             <img src="/images/avatar.svg" alt="" />
           </figure>
           <div className="lg:flex flex-col md:flex hidden">
-            <span className="body-small-medium">Fajar Roberto</span>
+            <span className="body-small-medium">{user}</span>
             <span className="body-xsmall-medium text-paragraph">@fajar123</span>
           </div>
           <figure>
