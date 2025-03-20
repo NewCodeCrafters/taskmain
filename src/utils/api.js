@@ -95,7 +95,7 @@ export const logIn = async (credentials) => {
 
 export const getUserProfile = async () => {
   try {
-    const res = await api.get("/accounts/profile/");
+    const res = await api.get("/auth/users/");
     return res.data;
   } catch (error) {
     throw error.response?.data?.message || "Unauthorized";
