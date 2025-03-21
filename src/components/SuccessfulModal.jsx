@@ -2,6 +2,7 @@ import React from "react";
 import Button from "./Button";
 import TickIcon from "../assets/icon(3).svg";
 import CloseIcon from "../assets/x-close.svg";
+import AnimatedCheckmark from "./AnimatedCheckMark";
 
 const Modal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -15,7 +16,7 @@ const Modal = ({ isOpen, onClose }) => {
 
         {/* Success Icon */}
         <div className="place-self-center">
-          <img src={TickIcon} alt="Success" className="w-16 h-16" />
+          <AnimatedCheckmark />
         </div>
 
         {/* Title & Description */}

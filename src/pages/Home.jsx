@@ -45,9 +45,6 @@ const Home = () => {
           <img src={plusDark} alt="" />
         </figure>
       </section>
-      <div>
-        <AnimatedCheckmark />
-      </div>
     </div>
   );
 };
