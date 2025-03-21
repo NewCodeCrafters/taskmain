@@ -122,7 +122,7 @@ const SignUpPage = () => {
           error={errors.password?.message}
         />
 
-        <Button className="mt-3" type="submit" isLoading={isLoading}>
+        <Button className="mt-3 h-10" type="submit" isLoading={isLoading}>
           Register
         </Button>
       </form>
