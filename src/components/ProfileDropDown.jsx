@@ -1,5 +1,6 @@
 import React from "react";
 import ProfileLink from "./ProfileLink";
+import { logout } from "../utils/api";
 
 const ProfileDropDown = () => {
   return (
@@ -30,6 +31,7 @@ const ProfileDropDown = () => {
 
         <div>
           <ProfileLink
+            onClick={() => logout()}
             leftIcon={<img src="/images/log-out-01.svg" />}
             linkDesc="Logout"
             rightIcon={<img src="/images/chevron-right-red.svg" />}
