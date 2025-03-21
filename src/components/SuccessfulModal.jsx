@@ -8,7 +8,7 @@ const Modal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-background/50 z-50">
-      <div className="bg-white rounded-lg p-6 max-w-[500px] w-full relative flex flex-col gap-5">
+      <div className="bg-white rounded-lg p-6 max-w-[500px] w-full relative flex flex-col gap-5 mx-5">
         {/* Close Button */}
         <button onClick={onClose} className="absolute top-4 right-4">
           <img src={CloseIcon} alt="Close" />
@@ -20,8 +20,10 @@ const Modal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Title & Description */}
-        <h2 className="text-center heading-3">Congratulations, You're In</h2>
-        <p className="text-center text-paragraph body-medium-medium">
+        <h2 className="text-center heading-4 md:heading-3">
+          Congratulations, You're In
+        </h2>
+        <p className="text-center text-paragraph body-small-medium md:body-medium-medium">
           Get ready to organize, prioritize, and conquer your to-do list like
           never before. Let’s make every day productive!
         </p>

@@ -9,12 +9,12 @@ const AnimatedCheckmark = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <motion.svg
-        className="w-24 h-24"
+        className="md:w-24 md:h-24 w-20 h-20"
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         animate={{
-          y: [0, -5, 0], // Bouncing effect
+          y: [0, -5, 0], // Smooth bouncing
           filter: [
             "drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.2))",
             "drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.3))",
@@ -38,9 +38,9 @@ const AnimatedCheckmark = () => {
           transition={{ duration: 0.6, ease: "easeOut" }}
         />
 
-        {/* Checkmark: Draws from Mid-Left to Top-Right */}
+        {/* Centered Checkmark - Starts from Mid-Left and Draws to Top-Right */}
         <motion.path
-          d="M40 50 L50 60 L70 30" // Mid-left to top-right checkmark stroke
+          d="M30 50 L45 65 L70 30" // Adjusted to be centered inside the circle
           stroke="white"
           strokeWidth="4"
           strokeLinecap="round"
