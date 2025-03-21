@@ -12,6 +12,7 @@ import Button from "../components/Button";
 import TaskToDo from "../components/TaskToDo";
 import TaskInProgress from "../components/TaskInProgress";
 import TaskCompleted from "../components/TaskCompleted";
+import AnimatedCheckmark from "../components/AnimatedCheckMark";
 
 const Home = () => {
   return (
