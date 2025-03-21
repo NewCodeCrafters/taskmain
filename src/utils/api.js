@@ -73,6 +73,9 @@ export const logIn = async (credentials) => {
   try {
     const res = await api.post("/accounts/login/", credentials);
     const { refresh_token, access_token } = res.data;
+    console.log(refresh_token, access_token);
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
     localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
     localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
     return res.data;

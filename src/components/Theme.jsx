@@ -1,19 +1,20 @@
 import React from "react";
-import { useState } from "react";
+import { Themes, useTheme } from "../stores/theme-store";
 
 const Theme = () => {
-  const [theme, setTheme] = useState("light");
-  function handleTheme(selectedTheme) {
-    setTheme(selectedTheme);
-  }
+  const { theme, toggleTheme } = useTheme((s) => s);
 
   return (
     <section className="bg-neutral-black-4 flex gap-3 p-1 rounded-xl justify-center items-center w-full">
       <button
-        onClick={() => handleTheme("light")}
+        onClick={() => {
+          if (theme !== Themes.light) {
+            toggleTheme();
+          }
+        }}
         className={`flex justify-center items-center rounded-lg gap-2 px-2.5 py-2 w-full max-w-[120px]
           transition-all duration-300 ease-in-out ${
-            theme === "light" ? "bg-white" : ""
+            theme === Themes.light ? "bg-white" : ""
           }
        `}
       >
@@ -29,10 +30,14 @@ const Theme = () => {
         </span>
       </button>
       <button
-        onClick={() => handleTheme("dark")}
+        onClick={() => {
+          if (theme !== Themes.dark) {
+            toggleTheme();
+          }
+        }}
         className={`flex justify-center items-center rounded-lg gap-2 px-2.5 py-2 w-full max-w-[120px]
           transition-all duration-300 ease-in-out ${
-            theme === "dark" ? "bg-white" : ""
+            theme === Themes.dark ? "bg-white" : ""
           }
        `}
       >

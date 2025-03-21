@@ -1,7 +1,10 @@
 import React from "react";
 import ProfileLink from "./ProfileLink";
+import { useTheme } from "../stores/theme-store";
 
 const ProfileDropDown = () => {
+  const { theme, toggleTheme } = useTheme((s) => s);
+
   return (
     <section>
       <div className="top-0 right-0 absolute mt-2 md:mt-4  mr-5 w-full md:max-w-[276px] max-w-[220px] p-2 bg-white rounded-xl flex flex-col gap-2 transition-all ease-in-out duration-500">
