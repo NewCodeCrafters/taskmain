@@ -96,14 +96,10 @@ export const logIn = async (credentials) => {
 
 export const getUserProfile = async () => {
   try {
-<<<<<<< HEAD
-    const res = await api.get("/auth/users/");
-=======
     // const token = localStorage.getItem(ACCESS_TOKEN_KEY);
     // console.log(token);
     const res = await api.get("/auth/users/");
     console.log(res.data);
->>>>>>> 683dcd6868fa490f5dcef54bd54efaced3c147c2
     return res.data;
   } catch (error) {
     throw error.response?.data?.message || "Unauthorized";
