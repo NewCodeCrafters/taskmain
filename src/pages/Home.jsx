@@ -1,5 +1,4 @@
 import React from "react";
-import ProfileDropDown from "../components/ProfileDropDown";
 import HomeLink from "../components/HomeLink";
 import grid from "../assets/grid-white.svg";
 import calendar from "../assets/calendar.svg";
@@ -9,17 +8,16 @@ import plus from "../assets/plus-white.svg";
 import plusDark from "../assets/plus.svg";
 import chevron from "../assets/chevron-selector-vertical.svg";
 import Button from "../components/Button";
-import TaskToDo from "../components/TaskToDo";
-import TaskInProgress from "../components/TaskInProgress";
-import TaskCompleted from "../components/TaskCompleted";
-import AnimatedCheckmark from "../components/AnimatedCheckMark";
-import CheckBox from "../components/CheckBox";
-import ProgressBar from "../components/ProgressBar";
-import TaskTable from "../components/TaskTable";
+import TaskColumn from "../components/TaskColumn";
+import { useTaskStore } from "../stores/taskStore";
+import tasks from "../data/task";
 
 const Home = () => {
+  const { setTask } = useTaskStore((s) => s);
+  setTask(tasks);
+
   return (
-    <div className="relative w-full flex flex-col gap-6">
+    <div className="relative flex flex-col gap-6 ">
       <span className="heading-4">Team Daily Task</span>
       <section className="flex justify-between">
         <div className="flex gap-1 items-start">
@@ -40,10 +38,10 @@ const Home = () => {
           </Button>
         </div>
       </section>
-      <section className="flex gap-[30px] items-start">
-        <TaskToDo />
-        <TaskInProgress />
-        <TaskCompleted />
+      <section className="flex gap-6">
+        <TaskColumn status="To Do" className="border-neutral-black-5" />
+        <TaskColumn status="In Progress" className="border-primary-500" />
+        <TaskColumn status="Completed" className="border-success-300" />
         <figure className="w-full max-w-[102px] h-[50px] border rounded-[100px] border-neutral-black-7 grid place-items-center ">
           <img src={plusDark} alt="" />
         </figure>
