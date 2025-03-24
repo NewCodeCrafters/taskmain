@@ -11,29 +11,26 @@ import plus from "../assets/plus-white.svg";
 import plusDark from "../assets/plus.svg";
 import chevron from "../assets/chevron-selector-vertical.svg";
 import Button from "../components/Button";
-<<<<<<< HEAD
 import { useTaskStore } from "../stores/taskStore";
 import tasks from "../data/task";
 import { useEffect } from "react";
-import { Outlet } from "react-router";
+import { useSearchParams } from "react-router";
 import HomeLinkMobile from "../components/HomeLinkMobile";
+import TaskColumn from "../components/TaskColumn";
+import BoardView from "../components/BoardView";
+import ListView from "../components/ListView";
+import Calendar from "../components/Calendar";
 
 const Home = () => {
   const { setTask } = useTaskStore((s) => s);
 
+  const [viewParams, setViewParams] = useSearchParams();
+
+  const view = viewParams.get("view") || "board";
   useEffect(() => {
     setTask(tasks);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-=======
-import TaskColumn from "../components/TaskColumn";
-import { useTaskStore } from "../stores/taskStore";
-import tasks from "../data/task";
-
-const Home = () => {
-  const { setTask } = useTaskStore((s) => s);
-  setTask(tasks);
->>>>>>> 37d2d279865469d2c8a5eee73ff878a27383c8a2
 
   return (
     <div className="relative flex flex-col gap-6 ">
@@ -44,23 +41,30 @@ const Home = () => {
         </div>
         <div className="hidden md:flex gap-1 items-start">
           <HomeLink
+            onClick={() => setViewParams({ view: "board" })}
             text="Board View"
             icon={<img src={grid} />}
-            LinkTo="/"
             activeIcon={<img src={gridBlue} />}
+            LinkTo={`/?view=board`}
+            isActive={view === "board"}
           />
           <HomeLink
+            onClick={() => setViewParams({ view: "list" })}
             text="List View"
             icon={<img src={rows} />}
-            LinkTo="/listview"
             activeIcon={<img src={rowsBlue} />}
+            LinkTo={`/?view=list`}
+            isActive={view === "list"}
           />
           <HomeLink
+            onClick={() => setViewParams({ view: "calendar" })}
             text="Calendar"
             icon={<img src={calendar} />}
-            LinkTo="/calendar"
             activeIcon={<img src={calendarBlue} />}
+            LinkTo={`/?view=calendar`}
+            isActive={view === "calendar"}
           />
+
           <img src={plusDark} alt="" className="ml-5" />
         </div>
         <div className="flex gap-3">
@@ -75,20 +79,11 @@ const Home = () => {
           </Button>
         </div>
       </section>
-<<<<<<< HEAD
       <div className="overflow-y-auto">
-        <Outlet />
+        {view === "board" && <BoardView />}
+        {view === "list" && <ListView />}
+        {view === "calendar" && <Calendar />}
       </div>
-=======
-      <section className="flex gap-6">
-        <TaskColumn status="To Do" className="border-neutral-black-5" />
-        <TaskColumn status="In Progress" className="border-primary-500" />
-        <TaskColumn status="Completed" className="border-success-300" />
-        <figure className="w-full max-w-[102px] h-[50px] border rounded-[100px] border-neutral-black-7 grid place-items-center ">
-          <img src={plusDark} alt="" />
-        </figure>
-      </section>
->>>>>>> 37d2d279865469d2c8a5eee73ff878a27383c8a2
     </div>
   );
 };

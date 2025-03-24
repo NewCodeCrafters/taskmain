@@ -23,11 +23,7 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
-            <Route path="" element={<Home />}>
-              <Route path="/" element={<BoardView />} />
-              <Route path="/listview" element={<ListView />} />
-              <Route path="/calendar" element={<Calendar />} />
-            </Route>
+            <Route path="/*" element={<Home />} />
             <Route
               path={routes.membersettings}
               element={<MembersSetttings />}
