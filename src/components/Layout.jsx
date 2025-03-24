@@ -50,7 +50,7 @@ const Layout = () => {
             handleSetMobileBar={handleSetMobileBar}
           />
         </div>
-        <div className="flex-1 bg-neutral-black-4 relative py-5 px-6 overflow-y-auto">
+        <div className="flex-1 bg-neutral-black-4 relative py-5 px-6">
           <DndProvider backend={HTML5Backend}>
             <Outlet />
           </DndProvider>

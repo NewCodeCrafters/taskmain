@@ -91,6 +91,7 @@ const LoginPage = () => {
             leftIcon={<img src={mail} />}
             placeholder="Your email"
             className="w-full body-small-medium text-neutral-900 "
+            errorBorder=" border-error-100"
             label="Email"
             error={errors.email?.message}
           />
@@ -105,6 +106,7 @@ const LoginPage = () => {
             }
             placeholder="Your password"
             className={"w-full body-small-medium text-neutral-900"}
+            errorBorder={`${error ? "bor" : ""}`}
             label="password"
             type={showPassword ? "text" : "password"}
             error={errors.password?.message}

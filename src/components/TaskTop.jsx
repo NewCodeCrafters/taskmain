@@ -5,7 +5,7 @@ import plusSign from "../assets/plus.svg";
 const TaskTop = ({ className, taskQuantity, taskStatus }) => {
   return (
     <div
-      className={`flex w-full max-w-[300px] justify-between py-3 px-5 bg-white border-t-4 rounded-xl rounded-b-xl ${className}`}
+      className={`flex w-[300px] justify-between py-3 px-5 bg-white border-t-4 rounded-xl rounded-b-xl ${className}`}
     >
       <div className=" flex gap-3 items-center">
         <h1 className="heading-5">{taskStatus}</h1>

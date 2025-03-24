@@ -8,6 +8,7 @@ const TextInput = ({
   hint,
   error,
   className,
+  errorBorder,
   ...inputProps
 }) => {
   return (
@@ -18,9 +19,9 @@ const TextInput = ({
         </label>
       )}
       <div
-        className={`px-3 py-2 gap-2 rounded-full border  focus-within:inset-shadow-custom-sm focus-within:drop-shadow-sm flex w-full ${
+        className={`px-3 py-2 gap-2 rounded-full border  focus-within:inset-shadow-custom-sm focus-within:drop-shadow-sm flex w-full ${errorBorder} ${
           error ? "border-error-100 " : "border-neutral-black-5"
-        }`}
+        } `}
         tabIndex={0}
       >
         {leftIcon}

@@ -12,7 +12,9 @@ import OtpPage from "./pages/OtpPage";
 import { Toaster } from "react-hot-toast";
 import { routes } from "./utils/constant";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Checkbox from "./components/CheckBox";
+import BoardView from "./components/BoardView";
+import ListView from "./components/ListView";
+import Calendar from "./components/Calendar";
 
 function App() {
   return (
@@ -21,7 +23,11 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
-            <Route path={routes.home} element={<Home />} />
+            <Route path="" element={<Home />}>
+              <Route path="/" element={<BoardView />} />
+              <Route path="/listview" element={<ListView />} />
+              <Route path="/calendar" element={<Calendar />} />
+            </Route>
             <Route
               path={routes.membersettings}
               element={<MembersSetttings />}
