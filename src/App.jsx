@@ -12,6 +12,7 @@ import OtpPage from "./pages/OtpPage";
 import { Toaster } from "react-hot-toast";
 import { routes } from "./utils/constant";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Checkbox from "./components/CheckBox";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
           <Route path={routes.signup} element={<SignUpPage />} />
           <Route path={routes.forgotpassword} element={<ForgetPassword />} />
           <Route path={routes.confirmotp} element={<OtpPage />} />
-          {/* <Route path="/confirmotp" element={<OtpPage />} /> */}
+          <Route path={routes.Checkbox} element={<Checkbox />} />
         </Route>
       </Routes>
     </main>

@@ -13,6 +13,9 @@ import TaskToDo from "../components/TaskToDo";
 import TaskInProgress from "../components/TaskInProgress";
 import TaskCompleted from "../components/TaskCompleted";
 import AnimatedCheckmark from "../components/AnimatedCheckMark";
+import CheckBox from "../components/CheckBox";
+import ProgressBar from "../components/ProgressBar";
+import TaskTable from "../components/TaskTable";
 
 const Home = () => {
   return (
