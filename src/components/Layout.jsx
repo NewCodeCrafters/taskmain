@@ -28,8 +28,8 @@ const Layout = () => {
   }
 
   return (
-    <div className="flex min-h-screen relative ">
-      <div className="sticky overflow-y-auto border-r border-neutral-black-5">
+    <div className="flex h-screen relative">
+      <div className="sticky overflow-y-auto border-r border-neutral-black-5 ">
         {sideBar ? (
           <CollapsedNav handleSidebar={handleSideBar} />
         ) : (
@@ -40,7 +40,7 @@ const Layout = () => {
           />
         )}
       </div>
-      <main className="flex flex-1 flex-col overflow-hidden">
+      <main className="flex flex-1 flex-col h-screen">
         <div className=" sticky top-0 z-50 bg-white">
           <Header
             handleSideBar={handleSideBar}
@@ -50,7 +50,7 @@ const Layout = () => {
             handleSetMobileBar={handleSetMobileBar}
           />
         </div>
-        <div className="flex-1 bg-neutral-black-4 relative py-5 px-6">
+        <div className="flex-1 bg-neutral-black-4 relative py-5 px-6 overflow-y-auto">
           <DndProvider backend={HTML5Backend}>
             <Outlet />
           </DndProvider>
