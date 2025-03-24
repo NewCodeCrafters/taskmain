@@ -41,7 +41,7 @@ function App() {
           <Route path={routes.signup} element={<SignUpPage />} />
           <Route path={routes.forgotpassword} element={<ForgetPassword />} />
           <Route path={routes.confirmotp} element={<OtpPage />} />
-          <Route path={routes.Checkbox} element={<Checkbox />} />
+          {/* <Route path={routes.Checkbox} element={<Checkbox />} /> */}
         </Route>
       </Routes>
     </main>
