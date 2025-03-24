@@ -7,19 +7,22 @@ import Button from "../components/Button";
 import mail from "../assets/mail.svg";
 import lock from "../assets/lock-03.svg";
 import OrSignIn from "../components/OrSignIn";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import eyeon from "../assets/eye-on.svg";
 import eyeoff from "../assets/eye-off.svg";
 // import { toast } from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import { logIn } from "../utils/api";
 // import { setProjectAnnotations } from "@storybook/react";
-import { ACCESS_TOKEN_KEY } from "../utils/constant";
+import { ACCESS_TOKEN_KEY, routes } from "../utils/constant";
 import logo from "../assets/logo.svg";
+import Modal from "../components/SuccessfulModal";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
 
   function handleShowPassword() {
     setShowPassword((prev) => !prev);
@@ -40,9 +43,13 @@ const LoginPage = () => {
     try {
       setIsLoading(true);
       await logIn(val);
+      setSuccess(true);
+      setError(null);
       localStorage.setItem(ACCESS_TOKEN_KEY, Response.access_token);
     } catch (error) {
       console.error(error);
+      setSuccess(false);
+      setError(error.response?.data || "Error dey");
     } finally {
       setIsLoading(false);
     }
@@ -55,6 +62,12 @@ const LoginPage = () => {
     console.log(val);
   };
 
+  const navigate = useNavigate();
+
+  function handleDashboard() {
+    setSuccess(false);
+    navigate(routes.home);
+  }
   return (
     <div className="h-full flex flex-col w-full justify-center max-w-[550px] ">
       <Toaster position="top-center" reverseOrder={false} />
@@ -128,6 +141,9 @@ const LoginPage = () => {
         <Link to="/signup" className="text-primary-500 body-medium-semibold ">
           Sign Up
         </Link>
+      </div>
+      <div>
+        {success && <Modal isOpen={success} onClose={handleDashboard} />}
       </div>
     </div>
   );
