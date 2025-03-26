@@ -4,6 +4,7 @@ import dots from "../assets/dots-horizontal.svg";
 import plus from "../assets/plus.svg";
 import messages from "../assets/message-text-square-01.svg";
 import { useDrag } from "react-dnd";
+import TaskInfoModal from "./taskInfoModal";
 
 const TaskCard = ({ task }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -67,6 +68,7 @@ const TaskCard = ({ task }) => {
           <img src={messages} alt="" />
           <span className="body-small-medium text-paragraph">7</span>
         </div>
+        <TaskInfoModal />
       </div>
     </div>
   );

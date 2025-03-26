@@ -15,17 +15,15 @@ const Modal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div
-        className={`bg-white rounded-lg p-6 max-w-sm w-full shadow-lg relative ${Class}`}
-      >
-        <button onClick={onClose} className="absolute top-4 right-4">
+    <div className="fixed inset-0 flex items-center justify-center bg-background/25  z-50">
+      <div className={`bg-white rounded-lg p-6 relative ${Class}`}>
+        {/* <button onClick={onClose} className="absolute top-4 right-4">
           <img
-            src={CloseIcon}
+            src={CloseIcon} 
             alt="Close"
             className="w-5 h-5 hover:opacity-80"
           />
-        </button>
+        </button> */}
 
         {icon && (
           <div className="flex justify-center">
@@ -37,7 +35,7 @@ const Modal = ({
           <h2 className="text-center text-lg font-semibold mt-4">{title}</h2>
         )}
 
-        <div className="text-center text-gray-600 mt-2">{children}</div>
+        <div>{children}</div>
 
         {buttonText && (
           <div className="mt-6">
