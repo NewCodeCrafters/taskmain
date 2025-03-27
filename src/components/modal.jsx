@@ -15,8 +15,8 @@ const Modal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-background/25  z-50">
-      <div className={`bg-white rounded-lg p-6 relative ${Class}`}>
+    <div className="fixed inset-0 grid place-items-center bg-background/25  z-50">
+      <div className={`bg-white rounded-lg p-6  ${Class}`}>
         {/* <button onClick={onClose} className="absolute top-4 right-4">
           <img
             src={CloseIcon} 
