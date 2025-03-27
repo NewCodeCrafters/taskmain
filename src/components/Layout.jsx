@@ -40,7 +40,7 @@ const Layout = () => {
           />
         )}
       </div>
-      <main className="flex flex-1 flex-col h-screen">
+      <main className="flex flex-1 flex-col h-screen overflow-y-auto">
         <div className=" sticky top-0 z-50 bg-white">
           <Header
             handleSideBar={handleSideBar}
