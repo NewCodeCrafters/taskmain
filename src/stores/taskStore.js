@@ -5,6 +5,9 @@ export const useTaskStore = create((set) => ({
 
   setTask: (newTask) => set({ tasks: newTask }),
 
+  // handleShowModal: (taskId) => set((state) => ({})),
+  // showTaskModal: tas,
+
   updateTaskStatus: (taskId, newStatus) =>
     set((state) => ({
       tasks: state.tasks.map((task) =>

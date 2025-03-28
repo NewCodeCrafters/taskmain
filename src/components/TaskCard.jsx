@@ -5,8 +5,17 @@ import plus from "../assets/plus.svg";
 import messages from "../assets/message-text-square-01.svg";
 import { useDrag } from "react-dnd";
 import TaskInfoModal from "./taskInfoModal";
+import { useModal } from "../stores/useModal";
 
 const TaskCard = ({ task }) => {
+  const { setModal, setTaskId } = useModal((s) => s);
+  const handleTaskId = (id) => {
+    setTaskId(id);
+    setModal(true);
+  };
+
+  // console.log(modal);
+  // console.log(task);
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "TASK",
     item: { id: task.id, status: task.status },
@@ -14,12 +23,14 @@ const TaskCard = ({ task }) => {
       isDragging: monitor.isDragging(),
     }),
   }));
+
   return (
     <div
       className={`flex flex-col gap-3 px-5 py-4 bg-white rounded-xl ${
         isDragging ? "opacity-50" : "opacity-100"
       }`}
       ref={drag}
+      onClick={() => handleTaskId(task.id)}
     >
       <div className="flex justify-between items-center">
         <div className="flex gap-1 items-center">

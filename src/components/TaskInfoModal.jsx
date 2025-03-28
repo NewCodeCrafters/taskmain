@@ -6,16 +6,31 @@ import star from "../assets/star-01.svg";
 import expand from "../assets/expand-01.svg";
 import loading from "../assets/loading-02.svg";
 import close from "../assets/x-close.svg";
+import user from "../assets/user-01.svg";
 import calendar from "../assets/calendar.svg";
+import flag from "../assets/flag-03.svg";
 import hourglass from "../assets/hourglass-03.svg";
 import Button from "./Button";
 import TaskListItem from "./TaskListItems";
+import ImageFile from "./ImageFile";
+import { useModal } from "../stores/useModal";
+import { useTaskStore } from "../stores/taskStore";
 
 const TaskInfoModal = () => {
+  const { tasks } = useTaskStore((s) => s);
+  const { modal, setModal, taskId } = useModal((s) => s);
+  const task = tasks.find((task) => task.id === taskId);
+  console.log(task);
+  if (!task) return null;
+
   return (
     <div className="">
-      <Modal Class="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
+      <Modal
+        isOpen={modal}
+        onClick={(e) => e.stopPropagation()}
+        Class="flex flex-col gap-6 w-full max-w-[1000px] overflow-y-auto max-h-4/5"
+      >
+        <div className="flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6 ">
           <TaskSection />
           <div className="flex gap-5 items-center">
             <div className="flex items-center gap-1">
@@ -27,49 +42,82 @@ const TaskInfoModal = () => {
             <Button variant="black">Share</Button>
             <img src={star} alt="" />
             <img src={edit} alt="" />
-            <img src={expand} alt="" />
-            <img src={close} alt="" />
+            <img
+              src={expand}
+              alt="" // className="absolute top-0 right-0"
+            />
+            <img src={close} alt="" onClick={() => setModal(false)} />
           </div>
         </div>
         <div className="flex flex-col gap-6">
-          <h1 className="heading-4">Create UI E-Commerce</h1>
-          <div className="flex gap-[150px]">
-            <div className="flex flex-col gap-3">
-              <TaskListItem
-                icon={loading}
-                title="Status"
-                taskListInfo="empty"
-              />
-              <TaskListItem
-                icon={calendar}
-                title="Due date"
-                taskListInfo="empty"
-              />
-              <TaskListItem
-                icon={hourglass}
-                title="Time Estimate  "
-                taskListInfo="empty"
-              />
-            </div>
+          <h1 className="heading-4">{task.title}</h1>
+          <div className="flex gap-[150px] border-b border-neutral-black-5 pb-6 mb-6">
             <div className="flex flex-col gap-3 w-full">
               <TaskListItem
                 icon={loading}
                 title="Status"
-                taskListInfo="empty"
+                taskListInfo={task.status}
+                className={`py-1 px-3 ${
+                  task.status === "Completed" && "bg-success-300"
+                }  ${task.status === "In Progress" && "bg-secondary-300"}
+                ${task.status === "To Do" && "bg-primary-200"} rounded-lg`}
               />
               <TaskListItem
-                icon={loading}
-                title="Status"
-                taskListInfo="empty"
+                icon={calendar}
+                title="Due date"
+                taskListInfo={task.dueDate}
               />
               <TaskListItem
-                icon={loading}
-                title="Status"
-                taskListInfo="empty"
+                icon={hourglass}
+                title="Time Estimate  "
+                taskListInfo={task.timeEstimate}
+              />
+            </div>
+            <div className="flex flex-col gap-3 w-full">
+              <TaskListItem
+                icon={user}
+                title="Assignees"
+                taskListInfo={task.assignees.map((task) => (
+                  <figure className="w-8 h-8 rounded-full border border-white shadow-2xl">
+                    <img
+                      src={task.avatar}
+                      key={task.id}
+                      className=" rounded-full"
+                    />
+                  </figure>
+                ))}
+              />
+              <TaskListItem
+                icon={calendar}
+                title="Project"
+                taskListInfo={task.project}
+                className="px-3 py-1 bg-neutral-black-5 rounded-lg"
+              />
+              <TaskListItem
+                icon={flag}
+                title="Priority"
+                taskListInfo={task.priority}
               />
             </div>
           </div>
         </div>
+        <div className="flex flex-col gap-4 mb-6">
+          <h1 className="heading-5">Detail</h1>
+
+          <p className="body-medium-medium w-full max-w-[962px]">
+            {task.description || "No detail"}
+          </p>
+        </div>
+        {task.image && (
+          <div className="flex flex-col gap-4">
+            <h1 className="heading-5">Attachments</h1>
+            <div className="flex gap-5 flex-wrap">
+              {task.image.map((task) => (
+                <ImageFile task={task} key={task.id} />
+              ))}
+            </div>
+          </div>
+        )}
       </Modal>
     </div>
   );

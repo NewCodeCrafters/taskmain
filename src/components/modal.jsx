@@ -10,16 +10,20 @@ const Modal = ({
   children,
   buttonText,
   buttonAction,
+  onClick,
   Class = "",
 }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 grid place-items-center bg-background/25  z-50">
-      <div className={`bg-white rounded-lg p-6  ${Class}`}>
+    <div
+      className="fixed inset-0 grid place-items-center bg-background/10 z-50"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className={`bg-white rounded-lg p-6  ${Class}`} onClick={onClick}>
         {/* <button onClick={onClose} className="absolute top-4 right-4">
           <img
-            src={CloseIcon} 
+            src={CloseIcon}
             alt="Close"
             className="w-5 h-5 hover:opacity-80"
           />

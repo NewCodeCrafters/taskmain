@@ -45,7 +45,7 @@ const tasks = [
     description: "Develop the main UI for product pages and checkout.",
     tags: ["Development", "Design"],
     comments: 3,
-    image: "https://via.placeholder.com/150",
+    image: ["https://via.placeholder.com/150"],
     checked: false,
   },
   {
@@ -89,7 +89,7 @@ const tasks = [
     description: "Fix misaligned elements and ensure responsive design.",
     tags: ["UI", "Frontend"],
     comments: 1,
-    image: "https://via.placeholder.com/150",
+    image: ["https://via.placeholder.com/150"],
     checked: true,
   },
   {
@@ -133,7 +133,10 @@ const tasks = [
     description: "Improve query efficiency to reduce response times.",
     tags: ["Database", "Optimization"],
     comments: 3,
-    image: "https://via.placeholder.com/150",
+    image: [
+      "https://via.placeholder.com/150",
+      "https://via.placeholder.com/150",
+    ],
     checked: false,
   },
   {
