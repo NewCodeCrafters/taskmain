@@ -1,4 +1,4 @@
-export const tasks = [
+export const task = [
   {
     id: 1,
     name: "Develop API Endpoint",

@@ -1,31 +1,70 @@
 import React from "react";
-import ProfileDropDown from "../components/ProfileDropDown";
 import HomeLink from "../components/HomeLink";
 import grid from "../assets/grid-white.svg";
+import gridBlue from "../assets/grid-blue.svg";
 import calendar from "../assets/calendar.svg";
+import calendarBlue from "../assets/calendar-blue.svg";
 import rows from "../assets/rows-01.svg";
+import rowsBlue from "../assets/rows-blue.svg";
 import filter from "../assets/filter-lines.svg";
 import plus from "../assets/plus-white.svg";
 import plusDark from "../assets/plus.svg";
 import chevron from "../assets/chevron-selector-vertical.svg";
 import Button from "../components/Button";
-import TaskToDo from "../components/TaskToDo";
-import TaskInProgress from "../components/TaskInProgress";
-import TaskCompleted from "../components/TaskCompleted";
-import AnimatedCheckmark from "../components/AnimatedCheckMark";
-import CheckBox from "../components/CheckBox";
-import ProgressBar from "../components/ProgressBar";
-import TaskTable from "../components/TaskTable";
+import { useTaskStore } from "../stores/taskStore";
+import tasks from "../data/task";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router";
+import HomeLinkMobile from "../components/HomeLinkMobile";
+import TaskColumn from "../components/TaskColumn";
+import BoardView from "../components/BoardView";
+import ListView from "../components/ListView";
+import Calendar from "../components/Calendar";
 
 const Home = () => {
+  const { setTask } = useTaskStore((s) => s);
+
+  const [viewParams, setViewParams] = useSearchParams();
+
+  const view = viewParams.get("view") || "board";
+  useEffect(() => {
+    setTask(tasks);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="relative w-full flex flex-col gap-6">
+    <div className="relative flex flex-col gap-6 ">
       <span className="heading-4">Team Daily Task</span>
       <section className="flex justify-between">
-        <div className="flex gap-1 items-start">
-          <HomeLink text="Board View" icon={<img src={grid} />} />
-          <HomeLink text="List View" icon={<img src={rows} />} />
-          <HomeLink text="Calender" icon={<img src={calendar} />} />
+        <div className="md:hidden flex">
+          <HomeLinkMobile />
+        </div>
+        <div className="hidden md:flex gap-1 items-start">
+          <HomeLink
+            onClick={() => setViewParams({ view: "board" })}
+            text="Board View"
+            icon={<img src={grid} />}
+            activeIcon={<img src={gridBlue} />}
+            LinkTo={`/?view=board`}
+            isActive={view === "board"}
+          />
+          <HomeLink
+            onClick={() => setViewParams({ view: "list" })}
+            text="List View"
+            icon={<img src={rows} />}
+            activeIcon={<img src={rowsBlue} />}
+            LinkTo={`/?view=list`}
+            isActive={view === "list"}
+          />
+          <HomeLink
+            onClick={() => setViewParams({ view: "calendar" })}
+            text="Calendar"
+            icon={<img src={calendar} />}
+            activeIcon={<img src={calendarBlue} />}
+            LinkTo={`/?view=calendar`}
+            isActive={view === "calendar"}
+          />
+
           <img src={plusDark} alt="" className="ml-5" />
         </div>
         <div className="flex gap-3">
@@ -35,19 +74,16 @@ const Home = () => {
           <figure className="w-10 h-10 border border-paragraph rounded-full grid place-items-center">
             <img src={chevron} alt="" />
           </figure>
-          <Button leftIcon={<img src={plus} />} className="ml-2">
+          <Button leftIcon={<img src={plus} />} className="hidden md:flex ml-2">
             Add Task
           </Button>
         </div>
       </section>
-      <section className="flex gap-[30px] items-start">
-        <TaskToDo />
-        <TaskInProgress />
-        <TaskCompleted />
-        <figure className="w-full max-w-[102px] h-[50px] border rounded-[100px] border-neutral-black-7 grid place-items-center ">
-          <img src={plusDark} alt="" />
-        </figure>
-      </section>
+      <div className="overflow-y-auto">
+        {view === "board" && <BoardView />}
+        {view === "list" && <ListView />}
+        {view === "calendar" && <Calendar />}
+      </div>
     </div>
   );
 };
