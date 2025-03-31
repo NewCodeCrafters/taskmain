@@ -28,18 +28,20 @@ const TaskInfoModal = () => {
       <Modal
         isOpen={modal}
         onClick={(e) => e.stopPropagation()}
-        Class="flex flex-col gap-6 w-full max-w-[1000px] overflow-y-auto max-h-4/5"
+        Class="flex flex-col gap-6 w-full max-w-[1000px] overflow-y-auto md:max-h-4/5 max-h-35/36"
       >
         <div className="flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6 ">
           <TaskSection />
           <div className="flex gap-5 items-center">
             <div className="flex items-center gap-1">
-              <img src={edit} alt="" />
-              <span className="body-small-regular text-paragraph">
+              <img src={edit} alt="" className="hidden md:flex" />
+              <span className="hidden md:flex body-small-regular text-paragraph">
                 Created on 2 March, 2024
               </span>
             </div>
-            <Button variant="black">Share</Button>
+            <Button variant="black " className="hidden md:flex">
+              Share
+            </Button>
             <img src={star} alt="" />
             <img src={edit} alt="" />
             <img
@@ -51,7 +53,7 @@ const TaskInfoModal = () => {
         </div>
         <div className="flex flex-col gap-6">
           <h1 className="heading-4">{task.title}</h1>
-          <div className="flex gap-[150px] border-b border-neutral-black-5 pb-6 mb-6">
+          <div className="flex flex-col gap-3 md:flex-row md:gap-[150px] border-b border-neutral-black-5 pb-6 mb-6">
             <div className="flex flex-col gap-3 w-full">
               <TaskListItem
                 icon={loading}
