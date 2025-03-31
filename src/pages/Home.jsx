@@ -20,6 +20,7 @@ import TaskColumn from "../components/TaskColumn";
 import BoardView from "../components/BoardView";
 import ListView from "../components/ListView";
 import Calendar from "../components/Calendar";
+import Dropdown from "../components/Dropdown";
 
 const Home = () => {
   const { setTask } = useTaskStore((s) => s);
@@ -83,6 +84,9 @@ const Home = () => {
         {view === "board" && <BoardView />}
         {view === "list" && <ListView />}
         {view === "calendar" && <Calendar />}
+        <div>
+          <Dropdown />
+        </div>
       </div>
     </div>
   );
