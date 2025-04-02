@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import { getUserProfile } from "../utils/api";
 import TaskSection from "./TaskSection";
+import ProfileDropDown from "./ProfileDropDown";
 
 const Header = ({
   handleSideBar,
@@ -74,6 +75,7 @@ const Header = ({
           </figure>
         </div>
       </section>
+      {dropDown && <ProfileDropDown />}
     </div>
   );
 };

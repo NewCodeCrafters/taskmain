@@ -9,7 +9,6 @@ import rowsBlue from "../assets/rows-blue.svg";
 import filter from "../assets/filter-lines.svg";
 import plus from "../assets/plus-white.svg";
 import plusDark from "../assets/plus.svg";
-import chevron from "../assets/chevron-selector-vertical.svg";
 import Button from "../components/Button";
 import { useTaskStore } from "../stores/taskStore";
 import tasks from "../data/task";
@@ -21,6 +20,7 @@ import BoardView from "../components/BoardView";
 import ListView from "../components/ListView";
 import Calendar from "../components/Calendar";
 import Dropdown from "../components/Dropdown";
+import SortBy from "../components/SortBy";
 
 const Home = () => {
   const { setTask } = useTaskStore((s) => s);
@@ -72,9 +72,7 @@ const Home = () => {
           <figure className="w-10 h-10 border border-paragraph rounded-full grid place-items-center">
             <img src={filter} alt="" />
           </figure>
-          <figure className="w-10 h-10 border border-paragraph rounded-full grid place-items-center">
-            <img src={chevron} alt="" />
-          </figure>
+          <SortBy />
           <Button leftIcon={<img src={plus} />} className="hidden md:flex ml-2">
             Add Task
           </Button>

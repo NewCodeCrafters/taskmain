@@ -54,7 +54,6 @@ const Layout = () => {
           <DndProvider backend={HTML5Backend}>
             <Outlet />
           </DndProvider>
-          {dropDown && <ProfileDropDown />}
         </div>
         {mobileBar && <MobileNavbar handleSetMobileBar={handleSetMobileBar} />}
       </main>
