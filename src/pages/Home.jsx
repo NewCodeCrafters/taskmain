@@ -6,7 +6,6 @@ import calendar from "../assets/calendar.svg";
 import calendarBlue from "../assets/calendar-blue.svg";
 import rows from "../assets/rows-01.svg";
 import rowsBlue from "../assets/rows-blue.svg";
-import filter from "../assets/filter-lines.svg";
 import plus from "../assets/plus-white.svg";
 import plusDark from "../assets/plus.svg";
 import Button from "../components/Button";
@@ -21,6 +20,7 @@ import ListView from "../components/ListView";
 import Calendar from "../components/Calendar";
 import Dropdown from "../components/Dropdown";
 import SortBy from "../components/SortBy";
+import Filter from "../components/Filter";
 
 const Home = () => {
   const { setTask } = useTaskStore((s) => s);
@@ -69,9 +69,7 @@ const Home = () => {
           <img src={plusDark} alt="" className="ml-5" />
         </div>
         <div className="flex gap-3">
-          <figure className="w-10 h-10 border border-paragraph rounded-full grid place-items-center">
-            <img src={filter} alt="" />
-          </figure>
+          <Filter />
           <SortBy />
           <Button leftIcon={<img src={plus} />} className="hidden md:flex ml-2">
             Add Task

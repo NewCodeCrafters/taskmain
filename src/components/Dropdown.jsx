@@ -19,7 +19,7 @@ const ActionDropdown = ({ className, children, action }) => {
   }, []);
 
   return (
-    <div className="relative inline-block" ref={dropdownRef}>
+    <div className="relative z-50" ref={dropdownRef}>
       {/* Button to toggle dropdown */}
       <button
         onClick={toggleDropdown}
@@ -30,7 +30,7 @@ const ActionDropdown = ({ className, children, action }) => {
 
       {/* Dropdown List */}
       {isOpen && (
-        <div className={`absolute ${className} overflow-hidden mt-2.5 right-0`}>
+        <div className={`absolute ${className}  mt-2.5 right-0 bg-white`}>
           {children}
         </div>
       )}
