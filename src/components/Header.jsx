@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import { getUserProfile } from "../utils/api";
+import TaskSection from "./TaskSection";
+import ProfileDropDown from "./ProfileDropDown";
 
 const Header = ({
   handleSideBar,
@@ -32,12 +34,7 @@ const Header = ({
         <button onClick={handleSideBar} className="hidden md:block">
           {sideBar ? <img src="/images/Closebar.svg" alt="" /> : null}
         </button>
-
-        <span className=" text-paragraph hidden lg:grid">
-          Development Stuff
-        </span>
-        <span className="hidden lg:grid">/</span>
-        <span className="hidden lg:grid">Team daily Task</span>
+        <TaskSection />
       </div>
       <section className="flex md:gap-10 gap-[20px]">
         <div className="flex gap-4 items-center">
@@ -78,6 +75,7 @@ const Header = ({
           </figure>
         </div>
       </section>
+      {dropDown && <ProfileDropDown />}
     </div>
   );
 };

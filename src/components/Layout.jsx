@@ -5,6 +5,8 @@ import { Outlet } from "react-router";
 import ProfileDropDown from "./ProfileDropDown";
 import CollapsedNav from "./CollapsedNav";
 import MobileNavbar from "./MobileNavbar";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const Layout = () => {
   const [sideBar, setSideBar] = useState(false);
@@ -26,8 +28,8 @@ const Layout = () => {
   }
 
   return (
-    <div className="flex min-h-screen relative">
-      <div className="sticky overflow-y-auto border-r border-neutral-black-5">
+    <div className="flex h-screen relative">
+      <div className="sticky border-r h-screen border-neutral-black-5 overflow-y-scroll ">
         {sideBar ? (
           <CollapsedNav handleSidebar={handleSideBar} />
         ) : (
@@ -38,7 +40,7 @@ const Layout = () => {
           />
         )}
       </div>
-      <main className="flex flex-1 flex-col overflow-hidden">
+      <main className="flex flex-1 h-screen flex-col overflow-y-auto">
         <div className=" sticky top-0 z-50 bg-white">
           <Header
             handleSideBar={handleSideBar}
@@ -48,9 +50,10 @@ const Layout = () => {
             handleSetMobileBar={handleSetMobileBar}
           />
         </div>
-        <div className="flex-1 bg-neutral-black-4 overflow-y-auto relative py-5 px-6">
-          <Outlet />
-          {dropDown && <ProfileDropDown />}
+        <div className="flex-1 bg-neutral-black-4 relative py-5 px-6 h-screen overflow-y-auto">
+          <DndProvider backend={HTML5Backend}>
+            <Outlet />
+          </DndProvider>
         </div>
         {mobileBar && <MobileNavbar handleSetMobileBar={handleSetMobileBar} />}
       </main>

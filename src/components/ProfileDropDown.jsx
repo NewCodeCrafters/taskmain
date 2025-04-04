@@ -4,8 +4,8 @@ import { logout } from "../utils/api";
 
 const ProfileDropDown = () => {
   return (
-    <section>
-      <div className="top-0 right-0 absolute mt-2 md:mt-4  mr-5 w-full md:max-w-[276px] max-w-[220px] p-2 bg-white rounded-xl flex flex-col gap-2 transition-all ease-in-out duration-500">
+    <>
+      <div className="-bottom-80 right-0 absolute mt-2 md:mt-4  mr-5 w-full md:max-w-[276px] max-w-[220px] p-2 bg-white rounded-xl flex flex-col gap-2 transition-all ease-in-out duration-500">
         <div className="flex flex-col gap-2 border-b pb-2 border-neutral-black-5">
           <ProfileLink
             leftIcon={<img src="/images/users-01.svg" />}
@@ -38,7 +38,7 @@ const ProfileDropDown = () => {
           />
         </div>
       </div>
-    </section>
+    </>
   );
 };
 
