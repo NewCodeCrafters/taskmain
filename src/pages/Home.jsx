@@ -21,6 +21,7 @@ import Calendar from "../components/Calendar";
 import Dropdown from "../components/Dropdown";
 import SortBy from "../components/SortBy";
 import Filter from "../components/Filter";
+import DatePick from "../components/DatePicker";
 
 const Home = () => {
   const { setTask } = useTaskStore((s) => s);
@@ -67,6 +68,7 @@ const Home = () => {
           />
 
           <img src={plusDark} alt="" className="ml-5" />
+          <DatePick />
         </div>
         <div className="flex gap-3">
           <Filter />

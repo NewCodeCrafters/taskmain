@@ -3,6 +3,7 @@ import Button from "./Button";
 import { getUserProfile } from "../utils/api";
 import TaskSection from "./TaskSection";
 import ProfileDropDown from "./ProfileDropDown";
+import ProfileModal from "./ProfileModal";
 
 const Header = ({
   handleSideBar,

@@ -6,4 +6,6 @@ export const useModal = create((set) => ({
   taskId: null,
   setModal: (newModal) => set({ modal: newModal }),
   setTaskId: (task) => set({ taskId: task }),
+  modalProfile: false,
+  setModalProfile: (newModal) => set({ modalProfile: newModal }),
 }));

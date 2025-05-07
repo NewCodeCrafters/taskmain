@@ -7,11 +7,14 @@ import CollapsedNav from "./CollapsedNav";
 import MobileNavbar from "./MobileNavbar";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import ProfileModal from "./ProfileModal";
+import { useModal } from "../stores/useModal";
 
 const Layout = () => {
   const [sideBar, setSideBar] = useState(false);
   const [dropDown, setDropDown] = useState(false);
   const [mobileBar, setMobileBar] = useState(false);
+  const { modalProfile } = useModal((s) => s);
 
   function handleSideBar() {
     setSideBar((prev) => !prev);
@@ -56,6 +59,7 @@ const Layout = () => {
           </DndProvider>
         </div>
         {mobileBar && <MobileNavbar handleSetMobileBar={handleSetMobileBar} />}
+        {modalProfile && <ProfileModal />}
       </main>
     </div>
   );
