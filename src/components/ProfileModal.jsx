@@ -15,7 +15,7 @@ const ProfileModal = () => {
   };
 
   return (
-    <div className="bg-background/50 absolute inset-0 z-200">
+    <div className="bg-background/50 absolute inset-0 z-200 hidden md:flex">
       <section className="absolute flex h-full gap-5 right-0">
         <button
           className="bg-white rounded-full w-[60px] h-[60px] p-[10px] grid place-items-center z-50 mt-3 cursor-pointer"

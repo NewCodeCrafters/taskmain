@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import BoardView from "./components/BoardView";
 import ListView from "./components/ListView";
 import Calendar from "./components/Calendar";
+import ProfileSettings from "./components/ProfileSettings";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             />
             <Route path={routes.favourites} element={<Favourites />} />
             <Route path={routes.messages} element={<Messages />} />
+            <Route path="/profileSettings" element={<ProfileSettings />} />
           </Route>
         </Route>
         <Route element={<AuthLayout />}>
@@ -37,6 +39,7 @@ function App() {
           <Route path={routes.signup} element={<SignUpPage />} />
           <Route path={routes.forgotpassword} element={<ForgetPassword />} />
           <Route path={routes.confirmotp} element={<OtpPage />} />
+
           {/* <Route path={routes.Checkbox} element={<Checkbox />} /> */}
         </Route>
       </Routes>
