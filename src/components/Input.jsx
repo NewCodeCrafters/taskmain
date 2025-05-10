@@ -13,14 +13,14 @@ const TextInput = ({
   ...inputProps
 }) => {
   return (
-    <div className={`flex flex-col gap-1.5 ${className}`}>
+    <div className={`flex flex-col gap-1.5  ${className}`}>
       {label && (
         <label className="body-small-medium text-neutral-black-13 ">
           {label}
         </label>
       )}
       <div
-        className={`px-3 py-2 gap-2 rounded-full border  focus-within:inset-shadow-custom-sm focus-within:drop-shadow-sm flex w-full ${InputClassName} ${errorBorder} ${
+        className={`px-3 py-2 gap-2 rounded-full border  focus-within:inset-shadow-custom-sm focus-within:drop-shadow-sm flex w-full bg-neutral-black-500 ${InputClassName} ${errorBorder} ${
           error ? "border-error-100 " : "border-neutral-black-5"
         } `}
         tabIndex={0}

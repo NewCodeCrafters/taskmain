@@ -5,9 +5,6 @@ import { useModal } from "../stores/useModal";
 
 const ProfileDropDown = () => {
   const { setModalProfile } = useModal((s) => s);
-  const handleProfileModal = () => {
-    setModalProfile((prev) => !prev);
-  };
 
   return (
     <>

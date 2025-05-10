@@ -24,6 +24,9 @@ const Button = ({
         return "bg-black text-white hover:bg-neutral-black-9";
       case "signIn":
         return "bg-neutral-black-2 text-black hover:bg-neutral-black-9";
+      case "red":
+        return "text-error-100 border-error-100 bg-error-500 hover:bg-transparent";
+
       default:
         return "bg-primary-500 text-white hover:bg-primary-400";
     }
