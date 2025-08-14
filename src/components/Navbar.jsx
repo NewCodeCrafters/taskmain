@@ -20,6 +20,7 @@ const Navbar = ({ handleSideBar, className, onClick, handleSetMobileBar }) => {
         </button>
       </div>
       <TextInput
+        InputClassName="bg-neutral-black-2"
         placeholder="Search"
         leftIcon={<img src="images/search-lg.svg" />}
       />

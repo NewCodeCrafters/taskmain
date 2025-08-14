@@ -10,8 +10,10 @@ import markerPin from "../assets/marker-pin-04.svg";
 import lock from "../assets/lock-03.svg";
 import logOut from "../assets/log-out-01.svg";
 import userX from "../assets/user-x-01.svg";
+import { useModal } from "../stores/useModal";
 
 const ProfileSettings = () => {
+  const { ProfileSettings } = useModal((s) => s);
   return (
     <div className="p-6 bg-white rounded-lg flex gap-6 w-full flex-col">
       <div className="grid grid-cols-3 gap-10 w-full border-b border-neutral-black-5 pb-6 ">

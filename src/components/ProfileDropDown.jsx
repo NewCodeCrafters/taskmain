@@ -2,9 +2,11 @@ import React from "react";
 import ProfileLink from "./ProfileLink";
 import { logout } from "../utils/api";
 import { useModal } from "../stores/useModal";
+import { useNavigate } from "react-router";
 
 const ProfileDropDown = () => {
   const { setModalProfile } = useModal((s) => s);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -18,6 +20,7 @@ const ProfileDropDown = () => {
           />
 
           <ProfileLink
+            onClick={() => navigate("/profileSettings")}
             leftIcon={<img src="/images/settings-02.svg" />}
             linkDesc="Settings"
             rightIcon={<img src="/images/chevron-right.svg" />}

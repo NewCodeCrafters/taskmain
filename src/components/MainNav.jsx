@@ -15,11 +15,11 @@ const MainNav = () => {
             LinkTo="/"
           />
 
-          <RouteLink
+          {/* <RouteLink
             leftIcon={<img src="/images/users-01.svg" />}
             linkDesc="Member settings"
             LinkTo="/membersettings"
-          />
+          /> */}
 
           <RouteLink
             leftIcon={<img src="/images/star-01.svg" />}

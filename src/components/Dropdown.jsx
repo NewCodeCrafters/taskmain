@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const ActionDropdown = ({ className, children, action }) => {
+const ActionDropdown = ({ className, children, action, actionClass }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -21,10 +21,7 @@ const ActionDropdown = ({ className, children, action }) => {
   return (
     <div className="relative z-50" ref={dropdownRef}>
       {/* Button to toggle dropdown */}
-      <button
-        onClick={toggleDropdown}
-        // className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none"
-      >
+      <button onClick={toggleDropdown} className={actionClass}>
         {action}
       </button>
 

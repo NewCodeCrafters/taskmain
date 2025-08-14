@@ -22,6 +22,8 @@ import Dropdown from "../components/Dropdown";
 import SortBy from "../components/SortBy";
 import Filter from "../components/Filter";
 import DatePick from "../components/DatePicker";
+import CreateTaskModal from "../components/CreateTaskModal";
+import CreateSpace from "../components/createSpace";
 
 const Home = () => {
   const { setTask } = useTaskStore((s) => s);
@@ -36,7 +38,6 @@ const Home = () => {
 
   return (
     <div className="relative flex flex-col gap-6 ">
-      <span className="heading-4">Team Daily Task</span>
       <section className="flex justify-between">
         <div className="md:hidden flex">
           <HomeLinkMobile />
@@ -68,7 +69,6 @@ const Home = () => {
           />
 
           <img src={plusDark} alt="" className="ml-5" />
-          <DatePick />
         </div>
         <div className="flex gap-3">
           <Filter />
@@ -86,6 +86,8 @@ const Home = () => {
           <Dropdown />
         </div>
       </div>
+      <CreateSpace />
+      {/* <CreateTaskModal /> */}
     </div>
   );
 };
