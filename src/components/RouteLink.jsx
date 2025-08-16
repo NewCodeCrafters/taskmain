@@ -21,8 +21,8 @@ const RouteLink = ({
       to={LinkTo || "#"}
       className={
         isActive
-          ? "bg-primary-50 py-3 px-4 rounded-xl flex w-full gap-3 relative"
-          : "flex py-3 px-4 hover:cursor-pointer rounded-4  items-center w-full gap-3 "
+          ? "bg-primary-50 py-3 px-4 rounded-xl flex w-full gap-3 relative body-medium-semibold"
+          : "flex py-3 px-4 hover:cursor-pointer rounded-4  items-center w-full gap-3 body-medium-semibold"
       }
     >
       {isActive && (

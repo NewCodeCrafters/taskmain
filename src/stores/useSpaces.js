@@ -12,12 +12,12 @@ export const useSpaces = create((set) => ({
           {
             id: `${newId}-tasks`,
             name: "Team Daily Task",
-            route: `/spaces/${newId}/team-daily-task`,
+            route: `/space/${newId}/teamdailytask`,
           },
           {
             id: `${newId}-settings`,
             name: "Member Settings",
-            route: `/spaces/${newId}/member-settings`,
+            route: `/space/${newId}/memberssetting`,
           },
         ],
       };

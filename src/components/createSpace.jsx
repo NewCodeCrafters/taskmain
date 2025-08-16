@@ -25,7 +25,10 @@ const CreateSpace = () => {
     >
       <div className="border-b border-neutral-black-5 pb-6 mb-6 flex items-center justify-between">
         <h1 className="body-medium-semibold">Create a Space</h1>
-        <button className="" onClick={() => setCreateSpaceModal(false)}>
+        <button
+          className="hover:cursor-pointer"
+          onClick={() => setCreateSpaceModal(false)}
+        >
           <img src={closeIcon} alt="" />
         </button>
       </div>

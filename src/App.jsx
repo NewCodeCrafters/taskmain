@@ -16,6 +16,7 @@ import BoardView from "./components/BoardView";
 import ListView from "./components/ListView";
 import Calendar from "./components/Calendar";
 import ProfileSettings from "./components/ProfileSettings";
+import Space from "./pages/Space";
 
 function App() {
   return (
@@ -25,13 +26,17 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
             <Route path="/*" element={<Home />} />
-            <Route
-              path={routes.membersettings}
-              element={<MembersSetttings />}
-            />
+
             <Route path={routes.favourites} element={<Favourites />} />
             <Route path={routes.messages} element={<Messages />} />
             <Route path="/profileSettings" element={<ProfileSettings />} />
+            <Route path="/space">
+              <Route path=":spaceId/teamdailytask" element={<Space />} />
+              <Route
+                path=":spaceId/memberssetting"
+                element={<MembersSetttings />}
+              />
+            </Route>
           </Route>
         </Route>
         <Route element={<AuthLayout />}>

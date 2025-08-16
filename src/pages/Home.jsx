@@ -6,8 +6,8 @@ import calendar from "../assets/calendar.svg";
 import calendarBlue from "../assets/calendar-blue.svg";
 import rows from "../assets/rows-01.svg";
 import rowsBlue from "../assets/rows-blue.svg";
-import plus from "../assets/plus-white.svg";
-import plusDark from "../assets/plus.svg";
+// import plus from "../assets/plus-white.svg";
+// import plusDark from "../assets/plus.svg";
 import Button from "../components/Button";
 import { useTaskStore } from "../stores/taskStore";
 import tasks from "../data/task";
@@ -68,14 +68,14 @@ const Home = () => {
             isActive={view === "calendar"}
           />
 
-          <img src={plusDark} alt="" className="ml-5" />
+          {/* <img src={plusDark} alt="" className="ml-5" /> */}
         </div>
         <div className="flex gap-3">
           <Filter />
           <SortBy />
-          <Button leftIcon={<img src={plus} />} className="hidden md:flex ml-2">
+          {/* <Button leftIcon={<img src={plus} />} className="hidden md:flex ml-2">
             Add Task
-          </Button>
+          </Button> */}
         </div>
       </section>
       <div className="overflow-y-auto">
