@@ -4,10 +4,18 @@ import HomeLink from "../components/HomeLink";
 import BoardView from "../components/BoardView";
 import ListView from "../components/ListView";
 import { Calendar } from "lucide-react";
+import plus from "../assets/plus-white.svg";
+import SortBy from "../components/SortBy";
+import Filter from "../components/Filter";
+import Button from "../components/Button";
+import CreateTaskModal from "../components/CreateTaskModal";
+import { useModal } from "../stores/useModal";
+import tasks from "../data/task";
 
 const Space = () => {
   const { spaceId } = useParams(); // ✅ get spaceId from URL
-  const spaces = useSpaces((state) => state.spaces);
+  const { spaces, setSpaces } = useSpaces((s) => s);
+  const { setModalAddTask } = useModal((s) => s);
 
   const currentSpace = spaces.find((s) => String(s.id) === spaceId);
 
@@ -41,6 +49,17 @@ const Space = () => {
             isActive={view === "calendar"}
           />
         </div>
+        <div className="flex gap-3">
+          <Filter />
+          <SortBy />
+          <Button
+            leftIcon={<img src={plus} />}
+            className="hidden md:flex ml-2 "
+            onClick={() => setModalAddTask(true)}
+          >
+            Add Task
+          </Button>
+        </div>
       </section>
 
       <div className="overflow-y-auto">
@@ -48,6 +67,7 @@ const Space = () => {
         {view === "list" && <ListView />}
         {view === "calendar" && <Calendar />}
       </div>
+      <CreateTaskModal />
     </div>
   );
 };

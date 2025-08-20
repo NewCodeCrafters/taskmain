@@ -86,8 +86,6 @@ const Home = () => {
           <Dropdown />
         </div>
       </div>
-      <CreateSpace />
-      {/* <CreateTaskModal /> */}
     </div>
   );
 };

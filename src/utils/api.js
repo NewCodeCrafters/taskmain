@@ -4,7 +4,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { Navigate } from "react-router";
 
 export const api = axios.create({
-  baseURL: "https://ncc-task-management-backend.onrender.com",
+  baseURL: "https://tasktonic-backend.onrender.com",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -43,7 +43,7 @@ api.interceptors.response.use(
 );
 export const signup = async (userData) => {
   try {
-    const res = await api.post("/accounts/signup/", userData);
+    const res = await api.post("/api/signup/", userData);
     const { access_token, refresh_token } = res.data;
 
     localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
@@ -71,7 +71,12 @@ export const signup = async (userData) => {
 
 export const logIn = async (credentials) => {
   try {
-    const res = await api.post("/accounts/login/", credentials);
+    const res = await api.post("/api/signin/", credentials);
+    if (res.status === 204) {
+      toast.success("Signup successful, but no tokens returned.");
+      return {}; // or navigate to login page directly
+    }
+    console.log(res);
     const { refresh_token, access_token } = res.data;
     localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
     localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
@@ -98,7 +103,7 @@ export const getUserProfile = async () => {
   try {
     // const token = localStorage.getItem(ACCESS_TOKEN_KEY);
     // console.log(token);
-    const res = await api.get("/auth/users/");
+    const res = await api.get("/api/users/");
     console.log(res.data);
     return res.data;
   } catch (error) {

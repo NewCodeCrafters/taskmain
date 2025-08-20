@@ -9,6 +9,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ProfileModal from "./ProfileModal";
 import { useModal } from "../stores/useModal";
+import CreateSpace from "./createSpace";
 
 const Layout = () => {
   const [sideBar, setSideBar] = useState(false);
@@ -61,6 +62,7 @@ const Layout = () => {
         {mobileBar && <MobileNavbar handleSetMobileBar={handleSetMobileBar} />}
         {modalProfile && <ProfileModal />}
       </main>
+      <CreateSpace />
     </div>
   );
 };

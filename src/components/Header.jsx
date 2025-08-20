@@ -4,6 +4,8 @@ import { getUserProfile } from "../utils/api";
 import TaskSection from "./TaskSection";
 import ProfileDropDown from "./ProfileDropDown";
 import ProfileModal from "./ProfileModal";
+import { useModal } from "../stores/useModal";
+import ShareSpace from "./ShareSpace";
 
 const Header = ({
   handleSideBar,
@@ -26,6 +28,8 @@ const Header = ({
     };
     fetchUserData();
   }, []);
+  const { setShareSpaceModal } = useModal((s) => s);
+
   return (
     <div className="px-3 md:px-6 flex justify-between items-center border- border-neutral-black-5  h-[76px] top-0  sticky z-50 ">
       <div className="flex gap-3 heading-5 bg-white lg:items-end">
@@ -43,7 +47,9 @@ const Header = ({
             <img src="/images/clock.svg" alt="" />
             <span className="text-paragraph">Last edited 10 minutes ago </span>
           </div>
-          <Button variant="black">Share</Button>
+          <Button variant="black" onClick={() => setShareSpaceModal(true)}>
+            Share
+          </Button>
           <div className="flex">
             <div className=" w-10 h-10 border border-neutral-black-5 grid place-items-center rounded-full">
               <img src="/images/bell-03.svg" alt="" />
@@ -77,6 +83,7 @@ const Header = ({
         </div>
       </section>
       {dropDown && <ProfileDropDown />}
+      <ShareSpace />
     </div>
   );
 };

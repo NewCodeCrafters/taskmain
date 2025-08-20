@@ -5,6 +5,7 @@ import { useModal } from "../stores/useModal";
 import { useSpaces } from "../stores/useSpaces";
 import { Link } from "react-router";
 import lineImg from "../assets/line.svg";
+import CreateSpace from "./createSpace";
 
 const SubNav = () => {
   const { setCreateSpaceModal } = useModal((s) => s);
@@ -34,8 +35,8 @@ const SubNav = () => {
         <div>
           {spaces.map((space) => (
             <div key={space.id}>
-              <Link
-                to={`/space/${space.id}`}
+              <div
+                // to={`/space/${space.id}`}
                 className="flex py-3 px-4 hover:cursor-pointer rounded-4  items-center w-full gap-3 "
               >
                 <img src="/images/star-01.svg" alt="" />
@@ -46,7 +47,7 @@ const SubNav = () => {
                 >
                   <span className="body-medium-semibold">{space.name}</span>
                 </button>
-              </Link>
+              </div>
               <ul className="">
                 {expanded === space.id && (
                   <div className="flex gap-2 pl-6">
@@ -81,6 +82,7 @@ const SubNav = () => {
           <Button>Upgrade Here</Button>
         </div>
       </section>
+      {/* <CreateSpace /> */}
     </div>
   );
 };

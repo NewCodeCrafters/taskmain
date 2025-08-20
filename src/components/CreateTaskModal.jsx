@@ -15,17 +15,21 @@ import DatePick from "./DatePicker";
 import StatusDropdown from "./StatusDropdown";
 import TimeEstimate from "./TimeEstimate";
 import Priority from "./Priority";
+import attachImg from "../assets/attachment-01.svg";
+import { useModal } from "../stores/useModal";
+import Button from "./Button";
 
 // const status = ["Completed", "In Progress", "To Do"];
 
 const CreateTaskModal = () => {
-  const [close, setClose] = useState(false);
-  const onClose = () => {
-    setClose(!close);
-  };
+  const { setModalAddTask, modalAddTask } = useModal((s) => s);
+  // const [close, setClose] = useState(false);
+  // const onClose = () => {
+  //   setClose(!close);
+  // };
   return (
-    <div>
-      <Modal isOpen Class="flex flex-col gap-6 w-full max-w-[1000px]">
+    <Modal isOpen={modalAddTask}>
+      <form action="" ClassName="flex flex-col gap-6 w-full max-w-[1000px]">
         <div className="w-full flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6">
           <div className="flex gap-3">
             <img src={filePlus} alt="filePlus" />
@@ -35,7 +39,7 @@ const CreateTaskModal = () => {
             <button>
               <img src={expand} alt="" />
             </button>
-            <button onClick={onClose}>
+            <button onClick={() => setModalAddTask(false)}>
               <img src={CloseIcon} alt="" />
             </button>
           </div>
@@ -80,7 +84,7 @@ const CreateTaskModal = () => {
             <Priority />
           </section>
         </div>
-        <div>
+        <div className="mb-6">
           <span className="body-small-medium">Add Description</span>
           <input
             type="text"
@@ -89,8 +93,14 @@ const CreateTaskModal = () => {
             maxLength={"200"}
           />
         </div>
-      </Modal>
-    </div>
+        <div className="flex items-center gap-4 w-full justify-end">
+          <Button className="rounded-full" variant="signIn">
+            <img src={attachImg} alt="" />
+          </Button>
+          <Button>Create Task</Button>
+        </div>
+      </form>
+    </Modal>
   );
 };
 

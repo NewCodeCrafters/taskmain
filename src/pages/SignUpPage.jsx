@@ -36,8 +36,8 @@ const SignUpPage = () => {
     values: {
       email: "",
       password: "",
-      first_name: "",
-      last_name: "",
+      firstname: "",
+      lastname: "",
     },
   });
 
@@ -81,21 +81,21 @@ const SignUpPage = () => {
       >
         <section className="flex flex-col lg:flex-row gap-3 w-full">
           <TextInput
-            {...register("first_name")}
+            {...register("firstname")}
             label="First name"
             leftIcon={<img src={userIcon} />}
             placeholder="Input your first name"
             className="w-full"
-            error={errors.first_name?.message}
+            error={errors.firstname?.message}
           />
 
           <TextInput
-            {...register("last_name")}
+            {...register("lastname")}
             label="Last name"
             leftIcon={<img src={userIcon} />}
             placeholder="Input your last name"
             className="w-full"
-            error={errors.last_name?.message}
+            error={errors.lastname?.message}
           />
         </section>
         <TextInput

@@ -9,10 +9,13 @@ export const useModal = create((set) => ({
   modalProfile: false,
   setModalProfile: (newModal) => set({ modalProfile: newModal }),
   modalAddTask: false,
-  setModalAddTask: (newModal) => set({ modalProfile: newModal }),
-  profileSettings: false,
-  setProfileSettings: (showSetting) => set({ settings: showSetting }),
+  setModalAddTask: (newModal) => set({ modalAddTask: newModal }),
+  profileSetting: true,
+  setProfileSetting: (showSetting) => set({ settings: showSetting }),
   createSpaceModal: false,
   setCreateSpaceModal: (showCreateSpace) =>
     set({ createSpaceModal: showCreateSpace }),
+  shareSpaceModal: false,
+  setShareSpaceModal: (showCreateSpace) =>
+    set({ shareSpaceModal: showCreateSpace }),
 }));

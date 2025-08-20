@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const registerSchema = z.object({
-  first_name: z.string().min(1, "First name is required"),
-  last_name: z.string().min(1, "Last name is required"),
+  firstname: z.string().min(1, "First name is required"),
+  lastname: z.string().min(1, "Last name is required"),
   email: z.string().email("Invalid Email"),
   password: z
     .string()
@@ -12,7 +12,6 @@ export const registerSchema = z.object({
       "Password must contain at leat 1 uppercase, 1 lowercase, and 1 special character"
     ),
 });
-
 
 export const loginschema = z.object({
   email: z.string().email("Invalid email"),

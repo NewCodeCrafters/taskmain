@@ -23,22 +23,22 @@ function App() {
     <main>
       <Toaster />
       <Routes>
-        <Route element={<ProtectedRoute />}>
-          <Route element={<Layout />}>
-            <Route path="/*" element={<Home />} />
+        {/* <Route element={<ProtectedRoute />}> */}
+        <Route element={<Layout />}>
+          <Route path="/*" element={<Home />} />
 
-            <Route path={routes.favourites} element={<Favourites />} />
-            <Route path={routes.messages} element={<Messages />} />
-            <Route path="/profileSettings" element={<ProfileSettings />} />
-            <Route path="/space">
-              <Route path=":spaceId/teamdailytask" element={<Space />} />
-              <Route
-                path=":spaceId/memberssetting"
-                element={<MembersSetttings />}
-              />
-            </Route>
+          <Route path={routes.favourites} element={<Favourites />} />
+          <Route path={routes.messages} element={<Messages />} />
+          <Route path="/profileSettings" element={<ProfileSettings />} />
+          <Route path="/space">
+            <Route path=":spaceId/teamdailytask" element={<Space />} />
+            <Route
+              path=":spaceId/memberssetting"
+              element={<MembersSetttings />}
+            />
           </Route>
         </Route>
+        {/* </Route> */}
         <Route element={<AuthLayout />}>
           <Route path={routes.login} element={<LoginPage />} />
           <Route path={routes.signup} element={<SignUpPage />} />
