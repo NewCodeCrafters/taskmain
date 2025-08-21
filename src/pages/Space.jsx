@@ -10,11 +10,12 @@ import Filter from "../components/Filter";
 import Button from "../components/Button";
 import CreateTaskModal from "../components/CreateTaskModal";
 import { useModal } from "../stores/useModal";
-import tasks from "../data/task";
+import { useEffect } from "react";
+// import tasks from "../data/task";
 
 const Space = () => {
   const { spaceId } = useParams(); // ✅ get spaceId from URL
-  const { spaces, setSpaces } = useSpaces((s) => s);
+  const { fetchProjects, spaces } = useSpaces((s) => s);
   const { setModalAddTask } = useModal((s) => s);
 
   const currentSpace = spaces.find((s) => String(s.id) === spaceId);

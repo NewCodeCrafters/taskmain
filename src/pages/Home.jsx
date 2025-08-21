@@ -10,7 +10,7 @@ import rowsBlue from "../assets/rows-blue.svg";
 // import plusDark from "../assets/plus.svg";
 import Button from "../components/Button";
 import { useTaskStore } from "../stores/taskStore";
-import tasks from "../data/task";
+// import tasks from "../data/task";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 import HomeLinkMobile from "../components/HomeLinkMobile";
@@ -26,13 +26,13 @@ import CreateTaskModal from "../components/CreateTaskModal";
 import CreateSpace from "../components/createSpace";
 
 const Home = () => {
-  const { setTask } = useTaskStore((s) => s);
+  const { fetchTasks } = useTaskStore((s) => s);
 
   const [viewParams, setViewParams] = useSearchParams();
 
   const view = viewParams.get("view") || "board";
   useEffect(() => {
-    setTask(tasks);
+    fetchTasks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

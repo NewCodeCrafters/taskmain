@@ -1,38 +1,38 @@
 import { create } from "zustand";
-import tasks from "../data/task";
+import users from "../data/users";
 
-export const useTaskStore = create((set) => ({
-  tasks: [],
+export const useUserStore = create((set) => ({
+  users: [],
   loading: false,
   error: null,
 
-  fetchTasks: async () => {
+  fetchUsers: async () => {
     set({ loading: true, error: null });
     try {
       await new Promise((res) => setTimeout(res, 500));
-      set({ tasks: tasks, loading: false });
+      set({ users: users, loading: false });
     } catch (err) {
       set({ error: err.message, loading: false });
     }
   },
 
-  addTask: async (task) => {
+  addUser: async (user) => {
     set({ loading: true });
     try {
-      await new Promise((res) => setTimeout(res, 500));
-      set((state) => ({ tasks: [...state.tasks, task], loading: false }));
+      await new Promise((res) => setTimeout(res, 300));
+      set((state) => ({ users: [...state.users, user], loading: false }));
     } catch (err) {
       set({ error: err.message, loading: false });
     }
   },
 
-  updateTaskStatus: async (taskId, newStatus) => {
+  updateUser: async (userId, updates) => {
     set({ loading: true });
     try {
-      await new Promise((res) => setTimeout(res, 500));
+      await new Promise((res) => setTimeout(res, 300));
       set((state) => ({
-        tasks: state.tasks.map((t) =>
-          t.id === taskId ? { ...t, status: newStatus } : t
+        users: state.users.map((u) =>
+          u.id === userId ? { ...u, ...updates } : u
         ),
         loading: false,
       }));
@@ -41,12 +41,12 @@ export const useTaskStore = create((set) => ({
     }
   },
 
-  deleteTask: async (taskId) => {
+  deleteUser: async (userId) => {
     set({ loading: true });
     try {
-      await new Promise((res) => setTimeout(res, 500));
+      await new Promise((res) => setTimeout(res, 300));
       set((state) => ({
-        tasks: state.tasks.filter((t) => t.id !== taskId),
+        users: state.users.filter((u) => u.id !== userId),
         loading: false,
       }));
     } catch (err) {

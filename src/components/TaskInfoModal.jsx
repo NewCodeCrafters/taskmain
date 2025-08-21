@@ -110,7 +110,7 @@ const TaskInfoModal = () => {
             {task.description || "No detail"}
           </p>
         </div>
-        {task.image && (
+        {/* {task.image && (
           <div className="flex flex-col gap-4">
             <h1 className="heading-5">Attachments</h1>
             <div className="flex gap-5 flex-wrap">
@@ -119,7 +119,7 @@ const TaskInfoModal = () => {
               ))}
             </div>
           </div>
-        )}
+        )} */}
       </Modal>
     </div>
   );

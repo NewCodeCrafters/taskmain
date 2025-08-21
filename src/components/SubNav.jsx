@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import RouteLink from "./RouteLink";
 import Button from "./Button";
 import { useModal } from "../stores/useModal";
-import { useSpaces } from "../stores/useSpaces";
+// import { useSpaces } from "../stores/useSpaces";
 import { Link } from "react-router";
 import lineImg from "../assets/line.svg";
 import CreateSpace from "./createSpace";
+import { useProjectStore } from "../stores/useProjectStore";
 
 const SubNav = () => {
   const { setCreateSpaceModal } = useModal((s) => s);
-  const spaces = useSpaces((state) => state.spaces);
+  const { projects, fetchProjects } = useProjectStore((s) => s);
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+  console.log(projects);
   const handleCrateSpaceModal = () => {
     setCreateSpaceModal(true);
   };
@@ -33,7 +39,7 @@ const SubNav = () => {
           </div>
         </div>
         <div>
-          {spaces.map((space) => (
+          {projects.map((space) => (
             <div key={space.id}>
               <div
                 // to={`/space/${space.id}`}
@@ -53,7 +59,7 @@ const SubNav = () => {
                   <div className="flex gap-2 pl-6">
                     <img src={lineImg} alt="" />
                     <div className="flex gap-1 flex-col">
-                      {space.items.map((item) => (
+                      {projects.items.map((item) => (
                         <li key={item.id} className="flex flex-col">
                           <Link
                             to={item.route}

@@ -16,6 +16,7 @@ const TaskCard = ({ task }) => {
 
   // console.log(modal);
   // console.log(task);
+
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "TASK",
     item: { id: task.id, status: task.status },
@@ -53,23 +54,23 @@ const TaskCard = ({ task }) => {
         />
       )}
       <div className="flex items-center gap-2.5">
-        {task.tags.map((tag, index) => (
+        {/* {task.tags.map((tag, index) => (
           <span
             key={index}
             className="body-small-medium text-primary-500 py-1 px-3 bg-primary-50 rounded-full"
           >
             {tag}
           </span>
-        ))}
+        ))} */}
       </div>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="flex">
-            {task.assignees.map((user) => (
+            {/* {task.assignees.map((user) => (
               <figure className="w-full max-w-12 max-h-12 rounded-full overflow-hidden ">
                 <img src={user.avatar} alt={user.name} key={user.id} />
               </figure>
-            ))}
+            ))} */}
           </div>
           <button>
             <img src={plus} alt="" />
