@@ -6,6 +6,7 @@ import { useModal } from "../stores/useModal";
 // import { useSpaces } from "../stores/useSpaces";
 import { Link } from "react-router";
 import lineImg from "../assets/line.svg";
+import chevron from "../assets/chevron-down-2.svg";
 import CreateSpace from "./createSpace";
 import { useProjectStore } from "../stores/useProjectStore";
 
@@ -20,7 +21,9 @@ const SubNav = () => {
     setCreateSpaceModal(true);
   };
   const [expanded, setExpanded] = useState(null);
-
+  // const handleExpand = () => {
+  //   setExpanded((prev) => !prev);
+  // };
   return (
     <div>
       <section className="flex flex-col gap-3">
@@ -47,33 +50,39 @@ const SubNav = () => {
               >
                 <img src="/images/star-01.svg" alt="" />
                 <button
-                  onClick={() =>
-                    setExpanded(expanded === space.id ? null : space.id)
-                  }
+                  className="flex items-center justify-between w-full hover:cursor-pointer"
+                  onClick={() => {
+                    setExpanded(expanded === space.id ? null : space.id);
+                  }}
                 >
                   <span className="body-medium-semibold">{space.name}</span>
+                  <img src={chevron} alt="" />
                 </button>
               </div>
-              <ul className="">
-                {expanded === space.id && (
-                  <div className="flex gap-2 pl-6">
-                    <img src={lineImg} alt="" />
-                    <div className="flex gap-1 flex-col">
-                      {projects.items.map((item) => (
-                        <li key={item.id} className="flex flex-col">
-                          <Link
-                            to={item.route}
-                            className="py-3 px-4   hover:cursor-pointer
+
+              {expanded === space.id && (
+                <div className="flex gap-2 pl-6">
+                  <img src={lineImg} alt="" />
+                  <div className="flex gap-1 flex-col">
+                    <li className="flex flex-col">
+                      <Link
+                        to={`/${space.name}/${space.id}/teamdailytask`}
+                        className="py-3 px-4   hover:cursor-pointer
                         rounded-4 w-full"
-                          >
-                            {item.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </div>
+                      >
+                        Team Daily Task
+                      </Link>
+                      <Link
+                        to={`/${space.name}/${space.id}/memberssettings`}
+                        className="py-3 px-4   hover:cursor-pointer
+                        rounded-4 w-full"
+                      >
+                        Member Settings
+                      </Link>
+                    </li>
                   </div>
-                )}
-              </ul>
+                </div>
+              )}
             </div>
           ))}
         </div>

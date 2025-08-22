@@ -30,13 +30,13 @@ function App() {
           <Route path={routes.favourites} element={<Favourites />} />
           <Route path={routes.messages} element={<Messages />} />
           <Route path="/profileSettings" element={<ProfileSettings />} />
-          <Route path="/space">
-            <Route path=":spaceId/teamdailytask" element={<Space />} />
-            <Route
-              path=":spaceId/memberssetting"
-              element={<MembersSetttings />}
-            />
-          </Route>
+          {/* <Route path="/pro"> */}
+          <Route path=":name/:id/teamdailytask" element={<Space />} />
+          <Route
+            path=":name/:id/memberssettings"
+            element={<MembersSetttings />}
+          />
+          {/* </Route> */}
         </Route>
         {/* </Route> */}
         <Route element={<AuthLayout />}>

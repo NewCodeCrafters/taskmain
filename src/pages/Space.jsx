@@ -11,21 +11,25 @@ import Button from "../components/Button";
 import CreateTaskModal from "../components/CreateTaskModal";
 import { useModal } from "../stores/useModal";
 import { useEffect } from "react";
+import { useTaskStore } from "../stores/taskStore";
+
 // import tasks from "../data/task";
 
 const Space = () => {
-  const { spaceId } = useParams(); // ✅ get spaceId from URL
-  const { fetchProjects, spaces } = useSpaces((s) => s);
-  const { setModalAddTask } = useModal((s) => s);
+  const { id } = useParams();
+  const { fetchTasks, tasks } = useTaskStore((s) => s);
 
-  const currentSpace = spaces.find((s) => String(s.id) === spaceId);
+  const filteredTasks = tasks.filter((t) => t.projectId === id);
+  console.log(filteredTasks);
+
+  const { setModalAddTask } = useModal((s) => s);
 
   const [viewParams, setViewParams] = useSearchParams();
   const view = viewParams.get("view") || "board";
-
-  if (!currentSpace) {
-    return <div className="p-6">Space not found</div>;
-  }
+  useEffect(() => {
+    fetchTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="relative flex flex-col gap-6 ">
@@ -34,19 +38,19 @@ const Space = () => {
           <HomeLink
             onClick={() => setViewParams({ view: "board" })}
             text="Board View"
-            LinkTo={`/space/${spaceId}/teamdailytask?view=board`}
+            // LinkTo={`/space/${id}/teamdailytask?view=board`}
             isActive={view === "board"}
           />
           <HomeLink
             onClick={() => setViewParams({ view: "list" })}
             text="List View"
-            LinkTo={`/space/${spaceId}/teamdailytask?view=list`}
+            // LinkTo={`/space/${spaceId}/teamdailytask?view=list`}
             isActive={view === "list"}
           />
           <HomeLink
             onClick={() => setViewParams({ view: "calendar" })}
             text="Calendar"
-            LinkTo={`/space/${spaceId}/teamdailytask?view=calendar`}
+            // LinkTo={`/space/${spaceId}/teamdailytask?view=calendar`}
             isActive={view === "calendar"}
           />
         </div>

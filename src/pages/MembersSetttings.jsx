@@ -11,12 +11,6 @@ import { useTaskStore } from "../stores/taskStore";
 const MembersSetttings = () => {
   const { tasks } = useTaskStore((s) => s);
 
-  // const tasksUse = tasks.assignees[0];\
-  console.log(tasks);
-  const taskUse = tasks.assignees;
-  console.log(taskUse);
-  const me = taskUse.flatMap((s) => s.name);
-  console.log(me);
   return (
     <section className="flex flex-col gap-6 bg-white p-6 w-full">
       <div className="flex flex-col gap-4 border-b border-b-neutral-black-5 pb-6">
