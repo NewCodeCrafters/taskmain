@@ -1,9 +1,5 @@
 import { useParams, useSearchParams } from "react-router";
-import { useSpaces } from "../stores/useSpaces";
 import HomeLink from "../components/HomeLink";
-import BoardView from "../components/BoardView";
-import ListView from "../components/ListView";
-import { Calendar } from "lucide-react";
 import plus from "../assets/plus-white.svg";
 import SortBy from "../components/SortBy";
 import Filter from "../components/Filter";
@@ -12,6 +8,9 @@ import CreateTaskModal from "../components/CreateTaskModal";
 import { useModal } from "../stores/useModal";
 import { useEffect } from "react";
 import { useTaskStore } from "../stores/taskStore";
+import DailyTaskBoardView from "../components/DailyTaskBoardView";
+import DailyTaskListView from "../components/DailyTaskListView";
+import DailyTaskCalenderView from "../components/DailyTaskCalenderView";
 
 // import tasks from "../data/task";
 
@@ -68,9 +67,11 @@ const Space = () => {
       </section>
 
       <div className="overflow-y-auto">
-        {view === "board" && <BoardView />}
-        {view === "list" && <ListView />}
-        {view === "calendar" && <Calendar />}
+        {view === "board" && (
+          <DailyTaskBoardView filteredTask={filteredTasks} />
+        )}
+        {view === "list" && <DailyTaskListView />}
+        {view === "calendar" && <DailyTaskCalenderView />}
       </div>
       <CreateTaskModal />
     </div>

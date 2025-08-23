@@ -4,9 +4,9 @@ import TaskCard from "./TaskCard";
 import { useTaskStore } from "../stores/taskStore";
 import { useDrop } from "react-dnd";
 
-const TaskColumn = ({ status, className }) => {
-  const { tasks, updateTaskStatus } = useTaskStore((s) => s);
-  console.log(tasks);
+const TaskColumn = ({ status, className, filteredTask }) => {
+  const { updateTaskStatus } = useTaskStore((s) => s);
+
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "TASK",
     drop: (item) => updateTaskStatus(item.id, status),
@@ -14,7 +14,6 @@ const TaskColumn = ({ status, className }) => {
       isOver: monitor.isOver(),
     }),
   }));
-  const filteredTasks = tasks.filter((task) => task.status === status);
   return (
     <div
       className={`flex flex-col gap-5 w-full max-w-[300px] ${
@@ -25,9 +24,9 @@ const TaskColumn = ({ status, className }) => {
       <TaskTop
         taskStatus={status}
         className={className}
-        taskQuantity={filteredTasks.length}
+        taskQuantity={filteredTask.length}
       />
-      {filteredTasks.map((task) => (
+      {filteredTask.map((task) => (
         <TaskCard key={task.id} task={task} />
       ))}
     </div>

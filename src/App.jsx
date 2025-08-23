@@ -12,9 +12,6 @@ import OtpPage from "./pages/OtpPage";
 import { Toaster } from "react-hot-toast";
 import { routes } from "./utils/constant";
 import ProtectedRoute from "./components/ProtectedRoute";
-import BoardView from "./components/BoardView";
-import ListView from "./components/ListView";
-import Calendar from "./components/Calendar";
 import ProfileSettings from "./components/ProfileSettings";
 import Space from "./pages/Space";
 

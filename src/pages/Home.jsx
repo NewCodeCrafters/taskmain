@@ -14,16 +14,15 @@ import { useTaskStore } from "../stores/taskStore";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 import HomeLinkMobile from "../components/HomeLinkMobile";
-import TaskColumn from "../components/TaskColumn";
-import BoardView from "../components/BoardView";
-import ListView from "../components/ListView";
-import Calendar from "../components/Calendar";
 import Dropdown from "../components/Dropdown";
 import SortBy from "../components/SortBy";
 import Filter from "../components/Filter";
 import DatePick from "../components/DatePicker";
 import CreateTaskModal from "../components/CreateTaskModal";
 import CreateSpace from "../components/createSpace";
+import OverviewListView from "../components/OverviewListView";
+import OverViewBoardView from "../components/OverviewBoardView";
+import OverviewCalendarView from "../components/OverviewCalendarView";
 
 const Home = () => {
   const { fetchTasks } = useTaskStore((s) => s);
@@ -79,9 +78,9 @@ const Home = () => {
         </div>
       </section>
       <div className="overflow-y-auto">
-        {view === "board" && <BoardView />}
-        {view === "list" && <ListView />}
-        {view === "calendar" && <Calendar />}
+        {view === "board" && <OverViewBoardView />}
+        {view === "list" && <OverviewListView />}
+        {view === "calendar" && <OverviewCalendarView />}
         <div>
           <Dropdown />
         </div>

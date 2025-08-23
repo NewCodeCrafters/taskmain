@@ -3,7 +3,7 @@ import ProgressBar from "./ProgressBar";
 import { useTaskStore } from "../stores/taskStore";
 import threeDotIcon from "../assets/dots-vertical.svg";
 
-const ListView = () => {
+const OverviewListView = () => {
   const { tasks } = useTaskStore((s) => s);
   const getDueDateColor = (dueDate) => {
     const today = new Date();
@@ -44,12 +44,10 @@ const ListView = () => {
                 {task.title}
               </td>
 
-              <td className="p-3 border body-small-medium border-gray-300">
-                {task.project}
-              </td>
+              {/*  */}
 
               {/* Assignee Column with Given Avatar */}
-              <td className="p-3 flex">
+              {/* <td className="p-3 flex">
                 {task.assignees.map((task) => (
                   <img
                     src={task.avatar}
@@ -57,7 +55,7 @@ const ListView = () => {
                     alt="Assignee"
                   />
                 ))}
-              </td>
+              </td> */}
               <td
                 className={`p-2 border border-gray-300 body-small-medium ${getDueDateColor(
                   task.dueDate
@@ -102,4 +100,4 @@ const ListView = () => {
   );
 };
 
-export default ListView;
+export default OverviewListView;
