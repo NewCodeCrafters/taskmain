@@ -33,6 +33,7 @@ const Header = ({
     };
     fetchUserData();
   }, []);
+  console.log(user);
   const { setShareSpaceModal } = useModal((s) => s);
   const [showNotificationModal, setShowNotificationModal] = useState(false);
 
@@ -120,7 +121,7 @@ const Header = ({
             <img src="/images/avatar.svg" alt="" />
           </figure>
           <div className="lg:flex flex-col md:flex hidden">
-            <span className="body-small-medium">{user}</span>
+            <span className="body-small-medium">{user.user.firstname}</span>
             <span className="body-xsmall-medium text-paragraph">@fajar123</span>
           </div>
           <figure>

@@ -45,6 +45,7 @@ export const signup = async (userData) => {
   try {
     const res = await api.post("/api/signup/", userData);
     const { access_token, refresh_token } = res.data;
+    console.log(res);
 
     localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
     localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
