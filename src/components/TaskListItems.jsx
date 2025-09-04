@@ -5,7 +5,7 @@ const TaskListItems = ({ icon, title, taskListInfo, className }) => {
     <div className="flex gap-6">
       <div className="flex gap-2.5 items-center w-[150px]">
         <img src={icon} alt="" />
-        <span className="body-medium-medium text-paragraph">{title}</span>
+        <span className="body-medium-medium dark:text-neutral-400 text-paragraph">{title}</span>
       </div>
       <section className={`flex text-body-medium-semibold ${className}`}>
         {taskListInfo}

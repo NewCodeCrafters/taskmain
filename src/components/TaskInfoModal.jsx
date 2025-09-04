@@ -15,12 +15,13 @@ import TaskListItem from "./TaskListItems";
 import ImageFile from "./ImageFile";
 import { useModal } from "../stores/useModal";
 import { useTaskStore } from "../stores/taskStore";
+import { X } from "lucide-react";
 
 const TaskInfoModal = () => {
   const { tasks } = useTaskStore((s) => s);
   const { modal, setModal, taskId } = useModal((s) => s);
   const task = tasks.find((task) => task.id === taskId);
-  console.log(task);
+  // console.log(task);
   if (!task) return null;
 
   return (
@@ -30,12 +31,12 @@ const TaskInfoModal = () => {
         onClick={(e) => e.stopPropagation()}
         Class="flex flex-col gap-6 w-full max-w-[1000px] overflow-y-auto md:max-h-4/5 max-h-35/36"
       >
-        <div className="flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6 ">
+        <div className="flex items-center justify-between border-b border-neutral-black-5 dark:border-neutral-600 pb-6 mb-6 ">
           <TaskSection />
           <div className="flex gap-5 items-center">
             <div className="flex items-center gap-1">
               <img src={edit} alt="" className="hidden md:flex" />
-              <span className="hidden md:flex body-small-regular text-paragraph">
+              <span className="hidden md:flex dark:text-neutral-400 body-small-regular text-paragraph">
                 Created on 2 March, 2024
               </span>
             </div>
@@ -45,15 +46,16 @@ const TaskInfoModal = () => {
             <img src={star} alt="" />
             <img src={edit} alt="" />
             <img
+              className="cursor-pointer"
               src={expand}
               alt="" // className="absolute top-0 right-0"
             />
-            <img src={close} alt="" onClick={() => setModal(false)} />
+            <X className="cursor-pointer"  onClick={() => setModal(false)}/>
           </div>
         </div>
         <div className="flex flex-col gap-6">
           <h1 className="heading-4">{task.title}</h1>
-          <div className="flex flex-col gap-3 md:flex-row md:gap-[150px] border-b border-neutral-black-5 pb-6 mb-6">
+          <div className="flex flex-col gap-3 md:flex-row md:gap-[150px] border-b border-neutral-black-5 dark:border-neutral-600 pb-6 mb-6">
             <div className="flex flex-col gap-3 w-full">
               <TaskListItem
                 icon={loading}

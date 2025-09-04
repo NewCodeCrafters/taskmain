@@ -10,4 +10,5 @@ export const routes = {
   membersettings: "/membersettings",
   favourites: "/favourites",
   messages: "/messages",
+  passwordpeset: '/resetpassword',
 };

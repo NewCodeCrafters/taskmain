@@ -5,6 +5,7 @@ import closeIcon from "../assets/x-close.svg";
 import TextInput from "./Input";
 import mail from "../assets/mail-01.svg";
 import Button from "./Button";
+import { X } from "lucide-react";
 
 const ShareSpace = () => {
   const [shareSpace, setShareSpace] = useState("");
@@ -21,7 +22,7 @@ const ShareSpace = () => {
           className="hover:cursor-pointer"
           onClick={() => setShareSpaceModal(false)}
         >
-          <img src={closeIcon} alt="" />
+          <X />
         </button>
       </div>
       <div className="flex items-center gap-3">

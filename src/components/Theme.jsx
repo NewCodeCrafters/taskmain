@@ -1,3 +1,4 @@
+import { MoonIcon } from "lucide-react";
 import React from "react";
 import { useState } from "react";
 
@@ -8,7 +9,7 @@ const Theme = () => {
   }
 
   return (
-    <section className="bg-neutral-black-4 flex gap-3 p-1 rounded-xl justify-center items-center w-full">
+    <section className="bg-neutral-black-4 dark:bg-background flex gap-3 p-1 rounded-xl justify-center items-center w-full">
       <button
         onClick={() => handleTheme("light")}
         className={`flex justify-center items-center rounded-lg gap-2 px-2.5 py-2 w-full max-w-[120px]
@@ -31,16 +32,16 @@ const Theme = () => {
       <button
         onClick={() => handleTheme("dark")}
         className={`flex justify-center items-center rounded-lg gap-2 px-2.5 py-2 w-full max-w-[120px]
-          transition-all duration-300 ease-in-out ${
-            theme === "dark" ? "bg-white" : ""
+          transition-all duration-300 dark:text-white ease-in-out ${
+            theme === "dark" ? "bg-white dark:bg-black" : ""
           }
        `}
       >
-        <img src="/images/moon.svg" alt="" />
+        <MoonIcon />
         <span
           className={` ${
             theme === "dark"
-              ? "bg-white font-semibold text-black"
+              ? "bg-white dark:bg-black dark:text-white font-semibold text-black"
               : "text-paragraph body-xsmall-semibold "
           } `}
         >

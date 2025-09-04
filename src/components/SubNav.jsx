@@ -7,10 +7,14 @@ import { useModal } from "../stores/useModal";
 import { Link } from "react-router";
 import lineImg from "../assets/line.svg";
 import chevron from "../assets/chevron-down-2.svg";
+import chevronUp from '/images/chevron-up.svg'
 import CreateSpace from "./createSpace";
 import { useProjectStore } from "../stores/useProjectStore";
+import { ChevronDown } from "lucide-react";
 
-const SubNav = () => {
+const SubNav = ({ 
+  handleSideBar
+ }) => {
   const { setCreateSpaceModal } = useModal((s) => s);
   const { projects, fetchProjects } = useProjectStore((s) => s);
   useEffect(() => {
@@ -46,7 +50,7 @@ const SubNav = () => {
             <div key={space.id}>
               <div
                 // to={`/space/${space.id}`}
-                className="flex py-3 px-4 hover:cursor-pointer rounded-4  items-center w-full gap-3 "
+                className="flex py-3 px-4 dark:text-white hover:cursor-pointer rounded-4  items-center w-full gap-3 "
               >
                 <img src="/images/star-01.svg" alt="" />
                 <button
@@ -56,12 +60,14 @@ const SubNav = () => {
                   }}
                 >
                   <span className="body-medium-semibold">{space.name}</span>
-                  <img src={chevron} alt="" />
+                  <ChevronDown className={` transition-transform duration-500 ease-in-out ${
+                    expanded === space.id ? 'rotate-180 ' : 'rotate-0'
+                  }`} alt="" />
                 </button>
               </div>
 
               {expanded === space.id && (
-                <div className="flex gap-2 pl-6">
+                <div className="flex dark:text-white gap-2 pl-6">
                   <img src={lineImg} alt="" />
                   <div className="flex gap-1 flex-col">
                     <li className="flex flex-col">
@@ -87,7 +93,7 @@ const SubNav = () => {
           ))}
         </div>
 
-        <div className="flex flex-col gap-4 p-4 bg-neutral-black-3">
+        <div className="flex flex-col gap-4 p-4 dark:bg-background text-white rounded-lg dark:border-neutral-700 bg-neutral-black-3 dark:border">
           <article className="flex flex-col gap-1">
             <h1 className="heading-5">Upgrade to Pro</h1>
             <span className="body-xsmall-regular text-neutral-black-8">

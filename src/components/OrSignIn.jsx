@@ -8,7 +8,7 @@ const OrSignIn = () => {
     <>
       <section className="flex  items-center my-2 w-full">
         <div className="flex-1 border-t border-neutral-black-8"></div>
-        <span className="px-3 text-neutral-black-8 text-sm">
+        <span className="px-3 dark:text-neutral-400 text-neutral-black-8 text-sm">
           Or Sign in with
         </span>
         <div className="flex-1 border-t border-neutral-black-8"></div>

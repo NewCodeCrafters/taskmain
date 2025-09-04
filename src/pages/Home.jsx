@@ -39,7 +39,10 @@ const Home = () => {
     <div className="relative flex flex-col gap-6 ">
       <section className="flex justify-between">
         <div className="md:hidden flex">
-          <HomeLinkMobile />
+          <HomeLinkMobile 
+          view={view} 
+          onChange={setViewParams}
+          />
         </div>
         <div className="hidden md:flex gap-1 items-start">
           <HomeLink
@@ -77,7 +80,7 @@ const Home = () => {
           </Button> */}
         </div>
       </section>
-      <div className="overflow-y-auto">
+      <div className="">
         {view === "board" && <OverViewBoardView />}
         {view === "list" && <OverviewListView />}
         {view === "calendar" && <OverviewCalendarView />}

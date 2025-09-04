@@ -23,3 +23,21 @@ export const loginschema = z.object({
       "Password must contain atleast 1 uppercase, 1 lowercase,1 number and 1 special character "
     ),
 });
+
+export const forgotPasswordSchema = z.object({
+  email : z.string().email('Please enter a valid email')
+})
+
+export const resetPasswordSchema = z.object({
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters long')
+    .regex(
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+      "Password must contain atleast 1 uppercase, 1 lowercase,1 number and 1 special character "
+    ),
+  confirmPassword: z.string().min(8, 'Please confirm your password')
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+});

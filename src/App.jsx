@@ -7,13 +7,14 @@ import Messages from "./pages/Messages";
 import AuthLayout from "./components/AuthLayout";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import ForgetPassword from "./pages/Forgetpassword";
+import ForgetPassword from "./pages/ForgetPassword";
 import OtpPage from "./pages/OtpPage";
 import { Toaster } from "react-hot-toast";
 import { routes } from "./utils/constant";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProfileSettings from "./components/ProfileSettings";
 import Space from "./pages/Space";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
           {/* <Route path="/pro"> */}
           <Route path=":name/:id/teamdailytask" element={<Space />} />
           <Route
-            path=":name/:id/memberssettings"
+            path={routes.membersettings}
+            // Path should be ":name/:id/memberssettings" but i changed it to member settings just to see it since the api isn't ready
             element={<MembersSetttings />}
           />
           {/* </Route> */}
@@ -41,7 +43,7 @@ function App() {
           <Route path={routes.signup} element={<SignUpPage />} />
           <Route path={routes.forgotpassword} element={<ForgetPassword />} />
           <Route path={routes.confirmotp} element={<OtpPage />} />
-
+          <Route path={routes.passwordpeset} element={<ResetPassword />} />
           {/* <Route path={routes.Checkbox} element={<Checkbox />} /> */}
         </Route>
       </Routes>

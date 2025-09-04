@@ -71,7 +71,7 @@ const SignUpPage = () => {
       <Logo className="md:hidden" />
       <div className="flex flex-col gap-3 items-center ">
         <h1 className="heading-4 md:heading-3">Create Your Account</h1>
-        <span className="text-paragraph body-medium-medium">
+        <span className="text-paragraph dark:text-neutral-400 body-medium-medium">
           Please input to your account
         </span>
       </div>

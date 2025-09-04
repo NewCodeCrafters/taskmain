@@ -6,6 +6,7 @@ import mail from "../assets/mail-01.svg";
 import Button from "./Button";
 import { useModal } from "../stores/useModal";
 import { useSpaces } from "../stores/useSpaces";
+import { X } from "lucide-react";
 
 const CreateSpace = () => {
   const { setCreateSpaceModal, createSpaceModal } = useModal((c) => c);
@@ -29,7 +30,7 @@ const CreateSpace = () => {
           className="hover:cursor-pointer"
           onClick={() => setCreateSpaceModal(false)}
         >
-          <img src={closeIcon} alt="" />
+          <X />
         </button>
       </div>
       <div className="flex items-center gap-3">

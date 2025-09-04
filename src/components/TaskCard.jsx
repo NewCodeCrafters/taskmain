@@ -27,7 +27,7 @@ const TaskCard = ({ task }) => {
 
   return (
     <div
-      className={`flex flex-col gap-3 px-5 py-4 bg-white rounded-xl ${
+      className={`flex flex-col gap-3 px-5 py-4 dark:bg-black dark:text-white bg-white rounded-xl ${
         isDragging ? "opacity-50" : "opacity-100"
       }`}
       ref={drag}

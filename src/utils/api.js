@@ -116,3 +116,55 @@ export const logout = () => {
   localStorage.removeItem(REFRESH_TOKEN_KEY);
   window.location.href = routes.login;
 };
+
+export const forgotPassword = async (userEmail) => {
+  try{
+    const res = await api.post('/forgot_password/request', {
+      email : userEmail.email
+    })
+    console.log(res.data)
+    toast.success('Reset Instructions has been sent via email')
+    return res.data
+  } catch(err) {
+    console.error(err)
+    if(!err.response){
+      toast.error('Network error. Please try again')
+      throw new Error('Network error');
+    };
+
+    const errorData = err.response?.data;
+    
+    const firstKey = Object.keys(errorData)[0];
+    const errorMessage = Array.isArray(errorData[firstKey]) ? errorData[firstKey][0] : errorData[firstKey];
+
+    toast.error(errorMessage || 'Failed to send reset email');
+    throw new Error(errorMessage || "Failed to send reset email");
+  }
+}
+
+export const resetPassword = async ({email, otp, newPassword }) => {
+  try {
+    const res = await api.post('/forgot_password/reset', {
+      email,
+      otp,
+      newPassword : newPassword,
+    });
+
+    toast.success('Password Reset successful');
+    return res.data
+  } catch(err){
+    console.error(err)
+    if(!err.response){
+      toast.error('Network error. Please try again')
+      throw new Error('Network error');
+    };
+
+    const errorData = err.response?.data;
+    
+    const firstKey = Object.keys(errorData)[0];
+    const errorMessage = Array.isArray(errorData[firstKey]) ? errorData[firstKey][0] : errorData[firstKey];
+
+    toast.error(errorMessage || 'Failed to reset password');
+    throw new Error(errorMessage || "Failed to reset password");
+  }
+}

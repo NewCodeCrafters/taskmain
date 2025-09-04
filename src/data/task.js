@@ -10,6 +10,7 @@ const tasks = [
     priority: "High",
     timeEstimate: "1 week",
     image: "https://picsum.photos/seed/homepage/400/250",
+    progress: 60,
   },
   {
     id: "t2",
@@ -22,6 +23,7 @@ const tasks = [
     priority: "Medium",
     timeEstimate: "3 days",
     image: null,
+    progress: 0,
   },
   {
     id: "t3",
@@ -34,6 +36,7 @@ const tasks = [
     priority: "High",
     timeEstimate: "2 weeks",
     image: "https://picsum.photos/seed/backend/400/250",
+    progress: 40,
   },
   {
     id: "t4",
@@ -46,6 +49,7 @@ const tasks = [
     priority: "Low",
     timeEstimate: "1 week",
     image: null,
+    progress: 100,
   },
   {
     id: "t5",
@@ -58,6 +62,7 @@ const tasks = [
     priority: "High",
     timeEstimate: "1 month",
     image: "https://picsum.photos/seed/push/400/250",
+    progress: 50,
   },
   {
     id: "t6",
@@ -70,6 +75,7 @@ const tasks = [
     priority: "High",
     timeEstimate: "5 days",
     image: null,
+    progress: 0,
   },
   {
     id: "t7",
@@ -82,6 +88,7 @@ const tasks = [
     priority: "Medium",
     timeEstimate: "2 days",
     image: "https://picsum.photos/seed/landing/400/250",
+    progress: 70,
   },
   {
     id: "t8",
@@ -94,6 +101,7 @@ const tasks = [
     priority: "Medium",
     timeEstimate: "1 week",
     image: null,
+    progress: 0,
   },
   {
     id: "t9",
@@ -106,6 +114,7 @@ const tasks = [
     priority: "Low",
     timeEstimate: "4 days",
     image: "https://picsum.photos/seed/seo/400/250",
+    progress: 35,
   },
   {
     id: "t10",
@@ -118,6 +127,7 @@ const tasks = [
     priority: "High",
     timeEstimate: "1 week",
     image: null,
+    progress: 45,
   },
   {
     id: "t11",
@@ -130,6 +140,7 @@ const tasks = [
     priority: "Low",
     timeEstimate: "3 days",
     image: "https://picsum.photos/seed/email/400/250",
+    progress: 100,
   },
   {
     id: "t12",
@@ -142,6 +153,7 @@ const tasks = [
     priority: "High",
     timeEstimate: "1 day",
     image: null,
+    progress: 0,
   },
   {
     id: "t13",
@@ -154,6 +166,7 @@ const tasks = [
     priority: "Medium",
     timeEstimate: "1 week",
     image: "https://picsum.photos/seed/profile/400/250",
+    progress: 55,
   },
   {
     id: "t14",
@@ -166,6 +179,7 @@ const tasks = [
     priority: "High",
     timeEstimate: "2 weeks",
     image: null,
+    progress: 0,
   },
   {
     id: "t15",
@@ -178,6 +192,7 @@ const tasks = [
     priority: "High",
     timeEstimate: "1 week",
     image: "https://picsum.photos/seed/mobile/400/250",
+    progress: 80,
   },
 ];
 

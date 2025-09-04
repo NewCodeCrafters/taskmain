@@ -6,6 +6,9 @@ import ProfileDropDown from "./ProfileDropDown";
 import ProfileModal from "./ProfileModal";
 import { useModal } from "../stores/useModal";
 import ShareSpace from "./ShareSpace";
+import Modal from "./modal";
+import NotificationModal from "./NotificationModal";
+import { notifications } from "../data/notifications";
 
 const Header = ({
   handleSideBar,
@@ -29,10 +32,11 @@ const Header = ({
     fetchUserData();
   }, []);
   const { setShareSpaceModal } = useModal((s) => s);
+  const [showNotificationModal, setShowNotificationModal] = useState(false)
 
   return (
-    <div className="px-3 md:px-6 flex justify-between items-center border- border-neutral-black-5  h-[76px] top-0  sticky z-50 ">
-      <div className="flex gap-3 heading-5 bg-white lg:items-end">
+    <div className="px-3 md:px-6 flex justify-between items-center border- border-neutral-black-5 dark:bg-black dark:texts-white h-[76px] top-0  sticky z-50 ">
+      <div className="flex gap-3 items-center heading-5 dark:text-white lg:items-end">
         <button onClick={handleSetMobileBar} className="block md:hidden">
           <img src="images/grid-01.svg" alt="" />
         </button>
@@ -50,18 +54,40 @@ const Header = ({
           <Button variant="black" onClick={() => setShareSpaceModal(true)}>
             Share
           </Button>
-          <div className="flex">
-            <div className=" w-10 h-10 border border-neutral-black-5 grid place-items-center rounded-full">
-              <img src="/images/bell-03.svg" alt="" />
-            </div>
-            <div className=" w-6 h-6 bg-error-50 md:grid md:place-items-center rounded-full flex justify-center items-center -my-[9px] -mx-4 ">
-              <span className="text-white">7</span>
-            </div>
+          <div className="relative">
+                <div 
+              className={
+                `flex cursor-pointer`
+              }
+              onClick={() => {
+                setShowNotificationModal(prev => !prev)
+              }}>
+                <div 
+                className={`w-10 h-10 border z-50 border-neutral-black-5 grid place-items-center rounded-full ${
+                  showNotificationModal && 'bg-white'
+                }`}>
+                  <img src="/images/bell-03.svg" alt="" />
+                </div>
+                {
+                  notifications.filter(notification => notification.isRead === false).length > 0 && (
+                    <div className=" w-6 h-6 z-50 bg-error-50 md:grid md:place-items-center rounded-full flex justify-center items-center -my-[9px] -mx-4 ">
+                  <span className="text-white">
+                    {
+                      notifications.filter(notification => notification.isRead === false).length > 0 ? notifications.filter(notification => notification.isRead === false).length : null
+                    }
+                  </span>
+                </div>
+                  )
+                }
+              </div>
+            {
+              showNotificationModal && <NotificationModal onClose={() => setShowNotificationModal(false)} showFunction={setShowNotificationModal} />
+              }
           </div>
         </div>
         <div
           onClick={handleDropDown}
-          className="py-1 pl-1 pr-3 bg-neutral-black-3 md:gap-3 gap-1 rounded-full flex items-center hover:cursor-pointer"
+          className="py-1 pl-1 pr-3 bg-neutral-black-3 dark:bg-background md:gap-3 gap-1 rounded-full flex items-center hover:cursor-pointer"
         >
           <figure>
             <img src="/images/avatar.svg" alt="" />
@@ -82,6 +108,7 @@ const Header = ({
           </figure>
         </div>
       </section>
+      
       {dropDown && <ProfileDropDown />}
       <ShareSpace />
     </div>

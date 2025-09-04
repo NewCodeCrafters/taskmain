@@ -19,15 +19,15 @@ const ActionDropdown = ({ className, children, action, actionClass }) => {
   }, []);
 
   return (
-    <div className="relative z-50" ref={dropdownRef}>
+    <div className="relative z-30" ref={dropdownRef}>
       {/* Button to toggle dropdown */}
-      <button onClick={toggleDropdown} className={actionClass}>
+      <button onClick={toggleDropdown} className={actionClass || (isOpen ? 'text-primary-300' : '')}>
         {action}
       </button>
 
       {/* Dropdown List */}
       {isOpen && (
-        <div className={`absolute ${className}  mt-2.5 right-0 bg-white`}>
+        <div className={`absolute ${className}  mt-2.5 right-0 bg-white z-50 `}>
           {children}
         </div>
       )}

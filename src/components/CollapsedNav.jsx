@@ -4,10 +4,10 @@ import CollapsedNavLink from "./CollapsedNavLink";
 
 const CollapsedNav = () => {
   return (
-    <div className="lg:flex flex-col p-5 gap-4  border-r border-neutral-black-5  w-[95px]  h-screen md:flex hidden bg-white">
+    <div className="lg:flex flex-col p-5 gap-4  border-r border-neutral-black-5  w-[95px]  h-screen md:flex hidden bg-white ">
       {/* <div className="flex flex-col items-center justify-between pt-1 top-0 left-0 z-100 bg-white "> */}
       <figure>
-        <Link to="/home">
+        <Link to="/">
           <img
             src="/images/logo.svg"
             alt=""
