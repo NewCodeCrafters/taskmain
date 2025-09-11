@@ -2,6 +2,7 @@ import { ClipboardCheck, FileText, Mail, MailCheck, MessageCircleIcon } from 'lu
 import mail from '../assets/mail.svg'
 import React, { useEffect, useState } from 'react'
 import { notifications } from '../data/notifications'
+import Notification from './Notification'
 
 const NotificationModal = ({
     onClose,
@@ -9,6 +10,11 @@ const NotificationModal = ({
 }) => {
     const now = Date.now()
     const [filter, setFilter] = useState('all')
+
+    const filterd = filter === 'unread' ? notifications.filter(n => !n.isRead) : notifications;
+
+    const last7days = filterd.filter(f => (now - f.timeStamp) / (1000 * 60 * 60 * 24) <= 7);
+    const last30days = filterd.filter(f => (now - f.timeStamp) / (1000 * 60 * 60 * 24) > 7);
     // console.log(notifications.filter(notification => notification.isRead === false))
     useEffect(() => {
         function close() {
@@ -58,95 +64,19 @@ const NotificationModal = ({
                         <div className='p-5'>
                         <div className='flex flex-col gap-4 items-start pt-4'>
                             <p className='text-sm'>Last 7 days</p>
-                            
-                                { filter ==='all' ? notifications?.map((notification, i) => (
-                                    (now - notification.timeStamp)  / (1000 * 60 * 60 * 24) <= 7 && (
-                                     <div className='flex items-center gap-4' key={i}>
-                                        <div className='bg-primary-300 text-white w-fit p-4 rounded-full'>
-                                         {
-                                             notification.type === 'Reminder' ? <Mail /> : notification.type === 'task Completed' ? <ClipboardCheck /> : <MessageCircleIcon />
-                                         }
-                                        </div>
-                                        <div className='flex flex-col items-start gap-1'>
-                                         <h4 className={`text-[1rem] ${
-                                            notification.isRead === false ? 'font-bold' : 'font-medium'
-                                         }`}>{
-                                            notification.title
-                                            }</h4>
-                                         <p className='text-[0.8rem] text-neutral-500 font-medium'>{
-                                            notification.description
-                                            }</p>
-                                        </div>
-                                    </div>
-                                    )
-                                )) : filter === 'unread' && notifications?.filter(notification => notification.isRead === false).map((notification, i) => (
-                                    (now - notification.timeStamp)  / (1000 * 60 * 60 * 24) <= 7 && (
-                                     <div className='flex items-center gap-4' key={i}>
-                                        <div className='bg-primary-300 text-white w-fit p-4 rounded-full'>
-                                         {
-                                             notification.type === 'Reminder' ? <Mail /> : notification.type === 'task Completed' ? <ClipboardCheck /> : <MessageCircleIcon />
-                                         }
-                                        </div>
-                                        <div className='flex flex-col items-start gap-1'>
-                                         <h4 className={`text-[1rem] ${
-                                            notification.isRead === false ? 'font-bold' : 'font-medium'
-                                         }`}>{
-                                            notification.title
-                                            }</h4>
-                                         <p className='text-[0.8rem] text-neutral-500 font-medium'>{
-                                            notification.description
-                                            }</p>
-                                        </div>
-                                    </div>
-                                    )
+                            {
+                                last7days.map((notification, i) => (
+                                    <Notification notification={notification} key={i} />
                                 ))
-                                }
+                            }
                         </div>
                         <div className='flex flex-col gap-4 items-start pt-4'>
                             <p className='text-sm'>Last 30 days</p>
-                            
-                                {filter ==='all' ? notifications.map((notification, i) => (
-                                    (now - notification.timeStamp)  / (1000 * 60 * 60 * 24) >= 7 && (
-                                     <div className='flex items-center gap-4' key={i}>
-                                        <div className='bg-primary-300 text-white w-fit p-4 rounded-full'>
-                                         {
-                                             notification.type === 'Reminder' ? <Mail /> : notification.type === 'task Completed' ? <ClipboardCheck /> : <MessageCircleIcon />
-                                         }
-                                        </div>
-                                        <div className='flex flex-col items-start gap-1'>
-                                         <h4 className={`text-[1rem] ${
-                                            notification.isRead === false ? 'font-bold' : 'font-medium'
-                                         }`}>{
-                                            notification.title
-                                            }</h4>
-                                         <p className='text-[0.8rem] text-neutral-500 font-medium'>{
-                                            notification.description
-                                            }</p>
-                                        </div>
-                                    </div>
-                                    )
-                                )) : filter === 'unread' && notifications.filter(notification => notification.isRead === false).map((notification, i) => (
-                                    (now - notification.timeStamp)  / (1000 * 60 * 60 * 24) >= 7 && (
-                                     <div className='flex items-center gap-4' key={i}>
-                                        <div className='bg-primary-300 text-white w-fit p-4 rounded-full'>
-                                         {
-                                             notification.type === 'Reminder' ? <Mail /> : notification.type === 'task Completed' ? <ClipboardCheck /> : <MessageCircleIcon />
-                                         }
-                                        </div>
-                                        <div className='flex flex-col items-start gap-1'>
-                                         <h4 className={`text-[1rem] ${
-                                            notification.isRead === false ? 'font-bold' : 'font-medium'
-                                         }`}>{
-                                            notification.title
-                                            }</h4>
-                                         <p className='text-[0.8rem] text-neutral-500 font-medium'>{
-                                            notification.description
-                                            }</p>
-                                        </div>
-                                    </div>
-                                    )
+                            {
+                                last30days.map((notification, i) => (
+                                    <Notification notification={notification} key={i} />
                                 ))
-                                }
+                            }
                         </div>
                     </div>
                         ) : <div className='flex items-center h-5/6 text-neutral-500 text-[0.8rem] font-medium w-full justify-center'>

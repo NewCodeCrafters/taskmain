@@ -21,7 +21,7 @@ const TaskColumn = ({
   return (
     <div
       className={`flex flex-col gap-5 w-full max-w-[300px] ${
-        isOver ? "bg-gray-100" : ""
+        isOver ? "bg-gray-100 dark:bg-neutral-black-10/10" : ""
       }`}
       ref={drop}
     >

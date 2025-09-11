@@ -6,6 +6,7 @@ import ProfileUserInfo from "./ProfileUserInfo";
 import ProfileTaskInfo from "./ProfileTaskInfo";
 import { useTaskStore } from "../stores/taskStore";
 import { useModal } from "../stores/useModal";
+import { X } from "lucide-react";
 
 const ProfileModal = () => {
   const { tasks } = useTaskStore((s) => s);
@@ -18,14 +19,14 @@ const ProfileModal = () => {
     <div className="bg-background/50 absolute inset-0 z-200 hidden md:flex">
       <section className="absolute flex h-full gap-5 right-0">
         <button
-          className="bg-white rounded-full w-[60px] h-[60px] p-[10px] grid place-items-center z-50 mt-3 cursor-pointer"
+          className="bg-white dark:bg-neutral-900 rounded-full w-[60px] h-[60px] p-[10px] grid place-items-center z-50 mt-3 cursor-pointer"
           onClick={handleProfileModal}
         >
-          <img src={close} alt="close" />
+          <X className={`dark:text-white`} />
         </button>
         <div
-          className="bg-white 
-       h-full w-[600px] p-6 gap-6 rounded-l-[20px] flex flex-col min-h-svh overflow-y-auto "
+          className="bg-white dark:bg-black dark:text-white
+       h-full w-[600px] p-6 gap-6 rounded-l-[20px] flex flex-col min-h-svh overflow-y-auto scrollBar"
         >
           <div className="flex justify-between">
             <ProfileStatus />

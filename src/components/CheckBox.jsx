@@ -12,7 +12,7 @@ const Checkbox = ({checked, onChange}) => {
     <div
       onClick={onChange}
       className={`w-5 h-5 cursor-pointer flex items-center justify-center rounded-lg transition-all 
-          ${checked ? "bg-primary-500" : "bg-neutral-black-3 dark:bg-background" }
+          ${checked ? "bg-primary-500" : "bg-neutral-black-3 dark:bg-neutral-600" }
         `}
     >
       {checked ? <img src={tick} alt="tick" /> : null}

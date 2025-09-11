@@ -32,7 +32,6 @@ function App() {
           <Route path=":name/:id/teamdailytask" element={<Space />} />
           <Route
             path={routes.membersettings}
-            // Path should be ":name/:id/memberssettings" but i changed it to member settings just to see it since the api isn't ready
             element={<MembersSetttings />}
           />
           {/* </Route> */}

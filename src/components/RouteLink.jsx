@@ -30,7 +30,7 @@ const RouteLink = ({
         <div className="absolute  h-full w-[10px] bg-primary-500 left-[-25px] top-1/2 -translate-y-1/2 rounded-r-full"></div>
       )}
       <div className="flex items-center gap-3 w-full">
-        { leftIcon.length > 1 ? isActive ? leftIcon[1] : leftIcon[0] : leftIcon }
+        { leftIcon }
         <span>{linkDesc}</span>
       </div>
       {rightIcon}

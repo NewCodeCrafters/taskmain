@@ -15,7 +15,7 @@ const TextInput = ({
   return (
     <div className={`flex flex-col gap-1.5  ${className}`}>
       {label && (
-        <label className="body-small-medium text-neutral-black-13 ">
+        <label className="body-small-medium dark:text-neutral-400 text-neutral-black-13 ">
           {label}
         </label>
       )}

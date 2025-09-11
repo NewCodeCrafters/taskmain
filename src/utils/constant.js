@@ -7,7 +7,7 @@ export const routes = {
   signup: "/signup",
   forgotpassword: "/forgotpassword",
   confirmotp: "/confirmotp",
-  membersettings: "/membersettings",
+  membersettings: "/:name/:id/memberssettings",
   favourites: "/favourites",
   messages: "/messages",
   passwordpeset: '/resetpassword',

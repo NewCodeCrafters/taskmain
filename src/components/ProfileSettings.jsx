@@ -14,8 +14,8 @@ import userX from "../assets/user-x-01.svg";
 
 const ProfileSettings = () => {
   return (
-    <div className="p-6 bg-white rounded-lg flex gap-6 w-full flex-col">
-      <div className="grid grid-cols-3 gap-10 w-full border-b border-neutral-black-5 pb-6 ">
+    <div className="p-6 bg-white dark:bg-black dark:text-white rounded-lg flex gap-6 w-full flex-col">
+      <div className="grid grid-cols-3 gap-10 w-full border-b border-neutral-black-5 dark:border-neutral-800 pb-6 ">
         <ProfileUserInfo
           title="Profile"
           body="Your personal information and account 
@@ -47,7 +47,7 @@ const ProfileSettings = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-10 w-full border-b border-neutral-black-5 pb-6">
+      <div className="grid grid-cols-3 gap-10 w-full border-b border-neutral-black-5 dark:border-neutral-800 pb-6">
         <ProfileUserInfo
           title="Language & Region"
           body="Customize your language and region."

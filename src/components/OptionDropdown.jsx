@@ -43,15 +43,13 @@ const Dropdown = ({
           className={className}
           InputClassName="bg-neutral-black-2 dark:bg-background"
           value={perPage}
-          rightIcon={
-            isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />
-          }
+          rightIcon={<ChevronDown size={18} className={`${isOpen ? 'rotate-180' : 'rotate-0'} transition-all duration-300`} />}
           leftIcon={leftIcon}
         />
       </div>
 
       {isOpen && (
-        <div className={`absolute w-full bg-white rounded-lg z-[100] flex gap-2.5 flex-col border border-neutral-black-4 drop-shadow-lg p-4 cursor-pointer ${
+        <div className={`absolute w-full bg-white dark:text-white dark:bg-black dark:border-neutral-800 rounded-lg z-[100] flex gap-2.5 flex-col border border-neutral-black-4 drop-shadow-lg p-4 cursor-pointer ${
           openUp ? 'bottom-full mb-2' : 'top-full mt-2'
         }`}>
           {items.map((item, index) => (

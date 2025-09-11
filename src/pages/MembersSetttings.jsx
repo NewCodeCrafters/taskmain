@@ -13,7 +13,7 @@ const MembersSetttings = () => {
   const { tasks } = useTaskStore((s) => s);
 
   return (
-    <section className="flex flex-col gap-6 dark:bg-black dark:text-white    bg-white p-6 w-full">
+    <section className="flex flex-col gap-6 dark:bg-black rounded-lg dark:border dark:border-neutral-700 dark:text-white    bg-white p-6 w-full">
       <div className="flex flex-col gap-4 border-b dark:border-b-neutral-700 border-b-neutral-black-5 pb-6">
         <div className="flex flex-col gap-3">
           <h1 className="heading-4">Team Members</h1>

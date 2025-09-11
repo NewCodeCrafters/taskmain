@@ -7,14 +7,12 @@ import { useModal } from "../stores/useModal";
 import { Link } from "react-router";
 import lineImg from "../assets/line.svg";
 import chevron from "../assets/chevron-down-2.svg";
-import chevronUp from '/images/chevron-up.svg'
+import chevronUp from "/images/chevron-up.svg";
 import CreateSpace from "./createSpace";
 import { useProjectStore } from "../stores/useProjectStore";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Star } from "lucide-react";
 
-const SubNav = ({ 
-  handleSideBar
- }) => {
+const SubNav = ({ handleSideBar }) => {
   const { setCreateSpaceModal } = useModal((s) => s);
   const { projects, fetchProjects } = useProjectStore((s) => s);
   useEffect(() => {
@@ -41,7 +39,7 @@ const SubNav = ({
               <img src="/images/add.svg" alt="" />
             </button>
             <button>
-              <img src="/images/chevron-down.svg" alt="" />
+              <ChevronDown className="dark:text-white"/>
             </button>
           </div>
         </div>
@@ -52,7 +50,7 @@ const SubNav = ({
                 // to={`/space/${space.id}`}
                 className="flex py-3 px-4 dark:text-white hover:cursor-pointer rounded-4  items-center w-full gap-3 "
               >
-                <img src="/images/star-01.svg" alt="" />
+                <Star />
                 <button
                   className="flex items-center justify-between w-full hover:cursor-pointer"
                   onClick={() => {
@@ -60,9 +58,12 @@ const SubNav = ({
                   }}
                 >
                   <span className="body-medium-semibold">{space.name}</span>
-                  <ChevronDown className={` transition-transform duration-500 ease-in-out ${
-                    expanded === space.id ? 'rotate-180 ' : 'rotate-0'
-                  }`} alt="" />
+                  <ChevronDown
+                    className={` transition-transform duration-500 ease-in-out ${
+                      expanded === space.id ? "rotate-180 " : "rotate-0"
+                    }`}
+                    alt=""
+                  />
                 </button>
               </div>
 
@@ -93,7 +94,7 @@ const SubNav = ({
           ))}
         </div>
 
-        <div className="flex flex-col gap-4 p-4 dark:bg-background text-white rounded-lg dark:border-neutral-700 bg-neutral-black-3 dark:border">
+        <div className="flex flex-col gap-4 p-4 dark:bg-background dark:text-white rounded-lg dark:border-neutral-700 bg-neutral-black-3 dark:border">
           <article className="flex flex-col gap-1">
             <h1 className="heading-5">Upgrade to Pro</h1>
             <span className="body-xsmall-regular text-neutral-black-8">

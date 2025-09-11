@@ -8,12 +8,14 @@ const TaskSection = () => {
   // setPageName(locationName)
   console.log(locationName)
   useEffect(() => {
-    if(locationName.includes('membersettings')) {
+    if(locationName.includes('memberssettings')) {
       setPageName('Member Settings')
     } else if(locationName.includes('messages')) {
       setPageName('Messages')
     } else if(locationName.includes('favourites')) {
       setPageName('Favourites')
+    }else if(locationName.includes('profileSettings')){
+      setPageName('Profile Settings')
     } else {
       setPageName('Development Stuff')
     }
@@ -23,7 +25,7 @@ const TaskSection = () => {
     <div className="flex gap-2 w-auto">
       <span className={`${
         pageName === 'Development Stuff' ? 'text-paragraph' : 'text-black'
-      } hidden lg:grid heading-4 md:heading-5`}>
+      } hidden lg:grid heading-4 md:heading-5 dark:text-white`}>
         { pageName }
       </span>
       {

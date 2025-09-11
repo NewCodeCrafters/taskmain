@@ -17,7 +17,7 @@ const Modal = ({
 
   return (
     <div
-      className="fixed inset-0 grid place-items-center bg-background/10 glass z-50 p-5"
+      className="fixed inset-0 grid place-items-center bg-background/10 z-50 p-5"
       onClick={(e) => e.stopPropagation()}
     >
       <div className={`bg-white dark:bg-black dark:text-white rounded-lg p-6  ${Class}`} onClick={onClick}>

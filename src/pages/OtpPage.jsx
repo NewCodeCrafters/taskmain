@@ -36,7 +36,7 @@ const OtpPage = () => {
   const handleSumit =  () => {
     const otpCode = otp.join('');
 
-    if(otpCode.length < 6){
+    if(!(otpCode.length = 6)){
       setError('Otp not complete')
       return
     }
