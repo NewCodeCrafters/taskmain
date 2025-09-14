@@ -20,7 +20,7 @@ const Modal = ({
       className="fixed inset-0 grid place-items-center bg-background/10 z-50 p-5"
       onClick={(e) => e.stopPropagation()}
     >
-      <div className={`bg-white rounded-lg p-6  ${Class}`} onClick={onClick}>
+      <div className={`bg-white dark:bg-black dark:text-white rounded-lg p-6  ${Class}`} onClick={onClick}>
         {/* <button onClick={onClose} className="absolute top-4 right-4">
           <img
             src={CloseIcon}

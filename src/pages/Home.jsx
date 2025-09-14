@@ -6,39 +6,43 @@ import calendar from "../assets/calendar.svg";
 import calendarBlue from "../assets/calendar-blue.svg";
 import rows from "../assets/rows-01.svg";
 import rowsBlue from "../assets/rows-blue.svg";
-import plus from "../assets/plus-white.svg";
-import plusDark from "../assets/plus.svg";
+// import plus from "../assets/plus-white.svg";
+// import plusDark from "../assets/plus.svg";
 import Button from "../components/Button";
 import { useTaskStore } from "../stores/taskStore";
-import tasks from "../data/task";
+// import tasks from "../data/task";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 import HomeLinkMobile from "../components/HomeLinkMobile";
-import TaskColumn from "../components/TaskColumn";
-import BoardView from "../components/BoardView";
-import ListView from "../components/ListView";
-import Calendar from "../components/Calendar";
 import Dropdown from "../components/Dropdown";
 import SortBy from "../components/SortBy";
 import Filter from "../components/Filter";
+import DatePick from "../components/DatePicker";
+import CreateTaskModal from "../components/CreateTaskModal";
+import CreateSpace from "../components/createSpace";
+import OverviewListView from "../components/OverviewListView";
+import OverViewBoardView from "../components/OverviewBoardView";
+import OverviewCalendarView from "../components/OverviewCalendarView";
 
 const Home = () => {
-  const { setTask } = useTaskStore((s) => s);
+  const { fetchTasks } = useTaskStore((s) => s);
 
   const [viewParams, setViewParams] = useSearchParams();
 
   const view = viewParams.get("view") || "board";
   useEffect(() => {
-    setTask(tasks);
+    fetchTasks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="relative flex flex-col gap-6 ">
-      <span className="heading-4">Team Daily Task</span>
       <section className="flex justify-between">
         <div className="md:hidden flex">
-          <HomeLinkMobile />
+          <HomeLinkMobile 
+          view={view} 
+          onChange={setViewParams}
+          />
         </div>
         <div className="hidden md:flex gap-1 items-start">
           <HomeLink
@@ -66,20 +70,20 @@ const Home = () => {
             isActive={view === "calendar"}
           />
 
-          <img src={plusDark} alt="" className="ml-5" />
+          {/* <img src={plusDark} alt="" className="ml-5" /> */}
         </div>
         <div className="flex gap-3">
           <Filter />
           <SortBy />
-          <Button leftIcon={<img src={plus} />} className="hidden md:flex ml-2">
+          {/* <Button leftIcon={<img src={plus} />} className="hidden md:flex ml-2">
             Add Task
-          </Button>
+          </Button> */}
         </div>
       </section>
-      <div className="overflow-y-auto">
-        {view === "board" && <BoardView />}
-        {view === "list" && <ListView />}
-        {view === "calendar" && <Calendar />}
+      <div className="">
+        {view === "board" && <OverViewBoardView />}
+        {view === "list" && <OverviewListView />}
+        {view === "calendar" && <OverviewCalendarView />}
         <div>
           <Dropdown />
         </div>

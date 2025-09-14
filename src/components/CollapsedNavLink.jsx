@@ -14,14 +14,14 @@ const CollapsedNavLink = ({ LinkTo, image }) => {
         to={LinkTo || "#"}
         className={
           isActive
-            ? "bg-primary-50 rounded-xl relative flex items-center justify-center"
+            ? "bg-primary-50 text-primary-300 rounded-xl relative flex items-center justify-center"
             : ""
         }
       >
         {isActive && (
           <div className="absolute  h-full w-[10px] bg-primary-500 left-[-25px] top-1/2 -translate-y-1/2 rounded-r-full"></div>
         )}
-        {image}
+        <div className="p-[12px]">{image}</div>
       </Link>
     </div>
   );

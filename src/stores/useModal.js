@@ -6,4 +6,16 @@ export const useModal = create((set) => ({
   taskId: null,
   setModal: (newModal) => set({ modal: newModal }),
   setTaskId: (task) => set({ taskId: task }),
+  modalProfile: false,
+  setModalProfile: (newModal) => set({ modalProfile: newModal }),
+  modalAddTask: false,
+  setModalAddTask: (newModal) => set({ modalAddTask: newModal }),
+  profileSetting: true,
+  setProfileSetting: (showSetting) => set({ settings: showSetting }),
+  createSpaceModal: false,
+  setCreateSpaceModal: (showCreateSpace) =>
+    set({ createSpaceModal: showCreateSpace }),
+  shareSpaceModal: false,
+  setShareSpaceModal: (showCreateSpace) =>
+    set({ shareSpaceModal: showCreateSpace }),
 }));

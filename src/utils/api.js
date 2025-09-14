@@ -4,7 +4,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { Navigate } from "react-router";
 
 export const api = axios.create({
-  baseURL: "https://ncc-task-management-backend.onrender.com",
+  baseURL: "https://tasktonic-backend.onrender.com",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -43,7 +43,7 @@ api.interceptors.response.use(
 );
 export const signup = async (userData) => {
   try {
-    const res = await api.post("/accounts/signup/", userData);
+    const res = await api.post("/api/signup/", userData);
     const { access_token, refresh_token } = res.data;
 
     localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
@@ -71,7 +71,12 @@ export const signup = async (userData) => {
 
 export const logIn = async (credentials) => {
   try {
-    const res = await api.post("/accounts/login/", credentials);
+    const res = await api.post("/api/signin/", credentials);
+    if (res.status === 204) {
+      toast.success("Signup successful, but no tokens returned.");
+      return {}; // or navigate to login page directly
+    }
+    console.log(res);
     const { refresh_token, access_token } = res.data;
     localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
     localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
@@ -98,7 +103,7 @@ export const getUserProfile = async () => {
   try {
     // const token = localStorage.getItem(ACCESS_TOKEN_KEY);
     // console.log(token);
-    const res = await api.get("/auth/users/");
+    const res = await api.get("/api/users/");
     console.log(res.data);
     return res.data;
   } catch (error) {
@@ -111,3 +116,55 @@ export const logout = () => {
   localStorage.removeItem(REFRESH_TOKEN_KEY);
   window.location.href = routes.login;
 };
+
+export const forgotPassword = async (userEmail) => {
+  try{
+    const res = await api.post('/forgot_password/request', {
+      email : userEmail.email
+    })
+    console.log(res.data)
+    toast.success('Reset Instructions has been sent via email')
+    return res.data
+  } catch(err) {
+    console.error(err)
+    if(!err.response){
+      toast.error('Network error. Please try again')
+      throw new Error('Network error');
+    };
+
+    const errorData = err.response?.data;
+    
+    const firstKey = Object.keys(errorData)[0];
+    const errorMessage = Array.isArray(errorData[firstKey]) ? errorData[firstKey][0] : errorData[firstKey];
+
+    toast.error(errorMessage || 'Failed to send reset email');
+    throw new Error(errorMessage || "Failed to send reset email");
+  }
+}
+
+export const resetPassword = async ({email, otp, newPassword }) => {
+  try {
+    const res = await api.post('/forgot_password/reset', {
+      email,
+      otp,
+      newPassword : newPassword,
+    });
+
+    toast.success('Password Reset successful');
+    return res.data
+  } catch(err){
+    console.error(err)
+    if(!err.response){
+      toast.error('Network error. Please try again')
+      throw new Error('Network error');
+    };
+
+    const errorData = err.response?.data;
+    
+    const firstKey = Object.keys(errorData)[0];
+    const errorMessage = Array.isArray(errorData[firstKey]) ? errorData[firstKey][0] : errorData[firstKey];
+
+    toast.error(errorMessage || 'Failed to reset password');
+    throw new Error(errorMessage || "Failed to reset password");
+  }
+}

@@ -76,7 +76,7 @@ const LoginPage = () => {
           <img src={logo} alt="" />
         </figure>
         <div className="heading-3">Hi, Welcome</div>
-        <p className="text-neutral-black-9 body-medium-medium">
+        <p className="text-neutral-black-9 dark:text-neutral-400 body-medium-medium">
           Please login your account
         </p>
       </div>
@@ -122,13 +122,13 @@ const LoginPage = () => {
         </form>
 
         <div className="flex justify-between gap-4">
-          <label className="flex gap-2  border-hidden body-small-medium text-paragraph ">
+          <label className="flex gap-2  border-hidden body-small-medium dark:text-neutral-400 text-paragraph ">
             <TextInput className="" type="checkbox" />
             Remember me
           </label>
           <Link
             to="/forgotpassword"
-            className="body-small-medium text-paragraph"
+            className="body-small-medium dark:text-neutral-400 text-paragraph"
           >
             forgot password?
           </Link>
@@ -137,7 +137,7 @@ const LoginPage = () => {
 
       <OrSignIn />
       <div className="flex justify-center gap-2 mt-6">
-        <span className="text-neutral-900 body-small-medium ">
+        <span className="text-neutral-900  dark:text-white body-small-medium ">
           Don't have an account?
         </span>
         <Link to="/signup" className="text-primary-500 body-medium-semibold ">
