@@ -11,7 +11,6 @@ import axios from "axios";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, routes } from "./constant";
 import { Toaster, toast } from "react-hot-toast";
 import { Navigate } from "react-router";
-import usePerUSerStore from "../stores/usePerUserStore";
 
 export const api = axios.create({
   baseURL: "https://tasktonic-backend.onrender.com",
@@ -54,10 +53,10 @@ api.interceptors.response.use(
 export const signup = async (userData) => {
   try {
     const res = await api.post("/api/signup/", userData);
-    const { accessToken, refreshToken, user } = res.data;
+    const { accessToken, refreshToken } = res.data;
     console.log(res);
 
-    usePerUSerStore.getState().setUser(user);
+    // usePerUSerStore.getState().setUser(user);
 
     localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
@@ -90,8 +89,8 @@ export const logIn = async (credentials) => {
     console.log("Login response:", res);
 
     // ✅ correct keys from backend
-    const { accessToken, refreshToken, user } = res.data;
-
+    const { accessToken, refreshToken } = res.data;
+    console.log(accessToken, refreshToken);
     // ✅ save tokens
     localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
@@ -123,7 +122,7 @@ export const logIn = async (credentials) => {
 
 export const getUserProfile = async () => {
   try {
-    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+    const token = localStorage.getItem(ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY);
     console.log(token);
     const res = await api.get("/auth/me");
     console.log(res.data);

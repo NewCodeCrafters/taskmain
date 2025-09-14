@@ -9,6 +9,7 @@ const useAddTaskStore = create((set) => ({
   assignees: [],
   description: "",
   selectedUsers: [],
+  image: "",
 
   setTaskName: (newTaskName) => set({ taskName: newTaskName }),
   setStatus: (newStatus) => set({ Status: newStatus }),
@@ -19,6 +20,7 @@ const useAddTaskStore = create((set) => ({
   setDescription: (newDescription) => set({ description: newDescription }),
   setSelectedUsers: (newSelectedUser) =>
     set({ selectedUsers: newSelectedUser }),
+  setImage: (newImage) => set({ image: newImage }),
 
   resetForm: () =>
     set({

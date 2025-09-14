@@ -14,14 +14,22 @@ import Button from "./Button";
 import TaskListItem from "./TaskListItems";
 import ImageFile from "./ImageFile";
 import { useModal } from "../stores/useModal";
-import { useTaskStore } from "../stores/taskStore";
+
 import { X } from "lucide-react";
+import { useUserStore } from "../stores/useUserStore";
+
 
 const TaskInfoModal = () => {
   const { tasks } = useTaskStore((s) => s);
   const { modal, setModal, taskId } = useModal((s) => s);
+  const { users } = useUserStore((s) => s);
+
   const task = tasks.find((task) => task.id === taskId);
   // console.log(task);
+  console.log(task);
+  const taskAssignees = task.assignees;
+
+  const tasksFilter = users.filter((user) => taskAssignees.includes(user.id));
   if (!task) return null;
 
   return (
@@ -81,7 +89,7 @@ const TaskInfoModal = () => {
               <TaskListItem
                 icon={user}
                 title="Assignees"
-                taskListInfo={task.assignees.map((task) => (
+                taskListInfo={tasksFilter.map((task) => (
                   <figure className="w-8 h-8 rounded-full border border-white shadow-2xl">
                     <img
                       src={task.avatar}

@@ -15,6 +15,8 @@ const OrSignIn = () => {
 
   const handleCallbackResponse = async (response) => {
     const idToken = response.credential;
+
+    console.log(idToken);
     try {
       const data = await googleLogin(idToken);
       console.log("Backend response:", data);

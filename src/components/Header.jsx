@@ -14,7 +14,7 @@ import { notifications } from "../data/notifications";
 import { Bell, ChevronDown, LayoutGrid } from "lucide-react";
 import usePerUSerStore from "../stores/usePerUserStore";
 import { getUserProfile } from "../utils/api";
-import { useEffect } from "react";
+
 
 
 const Header = ({
@@ -26,14 +26,14 @@ const Header = ({
   setDropDown,
 }) => {
   // const [user, setUser] = useState(null);
+  // console.log(user);
   const { user, setUser } = usePerUSerStore((u) => u);
-  console.log(user);
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const user = await getUserProfile();
-        console.log("Logged in user:", user);
-        setUser(user);
+        const users = await getUserProfile();
+        console.log("Logged in user:", users);
+        setUser(users);
       } catch (err) {
         console.log(err.message);
         console.error("Not logged in or token invalid");

@@ -2,7 +2,7 @@ import { HandHeart } from "lucide-react";
 import { create } from "zustand";
 
 const usePerUSerStore = create((set) => ({
-  user: null,
+  user: [],
 
   setUser: (user) => {
     set({

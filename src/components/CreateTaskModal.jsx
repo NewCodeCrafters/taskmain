@@ -24,6 +24,7 @@ import { useProjectStore } from "../stores/useProjectStore";
 import AddAssignees from "./AddAssignees";
 import { useEffect } from "react";
 import { useUserStore } from "../stores/useUserStore";
+// import { preview } from "vite";
 
 const CreateTaskModal = () => {
   const { taskName, setTaskName, description, setDescription } =
@@ -37,8 +38,24 @@ const CreateTaskModal = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { setModalAddTask, modalAddTask } = useModal((s) => s);
-  const { Status, timeEstimate, priority, dueDate, resetForm, selectedUsers } =
-    useAddTaskStore((s) => s);
+  const {
+    Status,
+    timeEstimate,
+    priority,
+    dueDate,
+    resetForm,
+    selectedUsers,
+    image,
+    setImage,
+  } = useAddTaskStore((s) => s);
+  const assignees = selectedUsers.map((user) => user.id);
+  const handleImageChange = (e) => {
+    const selected = e.target.files[0];
+    if (selected) {
+      // setFile(selected);
+      setImage(URL.createObjectURL(selected));
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     addTask(Task);
@@ -51,12 +68,12 @@ const CreateTaskModal = () => {
     title: taskName,
     description: description,
     projectId: currentProjectId,
-    assignees: selectedUsers,
+    assignees: assignees,
     status: Status,
     dueDate: dueDate,
     priority: priority,
     timeEstimate: timeEstimate,
-    image: "",
+    image: image,
   };
   return (
     <Modal isOpen={modalAddTask}>
@@ -142,13 +159,15 @@ const CreateTaskModal = () => {
           />
         </div>
         <div className="flex items-center gap-4 w-full justify-end">
-          <Button
+          <input
+            type="file"
             className="rounded-full"
-            variant="signIn"
-            // onClick={(e) => e.preventDefault}
-          >
-            <img src={attachImg} alt="" />
-          </Button>
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+          {/* <input type="file" /> */}
+          {/* <img src={attachImg} alt="" />
+          </input> */}
           <Button onClick={handleSubmit}>Create Task</Button>
         </div>
       </form>
