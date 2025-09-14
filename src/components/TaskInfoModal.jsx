@@ -24,13 +24,17 @@ import useAddTaskStore from "../stores/useAddTaskStore";
 const TaskInfoModal = () => {
   const { tasks } = useTaskStore((s) => s);
   const { projectName } = useProjectStore((s) => s);
-  const { modal, setModal, taskId } = useModal((s) => s);
+  const { modal, setModal, taskId, setEditTaskModal, editTaskModal } = useModal(
+    (s) => s
+  );
   const { users } = useUserStore((s) => s);
   const { dateCreated } = useAddTaskStore((s) => s);
   const task = tasks.find((task) => task.id === taskId);
   console.log(task);
   const taskAssignees = task.assignees;
+  // useEffect(()=> {
 
+  // })
   const tasksFilter = users.filter((user) => taskAssignees.includes(user.id));
   // const projectName = project;
 
@@ -55,7 +59,14 @@ const TaskInfoModal = () => {
               Share
             </Button>
             <img src={star} alt="" />
-            <img src={edit} alt="" />
+            {!editTaskModal && (
+              <button
+                className="hover:cursor-pointer"
+                onClick={() => setEditTaskModal(true)}
+              >
+                <img src={edit} alt="" />
+              </button>
+            )}
             <img
               className="cursor-pointer"
               src={expand}

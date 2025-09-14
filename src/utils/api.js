@@ -36,7 +36,7 @@ api.interceptors.response.use(
         return Promise.reject(error);
       }
       try {
-        const res = await api.post("/auth/refresh/", {
+        const res = await api.post("/auth/refresh", {
           refresh: refreshToken,
         });
         const newAccessToken = res.data.accessToken;
@@ -147,6 +147,7 @@ export const logout = () => {
   window.location.href = routes.login;
 };
 
+
 export const forgotPassword = async (userEmail) => {
   try{
     const res = await api.post('/forgot_password/request', {
@@ -198,3 +199,10 @@ export const resetPassword = async ({email, otp, newPassword }) => {
     throw new Error(errorMessage || "Failed to reset password");
   }
 }
+
+export const fetchProjectsApi = () => api.post("/api/space");
+export const addProjectsApi = (space) => api.post("/api/space", space);
+export const updateProjectApi = (id, updates) =>
+  api.put(`api/space/${id}`, updates);
+export const deleteProjectApi = (id) => api.delete(`/api/space/${id}`);
+

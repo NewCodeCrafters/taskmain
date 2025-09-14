@@ -8,6 +8,7 @@ import { useModal } from "../stores/useModal";
 import { useSpaces } from "../stores/useSpaces";
 import { X } from "lucide-react";
 import { useProjectStore } from "../stores/useProjectStore";
+import { ACCESS_TOKEN_KEY } from "../utils/constant";
 
 const CreateSpace = () => {
   const { setCreateSpaceModal, createSpaceModal } = useModal((c) => c);
@@ -24,6 +25,7 @@ const CreateSpace = () => {
     name: spaceName,
     description: "A pro",
     createdAt: new Date().toISOString(),
+    // accessToken: localStorage.getItem(ACCESS_TOKEN_KEY),
   };
   return (
     <Modal
