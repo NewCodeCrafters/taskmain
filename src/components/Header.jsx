@@ -13,6 +13,8 @@ import NotificationModal from "./NotificationModal";
 import { notifications } from "../data/notifications";
 import { Bell, ChevronDown, LayoutGrid } from "lucide-react";
 import usePerUSerStore from "../stores/usePerUserStore";
+import { getUserProfile } from "../utils/api";
+import { useEffect } from "react";
 
 
 const Header = ({
@@ -24,20 +26,23 @@ const Header = ({
   setDropDown,
 }) => {
   // const [user, setUser] = useState(null);
-  const { user } = usePerUSerStore((u) => u);
+  const { user, setUser } = usePerUSerStore((u) => u);
   console.log(user);
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const userData = await getUserProfile();
-  //       setUser(userData);
-  //       console.log(userData);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchUserData();
-  // }, []);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await getUserProfile();
+        console.log("Logged in user:", user);
+        setUser(user);
+      } catch (err) {
+        console.log(err.message);
+        console.error("Not logged in or token invalid");
+      }
+    };
+    fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   console.log(user);
   const { setShareSpaceModal } = useModal((s) => s);
   const [showNotificationModal, setShowNotificationModal] = useState(false);
@@ -125,7 +130,7 @@ const Header = ({
           <figure>
             <img src="/images/avatar.svg" alt="" />
           </figure>
-          {/* <div className="lg:flex flex-col md:flex hidden">
+          <div className="lg:flex flex-col md:flex hidden">
             <div className="flex gap-1">
               <span className="body-small-medium">{user.firstname}</span>
               <span className="body-small-medium">{user.lastname}</span>
@@ -133,7 +138,7 @@ const Header = ({
             <span className="body-xsmall-medium text-paragraph">
               {user.email}
             </span>
-          </div> */}
+          </div>
           <figure>
             <ChevronDown
               className={`transition-all dark:text-white duration-300 ${

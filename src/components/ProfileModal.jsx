@@ -6,11 +6,9 @@ import ProfileUserInfo from "./ProfileUserInfo";
 import ProfileTaskInfo from "./ProfileTaskInfo";
 import { useTaskStore } from "../stores/taskStore";
 import { useModal } from "../stores/useModal";
-<<<<<<< HEAD
 import { X } from "lucide-react";
-=======
+
 import usePerUSerStore from "../stores/usePerUserStore";
->>>>>>> 50727dc (working on create task)
 
 const ProfileModal = () => {
   const { user } = usePerUSerStore((u) => u);

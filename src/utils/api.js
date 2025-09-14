@@ -1,3 +1,12 @@
+// Endpoints available
+// http://localhost:8000/api/signup same for sign in and out
+// http://localhost:8000/api/auth/forgot_password
+// To get the user info
+// http://localhost:8000/auth/me
+// To get a new access token if it's expired
+// http://localhost:8000/auth/refresh
+// for google auth - /auth/google
+
 import axios from "axios";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, routes } from "./constant";
 import { Toaster, toast } from "react-hot-toast";
@@ -11,7 +20,7 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem(ACCESS_TOKEN_KEY);
-  // console.log(token);
+  console.log(token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -28,10 +37,10 @@ api.interceptors.response.use(
         return Promise.reject(error);
       }
       try {
-        const res = await api.post("/accounts/refresh/", {
+        const res = await api.post("/auth/refresh/", {
           refresh: refreshToken,
         });
-        const newAccessToken = res.data.access_token;
+        const newAccessToken = res.data.accessToken;
         localStorage.setItem(ACCESS_TOKEN_KEY, newAccessToken);
         return api(error.config);
       } catch (refreshError) {
@@ -45,13 +54,13 @@ api.interceptors.response.use(
 export const signup = async (userData) => {
   try {
     const res = await api.post("/api/signup/", userData);
-    const { access_token, refresh_token, user } = res.data;
+    const { accessToken, refreshToken, user } = res.data;
     console.log(res);
 
-    usePerUSerStore.getState().setAuth(user);
+    usePerUSerStore.getState().setUser(user);
 
-    localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
-    localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
+    localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
 
     return res.data;
 
@@ -76,44 +85,60 @@ export const signup = async (userData) => {
 export const logIn = async (credentials) => {
   try {
     const res = await api.post("/api/signin/", credentials);
-    if (res.status === 204) {
-      toast.success("Signup successful, but no tokens returned.");
-      return {}; // or navigate to login page directly
-    }
-    console.log(res);
-    const { refresh_token, access_token, user } = res.data;
-    localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
-    localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
-    usePerUSerStore.getState().setAuth(user);
-    console.log(user);
+
+    // ✅ log response (for debugging only)
+    console.log("Login response:", res);
+
+    // ✅ correct keys from backend
+    const { accessToken, refreshToken, user } = res.data;
+
+    // ✅ save tokens
+    localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+
+    // ✅ save user in your store
+    // usePerUSerStore.getState().setUser(user);
+
     return res.data;
   } catch (error) {
-    // console.log(error);
     if (!error.response) {
-      toast.error("Network error, please check your internet connection");
+      // network / server unreachable
+      toast.error("Network error, please check your connection.");
       throw new Error("Network error");
     }
+
+    // backend responded with error
     const errorData = error.response.data;
+
+    // pick first error message if it exists
     const firstKey = Object.keys(errorData)[0];
     const errorMessage = Array.isArray(errorData[firstKey])
       ? errorData[firstKey][0]
       : errorData[firstKey];
 
-    toast.error(errorMessage || "Signup failed");
-    throw new Error(errorMessage || "Signup failed");
-    // throw error.response?.data?.message || "Login failed";
+    toast.error(errorMessage || "Login failed");
+    throw new Error(errorMessage || "Login failed");
   }
 };
 
 export const getUserProfile = async () => {
   try {
-    // const token = localStorage.getItem(ACCESS_TOKEN_KEY);
-    // console.log(token);
-    const res = await api.get("/api/users/");
+    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+    console.log(token);
+    const res = await api.get("/auth/me");
     console.log(res.data);
     return res.data;
   } catch (error) {
     throw error.response?.data?.message || "Unauthorized";
+  }
+};
+
+export const googleLogin = async (idToken) => {
+  try {
+    const res = await api.post("/auth/google", { id_token: idToken });
+    return res.data; // token, user info, etc.
+  } catch (err) {
+    throw err.response?.data || err;
   }
 };
 

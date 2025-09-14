@@ -4,7 +4,7 @@ import { create } from "zustand";
 const usePerUSerStore = create((set) => ({
   user: null,
 
-  setAuth: (user) => {
+  setUser: (user) => {
     set({
       user: user,
     });
