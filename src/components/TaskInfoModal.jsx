@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "./modal";
 import TaskSection from "./TaskSection";
 import edit from "../assets/edit-05.svg";
@@ -14,23 +14,25 @@ import Button from "./Button";
 import TaskListItem from "./TaskListItems";
 import ImageFile from "./ImageFile";
 import { useModal } from "../stores/useModal";
-
 import { X } from "lucide-react";
 import { useUserStore } from "../stores/useUserStore";
+import { useProjectStore } from "../stores/useProjectStore";
+import useAddTaskStore from "../stores/useAddTaskStore";
+// import { useAddTaskStore } from "../stores/useAddTaskStore";
 
 
 const TaskInfoModal = () => {
   const { tasks } = useTaskStore((s) => s);
+  const { projectName } = useProjectStore((s) => s);
   const { modal, setModal, taskId } = useModal((s) => s);
   const { users } = useUserStore((s) => s);
-
+  const { dateCreated } = useAddTaskStore((s) => s);
   const task = tasks.find((task) => task.id === taskId);
-  // console.log(task);
   console.log(task);
   const taskAssignees = task.assignees;
 
   const tasksFilter = users.filter((user) => taskAssignees.includes(user.id));
-  if (!task) return null;
+  // const projectName = project;
 
   return (
     <div className="">
@@ -39,13 +41,14 @@ const TaskInfoModal = () => {
         onClick={(e) => e.stopPropagation()}
         Class="flex flex-col gap-6 w-full max-w-[1000px] overflow-y-auto md:max-h-4/5 max-h-35/36"
       >
-        <div className="flex items-center justify-between border-b border-neutral-black-5 dark:border-neutral-600 pb-6 mb-6 ">
-          <TaskSection />
+
+        <div className="flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6 ">
+          <TaskSection projectName={projectName} />
           <div className="flex gap-5 items-center">
             <div className="flex items-center gap-1">
               <img src={edit} alt="" className="hidden md:flex" />
-              <span className="hidden md:flex dark:text-neutral-400 body-small-regular text-paragraph">
-                Created on 2 March, 2024
+              <span className="hidden md:flex body-small-regular text-paragraph">
+                {dateCreated}
               </span>
             </div>
             <Button variant="black " className="hidden md:flex">
@@ -102,7 +105,7 @@ const TaskInfoModal = () => {
               <TaskListItem
                 icon={calendar}
                 title="Project"
-                taskListInfo={task.project}
+                taskListInfo={projectName}
                 className="px-3 py-1 bg-neutral-black-5 rounded-lg"
               />
               <TaskListItem

@@ -10,6 +10,7 @@ const useAddTaskStore = create((set) => ({
   description: "",
   selectedUsers: [],
   image: "",
+  dateCreated: "",
 
   setTaskName: (newTaskName) => set({ taskName: newTaskName }),
   setStatus: (newStatus) => set({ Status: newStatus }),
@@ -21,6 +22,7 @@ const useAddTaskStore = create((set) => ({
   setSelectedUsers: (newSelectedUser) =>
     set({ selectedUsers: newSelectedUser }),
   setImage: (newImage) => set({ image: newImage }),
+  setDateCreated: (date) => set({ dateCreated: date }),
 
   resetForm: () =>
     set({

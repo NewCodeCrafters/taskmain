@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
-
+import { useLocation } from "react-router"
 const TaskSection = () => {
   const locationName = useLocation().pathname;
   const [pageName, setPageName] = useState('Development Stuff')

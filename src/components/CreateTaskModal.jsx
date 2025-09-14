@@ -29,14 +29,22 @@ import { useUserStore } from "../stores/useUserStore";
 const CreateTaskModal = () => {
   const { taskName, setTaskName, description, setDescription } =
     useAddTaskStore((s) => s);
-  const { currentProjectId, projects, fetchProjects } = useProjectStore();
-  const { addTask } = useTaskStore((s) => s);
-  const { fetchUsers, users } = useUserStore((s) => s);
+  const { currentProjectId, projects, fetchProjects, setProjectName } =
+    useProjectStore();
   useEffect(() => {
+    setProjectName(projectNameFound);
     fetchUsers();
     fetchProjects();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const findProject = projects?.find(
+    (p) => String(currentProjectId) === String(p.id)
+  );
+  const projectNameFound = findProject?.name;
+  const { addTask } = useTaskStore((s) => s);
+  const { fetchUsers, users } = useUserStore((s) => s);
+
   const { setModalAddTask, modalAddTask } = useModal((s) => s);
   const {
     Status,
@@ -47,7 +55,15 @@ const CreateTaskModal = () => {
     selectedUsers,
     image,
     setImage,
+    dateCreated,
+    setDateCreated,
   } = useAddTaskStore((s) => s);
+  const now = new Date();
+  const date = now.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
   const assignees = selectedUsers.map((user) => user.id);
   const handleImageChange = (e) => {
     const selected = e.target.files[0];
@@ -62,6 +78,7 @@ const CreateTaskModal = () => {
     console.log();
     setModalAddTask(false);
     resetForm();
+    setDateCreated(date);
   };
   const Task = {
     id: crypto.randomUUID(),
@@ -74,6 +91,7 @@ const CreateTaskModal = () => {
     priority: priority,
     timeEstimate: timeEstimate,
     image: image,
+    dateCreated: dateCreated,
   };
   return (
     <Modal isOpen={modalAddTask}>

@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 export const useModal = create((set) => ({
   modal: false,
-  taskId: null,
+  taskId: "",
   setModal: (newModal) => set({ modal: newModal }),
   setTaskId: (task) => set({ taskId: task }),
   modalProfile: false,
