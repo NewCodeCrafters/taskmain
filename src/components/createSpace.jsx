@@ -7,16 +7,23 @@ import Button from "./Button";
 import { useModal } from "../stores/useModal";
 import { useSpaces } from "../stores/useSpaces";
 import { X } from "lucide-react";
+import { useProjectStore } from "../stores/useProjectStore";
 
 const CreateSpace = () => {
   const { setCreateSpaceModal, createSpaceModal } = useModal((c) => c);
-  const addSpace = useSpaces((state) => state.addSpace);
+  const { addProject } = useProjectStore((s) => s);
   const [spaceName, setSpaceName] = useState("");
   const handleCreateSpace = () => {
     if (!spaceName.trim()) return;
-    addSpace(spaceName.trim());
+    addProject(project);
     setSpaceName("");
     setCreateSpaceModal(false);
+  };
+  const project = {
+    id: crypto.randomUUID(),
+    name: spaceName,
+    description: "A pro",
+    createdAt: new Date().toISOString(),
   };
   return (
     <Modal

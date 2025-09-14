@@ -7,7 +7,7 @@ import { useDrag } from "react-dnd";
 import TaskInfoModal from "./taskInfoModal";
 import { useModal } from "../stores/useModal";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, image }) => {
   const { setModal, setTaskId } = useModal((s) => s);
   const handleTaskId = (id) => {
     setTaskId(id);
@@ -47,12 +47,7 @@ const TaskCard = ({ task }) => {
         </figure>
       </div>
       <h1 className="heading-4">{task.title}</h1>
-      {task.image && (
-        <img
-          src={task.image}
-          className="h-[200px] w-full rounded-lg object-cover"
-        />
-      )}
+      {task.image && task.image}
       <div className="flex items-center gap-2.5">
         {/* {task.tags.map((tag, index) => (
           <span
@@ -66,7 +61,7 @@ const TaskCard = ({ task }) => {
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="flex">
-            {/* {task.assignees.map((user) => (
+            {/* {image.map((user) => (
               <figure className="w-full max-w-12 max-h-12 rounded-full overflow-hidden ">
                 <img src={user.avatar} alt={user.name} key={user.id} />
               </figure>

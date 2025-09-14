@@ -23,9 +23,11 @@ import CreateSpace from "../components/createSpace";
 import OverviewListView from "../components/OverviewListView";
 import OverViewBoardView from "../components/OverviewBoardView";
 import OverviewCalendarView from "../components/OverviewCalendarView";
+import { useUserStore } from "../stores/useUserStore";
 
 const Home = () => {
-  const { fetchTasks } = useTaskStore((s) => s);
+  const { fetchTasks, tasks } = useTaskStore((s) => s);
+  // const { fetchProjects } = useProjectStore((s) => s);
 
   const [viewParams, setViewParams] = useSearchParams();
 
@@ -34,6 +36,9 @@ const Home = () => {
     fetchTasks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const assigneesId = tasks.map((t) => t.assignees);
+
+  console.log(assigneesId);
 
   return (
     <div className="relative flex flex-col gap-6 ">
