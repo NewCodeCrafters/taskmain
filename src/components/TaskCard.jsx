@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import calendar from "../assets/calendar.svg";
 import dots from "../assets/dots-horizontal.svg";
 import plus from "../assets/plus.svg";
@@ -6,9 +7,18 @@ import messages from "../assets/message-text-square-01.svg";
 import { useDrag } from "react-dnd";
 import TaskInfoModal from "./taskInfoModal";
 import { useModal } from "../stores/useModal";
+import { useUserStore } from "../stores/useUserStore";
 
-const TaskCard = ({ task, image }) => {
+const TaskCard = ({ task }) => {
   const { setModal, setTaskId } = useModal((s) => s);
+  const { users } = useUserStore((s) => s);
+  const taskAssignees = task.assignees;
+  console.log(taskAssignees);
+  // useEffect(() => fetchUsers(), []);
+
+  const tasksFilter = users.filter((user) => taskAssignees.includes(user.id));
+  // console.log(tasksss);
+
   const handleTaskId = (id) => {
     setTaskId(id);
     setModal(true);
@@ -47,7 +57,7 @@ const TaskCard = ({ task, image }) => {
         </figure>
       </div>
       <h1 className="heading-4">{task.title}</h1>
-      {task.image && task.image}
+      {task.image && <img src={task.image} />}
       <div className="flex items-center gap-2.5">
         {/* {task.tags.map((tag, index) => (
           <span
@@ -61,11 +71,11 @@ const TaskCard = ({ task, image }) => {
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="flex">
-            {/* {image.map((user) => (
+            {tasksFilter.map((user) => (
               <figure className="w-full max-w-12 max-h-12 rounded-full overflow-hidden ">
                 <img src={user.avatar} alt={user.name} key={user.id} />
               </figure>
-            ))} */}
+            ))}
           </div>
           <button>
             <img src={plus} alt="" />

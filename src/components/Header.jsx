@@ -1,15 +1,19 @@
+
 import React, { useEffect, useState, useRef } from "react";
+
 import Button from "./Button";
-import { getUserProfile } from "../utils/api";
+// import { getUserProfile } from "../utils/api";
 import TaskSection from "./TaskSection";
 import ProfileDropDown from "./ProfileDropDown";
 import ProfileModal from "./ProfileModal";
 import { useModal } from "../stores/useModal";
-import ShareSpace from "./ShareSpace";
+import ShareSpace from "./ShareSpace"
 import Modal from "./modal";
 import NotificationModal from "./NotificationModal";
 import { notifications } from "../data/notifications";
 import { Bell, ChevronDown, LayoutGrid } from "lucide-react";
+import usePerUSerStore from "../stores/usePerUserStore";
+
 
 const Header = ({
   handleSideBar,
@@ -19,20 +23,21 @@ const Header = ({
   handleSetMobileBar,
   setDropDown,
 }) => {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+  const { user } = usePerUSerStore((u) => u);
   console.log(user);
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userData = await getUserProfile();
-        setUser(userData);
-        console.log(userData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUserData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const userData = await getUserProfile();
+  //       setUser(userData);
+  //       console.log(userData);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchUserData();
+  // }, []);
   console.log(user);
   const { setShareSpaceModal } = useModal((s) => s);
   const [showNotificationModal, setShowNotificationModal] = useState(false);
@@ -121,8 +126,13 @@ const Header = ({
             <img src="/images/avatar.svg" alt="" />
           </figure>
           <div className="lg:flex flex-col md:flex hidden">
-            <span className="body-small-medium">{user.user.firstname}</span>
-            <span className="body-xsmall-medium text-paragraph">@fajar123</span>
+            <div className="flex gap-1">
+              <span className="body-small-medium">{user.firstname}</span>
+              <span className="body-small-medium">{user.lastname}</span>
+            </div>
+            <span className="body-xsmall-medium text-paragraph">
+              {user.email}
+            </span>
           </div>
           <figure>
             <ChevronDown
