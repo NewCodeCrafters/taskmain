@@ -23,24 +23,33 @@ api.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  console.log(api.interceptors.response, api.interceptors.request);
   return config;
 });
 
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 403) {
       const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+      console.log(refreshToken);
       if (!refreshToken) {
         logout();
         return Promise.reject(error);
       }
       try {
-        const res = await api.post("/auth/refresh", {
-          refresh: refreshToken,
-        });
+        const res = await axios.post(
+          "https://tasktonic-backend.onrender.com/refresh",
+          {
+            refresh: refreshToken,
+          }
+        );
+        console.log(res);
         const newAccessToken = res.data.accessToken;
+        console.log(newAccessToken);
         localStorage.setItem(ACCESS_TOKEN_KEY, newAccessToken);
+        localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+        error.config.headers["authorization"] = `Bearer ${newAccessToken}`;
         return api(error.config);
       } catch (refreshError) {
         logout();
@@ -52,7 +61,7 @@ api.interceptors.response.use(
 );
 export const signup = async (userData) => {
   try {
-    const res = await api.post("/api/signup/", userData);
+    const res = await api.post("/api/signup", userData);
     const { accessToken, refreshToken } = res.data;
     console.log(res);
 
@@ -65,7 +74,7 @@ export const signup = async (userData) => {
 
     // Navigate(/)
   } catch (error) {
-    // console.error("Full Error Object:", error);
+    console.error("Full Error Object:", error);
     if (!error.response) {
       toast.error("Network error, please check your internet connection");
       throw new Error("Network error");
@@ -83,7 +92,7 @@ export const signup = async (userData) => {
 
 export const logIn = async (credentials) => {
   try {
-    const res = await api.post("/api/signin/", credentials);
+    const res = await api.post("/api/signin", credentials);
 
     // ✅ log response (for debugging only)
     console.log("Login response:", res);
@@ -122,7 +131,7 @@ export const logIn = async (credentials) => {
 
 export const getUserProfile = async () => {
   try {
-    const token = localStorage.getItem(ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY);
+    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
     console.log(token);
     const res = await api.get("/auth/me");
     console.log(res.data);

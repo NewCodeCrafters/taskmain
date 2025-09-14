@@ -15,7 +15,7 @@ import DatePick from "./DatePicker";
 import StatusDropdown from "./StatusDropdown";
 import TimeEstimate from "./TimeEstimate";
 import Priority from "./Priority";
-import attachImg from "../assets/attachment-01.svg";
+// import attachImg from "../assets/attachment-01.svg";
 import { useModal } from "../stores/useModal";
 import Button from "./Button";
 import useAddTaskStore from "../stores/useAddTaskStore";
@@ -29,7 +29,7 @@ import { useUserStore } from "../stores/useUserStore";
 const CreateTaskModal = () => {
   const { taskName, setTaskName, description, setDescription } =
     useAddTaskStore((s) => s);
-  const { currentProjectId, projects, fetchProjects, setProjectName } =
+  const { currentProjectId, projectes, fetchProjects, setProjectName } =
     useProjectStore();
   useEffect(() => {
     setProjectName(projectNameFound);
@@ -38,7 +38,7 @@ const CreateTaskModal = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const findProject = projects?.find(
+  const findProject = projectes?.find(
     (p) => String(currentProjectId) === String(p.id)
   );
   const projectNameFound = findProject?.name;
@@ -152,7 +152,7 @@ const CreateTaskModal = () => {
               <AddAssignees
                 projectId={currentProjectId}
                 users={users}
-                projects={projects}
+                projectes={projectes}
               />
             </div>
           </section>

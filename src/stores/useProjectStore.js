@@ -11,7 +11,7 @@ import { addProjectsApi, fetchProjectsApi } from "../utils/api";
 // With\-id_too
 
 export const useProjectStore = create((set) => ({
-  projects: [],
+  projectes: [],
   loading: false,
   error: null,
   currentProjectId: null,
@@ -24,8 +24,8 @@ export const useProjectStore = create((set) => ({
     set({ loading: true, error: null });
     try {
       const res = await fetchProjectsApi();
-      const data = await res.json();
-      set({ projects: data, loading: false });
+      console.log(res);
+      set({ projectes: res, loading: false });
     } catch (err) {
       set({ error: err.message, loading: false });
     }
@@ -34,10 +34,11 @@ export const useProjectStore = create((set) => ({
   addProject: async (project) => {
     set({ loading: true });
     try {
-      const res = await addProjectsApi(project);
-      const newProject = await res.json();
-      set((state) => ({
-        projects: [...state.projects, newProject],
+      await addProjectsApi(project);
+      const res = await fetchProjectsApi();
+
+      set(() => ({
+        projectes: res,
         loading: false,
       }));
     } catch (err) {
@@ -50,7 +51,7 @@ export const useProjectStore = create((set) => ({
     try {
       await new Promise((res) => setTimeout(res, 300));
       set((state) => ({
-        projects: state.projects.map((p) =>
+        projectes: state.projects.map((p) =>
           p.id === projectId ? { ...p, ...updates } : p
         ),
         loading: false,
@@ -65,7 +66,7 @@ export const useProjectStore = create((set) => ({
     try {
       await new Promise((res) => setTimeout(res, 300));
       set((state) => ({
-        projects: state.projects.filter((p) => p.id !== projectId),
+        projectes: state.projects.filter((p) => p.id !== projectId),
         loading: false,
       }));
     } catch (err) {

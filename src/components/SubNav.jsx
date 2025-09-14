@@ -14,15 +14,16 @@ import { ChevronDown, Star } from "lucide-react";
 
 const SubNav = ({ handleSideBar }) => {
   const { setCreateSpaceModal } = useModal((s) => s);
-  const { projects, fetchProjects } = useProjectStore((s) => s);
+  const { projectes, fetchProjects } = useProjectStore((s) => s);
   useEffect(() => {
     fetchProjects();
   }, []);
-  console.log(projects);
+  // console.log(projects);
   const handleCrateSpaceModal = () => {
     setCreateSpaceModal(true);
   };
   const [expanded, setExpanded] = useState(null);
+  const projects = projectes?.data;
   // const handleExpand = () => {
   //   setExpanded((prev) => !prev);
   // };
@@ -44,8 +45,8 @@ const SubNav = ({ handleSideBar }) => {
           </div>
         </div>
         <div>
-          {projects.map((space) => (
-            <div key={space.id}>
+          {projects?.map((space) => (
+            <div key={space._id}>
               <div
                 // to={`/space/${space.id}`}
                 className="flex py-3 px-4 dark:text-white hover:cursor-pointer rounded-4  items-center w-full gap-3 "
@@ -54,7 +55,7 @@ const SubNav = ({ handleSideBar }) => {
                 <button
                   className="flex items-center justify-between w-full hover:cursor-pointer"
                   onClick={() => {
-                    setExpanded(expanded === space.id ? null : space.id);
+                    setExpanded(expanded === space._id ? null : space._id);
                   }}
                 >
                   <span className="body-medium-semibold">{space.name}</span>
@@ -67,20 +68,22 @@ const SubNav = ({ handleSideBar }) => {
                 </button>
               </div>
 
+
               {expanded === space.id && (
                 <div className="flex dark:text-white gap-2 pl-6">
+
                   <img src={lineImg} alt="" />
                   <div className="flex gap-1 flex-col">
                     <li className="flex flex-col">
                       <Link
-                        to={`/${space.name}/${space.id}/teamdailytask`}
+                        to={`/${space.name}/${space._id}/teamdailytask`}
                         className="py-3 px-4   hover:cursor-pointer
                         rounded-4 w-full"
                       >
                         Team Daily Task
                       </Link>
                       <Link
-                        to={`/${space.name}/${space.id}/memberssettings`}
+                        to={`/${space.name}/${space._id}/memberssettings`}
                         className="py-3 px-4   hover:cursor-pointer
                         rounded-4 w-full"
                       >

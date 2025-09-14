@@ -20,11 +20,19 @@ const CreateSpace = () => {
     setSpaceName("");
     setCreateSpaceModal(false);
   };
+
+  // id: "p1",
+  //   name: "Website Redesign",
+  //   description: "Revamp the company website with a modern design",
+  //   createdAt: "2025-08-01",
+  //   members: ["u1", "u2", "u3"],
+
   const project = {
-    id: crypto.randomUUID(),
+    // id: crypto.randomUUID(),
     name: spaceName,
     description: "A pro",
-    createdAt: new Date().toISOString(),
+    // createdAt: new Date().toISOString(),
+    members: ["u1", "u2"],
     // accessToken: localStorage.getItem(ACCESS_TOKEN_KEY),
   };
   return (

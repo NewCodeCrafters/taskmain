@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import useAddTaskStore from "../stores/useAddTaskStore";
 
-const AddAssignees = ({ projectId, users, projects }) => {
-  const project = projects.find((p) => p.id === projectId);
+const AddAssignees = ({ projectId, users, projectes }) => {
+  const project = projectes.find((p) => p.id === projectId);
   const projectMembers = project ? project.members : [];
 
   const assignedUsers = users.filter((user) =>
