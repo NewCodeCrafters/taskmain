@@ -22,11 +22,6 @@ const OverViewBoardView = () => {
   const InProgress = tasks.filter((t) => t.status === "In Progress");
   const Completed = tasks.filter((t) => t.status === "Completed");
 
-  const ToDoAssignees = ToDo.map((task) => task.assignees);
-  const InProgessAssignes = InProgress.map((task) => task.assignees);
-  const InProgessAssignees = InProgessAssignes.map((t) => t);
-  const CompletedAssignees = Completed.map((task) => task.assignees);
-
   // const usersId = users.map((user) => user.id);
 
   const ImageInProgress = users.find((user) => user.id === InProgessAssignees);

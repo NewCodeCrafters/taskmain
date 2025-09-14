@@ -125,7 +125,7 @@ const Header = ({
           <figure>
             <img src="/images/avatar.svg" alt="" />
           </figure>
-          <div className="lg:flex flex-col md:flex hidden">
+          {/* <div className="lg:flex flex-col md:flex hidden">
             <div className="flex gap-1">
               <span className="body-small-medium">{user.firstname}</span>
               <span className="body-small-medium">{user.lastname}</span>
@@ -133,7 +133,7 @@ const Header = ({
             <span className="body-xsmall-medium text-paragraph">
               {user.email}
             </span>
-          </div>
+          </div> */}
           <figure>
             <ChevronDown
               className={`transition-all dark:text-white duration-300 ${

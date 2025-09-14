@@ -11,12 +11,18 @@ import { useTaskStore } from "../stores/taskStore";
 import DailyTaskBoardView from "../components/DailyTaskBoardView";
 import DailyTaskListView from "../components/DailyTaskListView";
 import DailyTaskCalenderView from "../components/DailyTaskCalenderView";
+import { useProjectStore } from "../stores/useProjectStore";
 
 // import tasks from "../data/task";
 
 const Space = () => {
   const { id, name } = useParams();
   const { fetchTasks, tasks } = useTaskStore((s) => s);
+  const { setCurrentProjectId } = useProjectStore();
+
+  useEffect(() => {
+    setCurrentProjectId(id);
+  }, [id, setCurrentProjectId]);
 
   const filteredTasks = tasks.filter((t) => t.projectId === id);
   console.log(filteredTasks);

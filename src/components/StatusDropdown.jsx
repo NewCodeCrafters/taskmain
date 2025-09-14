@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import chevronDown from "../assets/chevron-down.svg";
+import useAddTaskStore from "../stores/useAddTaskStore";
 
-const options = [
-  { label: "Completed", color: "#4CAF50" }, // green
-  { label: "In Progress", color: "#FFC107" }, // amber
-  { label: "To Do", color: "#F44336" }, // red
-];
+const options = ["Completed", "In Progress", "To Do"];
 
 export default function StatusDropdown() {
-  const [selected, setSelected] = useState(null);
+  const { status, setStatus } = useAddTaskStore((s) => s);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (option) => {
-    setSelected(option);
+    setStatus(option);
     setIsOpen(false);
   };
 
@@ -24,16 +21,16 @@ export default function StatusDropdown() {
       >
         <span
           className={`${
-            selected?.label === "Completed"
+            status === "Completed"
               ? "bg-success-300 "
-              : selected?.label === "In Progress"
+              : status === "In Progress"
               ? "bg-warning-300 "
-              : selected?.label === "To Do"
+              : status === "To Do"
               ? "bg-gray-400 "
               : ""
           } text-white body-medium-medium px-3 py-1 rounded flex gap-2.5 items-center`}
         >
-          {selected?.label || "Empty"}
+          {status || "Empty"}
           <img src={chevronDown} alt="" />
         </span>
       </div>
@@ -42,12 +39,12 @@ export default function StatusDropdown() {
         <div className="absolute top-full left-0 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-md z-10">
           {options.map((option) => (
             <div
-              key={option.label}
+              key={option}
               onClick={() => handleSelect(option)}
               className="flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100"
               //   style={{ color: option.color, background: option.color }}
             >
-              {option.label}
+              {option}
             </div>
           ))}
         </div>

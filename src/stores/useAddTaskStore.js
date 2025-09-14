@@ -1,0 +1,32 @@
+import { create } from "zustand";
+
+const useAddTaskStore = create((set) => ({
+  taskName: "",
+  Status: "",
+  timeEstimate: "",
+  priority: "",
+  dueDate: "",
+  assignees: [],
+  description: "",
+
+  setTaskName: (newTaskName) => set({ taskName: newTaskName }),
+  setStatus: (newStatus) => set({ Status: newStatus }),
+  setTimeEstimate: (newTimeEstimate) => set({ timeEstimate: newTimeEstimate }),
+  setPriority: (newPrority) => set({ priority: newPrority }),
+  setDueDate: (newDueDate) => set({ dueDate: newDueDate }),
+  setAssignees: (newAssignees) => set({ assignees: newAssignees }),
+  setDescription: (newDescription) => set({ description: newDescription }),
+
+  resetForm: () =>
+    set({
+      taskName: "",
+      description: "",
+      Status: "todo",
+      timeEstimate: "",
+      priority: "low",
+      dueDate: null,
+      assignees: [],
+    }),
+}));
+
+export default useAddTaskStore;

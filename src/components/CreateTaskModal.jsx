@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import Modal from "./modal";
 import filePlus from "../assets/file-plus-03.svg";
 import expand from "../assets/expand-01.svg";
@@ -18,15 +18,38 @@ import Priority from "./Priority";
 import attachImg from "../assets/attachment-01.svg";
 import { useModal } from "../stores/useModal";
 import Button from "./Button";
-
-// const status = ["Completed", "In Progress", "To Do"];
+import useAddTaskStore from "../stores/useAddTaskStore";
+import { useTaskStore } from "../stores/taskStore";
+import { useProjectStore } from "../stores/useProjectStore";
 
 const CreateTaskModal = () => {
+  const { taskName, setTaskName, description, setDescription } =
+    useAddTaskStore((s) => s);
+  const { currentProjectId } = useProjectStore();
+
+  const { addTask } = useTaskStore((s) => s);
   const { setModalAddTask, modalAddTask } = useModal((s) => s);
-  // const [close, setClose] = useState(false);
-  // const onClose = () => {
-  //   setClose(!close);
-  // };
+  const { Status, timeEstimate, priority, dueDate, assignees, resetForm } =
+    useAddTaskStore((s) => s);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addTask(Task);
+    console.log();
+    setModalAddTask(false);
+    resetForm();
+  };
+  const Task = {
+    id: crypto.randomUUID(),
+    title: taskName,
+    description: description,
+    projectId: currentProjectId,
+    assignees: [],
+    status: Status,
+    dueDate: dueDate,
+    priority: priority,
+    timeEstimate: timeEstimate,
+    image: "",
+  };
   return (
     <Modal isOpen={modalAddTask}>
       <form action="" ClassName="flex flex-col gap-6 w-full max-w-[1000px]">
@@ -49,6 +72,8 @@ const CreateTaskModal = () => {
           className="bg-none border-0 heading-3 focus:outline-0  placeholder:text-gray-400 mb-3
           "
           placeholder="Task Name"
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
         />
         <div className="md:grid md:grid-cols-2 md:grid-rows-4 flex flex-col gap-3 border-b border-neutral-black-5 pb-6 mb-6">
           <section className="w-full flex items-center justify-between max-w-[400px]">
@@ -91,13 +116,19 @@ const CreateTaskModal = () => {
             className="w-full h-[120px] focus:outline-0 bg-neutral-black-2 px-3 py-2.5"
             placeholder="Placeholder"
             maxLength={"200"}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
         <div className="flex items-center gap-4 w-full justify-end">
-          <Button className="rounded-full" variant="signIn">
+          <Button
+            className="rounded-full"
+            variant="signIn"
+            // onClick={(e) => e.preventDefault}
+          >
             <img src={attachImg} alt="" />
           </Button>
-          <Button>Create Task</Button>
+          <Button onClick={handleSubmit}>Create Task</Button>
         </div>
       </form>
     </Modal>

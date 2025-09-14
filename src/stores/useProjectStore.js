@@ -5,6 +5,7 @@ export const useProjectStore = create((set) => ({
   projects: [],
   loading: false,
   error: null,
+  currentProjectId: null,
 
   fetchProjects: async () => {
     set({ loading: true, error: null });
@@ -56,4 +57,6 @@ export const useProjectStore = create((set) => ({
       set({ error: err.message, loading: false });
     }
   },
+
+  setCurrentProjectId: (id) => set({ currentProjectId: id }),
 }));
