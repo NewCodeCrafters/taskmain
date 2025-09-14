@@ -21,13 +21,13 @@ export default function Priority() {
         <span
           className={`${
             priority === "High"
-              ? "bg-success-300 "
-              : priority === "Mid"
-              ? "bg-warning-300 "
+              ? "bg-success-300 text-white"
+              : priority === "Mid "
+              ? "bg-warning-300  text-white"
               : priority === "Low"
-              ? "bg-gray-400"
-              : "text-gray-400 px-0 py-0"
-          } text-white body-medium-medium px-3 py-1 rounded flex gap-2.5 items-center`}
+              ? "bg-gray-400  text-white"
+              : ""
+          } text-gray-400 body-medium-medium px-3 py-1 rounded flex gap-2.5 items-center`}
         >
           {priority || "Empty"}
         </span>

@@ -5,7 +5,7 @@ import useAddTaskStore from "../stores/useAddTaskStore";
 const options = ["Completed", "In Progress", "To Do"];
 
 export default function StatusDropdown() {
-  const { status, setStatus } = useAddTaskStore((s) => s);
+  const { Status, setStatus } = useAddTaskStore((s) => s);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (option) => {
@@ -17,20 +17,20 @@ export default function StatusDropdown() {
     <div className="relative w-52">
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className=" cursor-pointer px-3 py-1 flex gap-2.5"
+        className=" cursor-pointer px-1 py-1 flex gap-2.5"
       >
         <span
           className={`${
-            status === "Completed"
-              ? "bg-success-300 "
-              : status === "In Progress"
-              ? "bg-warning-300 "
-              : status === "To Do"
-              ? "bg-gray-400 "
+            Status === "Completed"
+              ? "bg-success-300 text-white "
+              : Status === "In Progress"
+              ? "bg-warning-300 text-white"
+              : Status === "To Do"
+              ? "bg-gray-400 text-white"
               : ""
-          } text-white body-medium-medium px-3 py-1 rounded flex gap-2.5 items-center`}
+          } text-gray-400 body-medium-medium px-3 py-1 rounded flex gap-2.5 items-center`}
         >
-          {status || "Empty"}
+          {Status || "Empty"}
           <img src={chevronDown} alt="" />
         </span>
       </div>

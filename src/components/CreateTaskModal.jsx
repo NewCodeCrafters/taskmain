@@ -21,15 +21,23 @@ import Button from "./Button";
 import useAddTaskStore from "../stores/useAddTaskStore";
 import { useTaskStore } from "../stores/taskStore";
 import { useProjectStore } from "../stores/useProjectStore";
+import AddAssignees from "./AddAssignees";
+import { useEffect } from "react";
+import { useUserStore } from "../stores/useUserStore";
 
 const CreateTaskModal = () => {
   const { taskName, setTaskName, description, setDescription } =
     useAddTaskStore((s) => s);
-  const { currentProjectId } = useProjectStore();
-
+  const { currentProjectId, projects, fetchProjects } = useProjectStore();
   const { addTask } = useTaskStore((s) => s);
+  const { fetchUsers, users } = useUserStore((s) => s);
+  useEffect(() => {
+    fetchUsers();
+    fetchProjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const { setModalAddTask, modalAddTask } = useModal((s) => s);
-  const { Status, timeEstimate, priority, dueDate, assignees, resetForm } =
+  const { Status, timeEstimate, priority, dueDate, resetForm, selectedUsers } =
     useAddTaskStore((s) => s);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +51,7 @@ const CreateTaskModal = () => {
     title: taskName,
     description: description,
     projectId: currentProjectId,
-    assignees: [],
+    assignees: selectedUsers,
     status: Status,
     dueDate: dueDate,
     priority: priority,
@@ -99,7 +107,20 @@ const CreateTaskModal = () => {
             </div>
             <TimeEstimate />
           </section>
-          <CreateTaskInput Title="Assignees" image={<img src={userImg} />} />
+
+          <section className="w-full flex items-center justify-between max-w-[400px]">
+            <div className="flex gap-8 items-center ">
+              <img src={userImg} />
+              <span className="text-gray-400 body-medium-medium">
+                Assignees
+              </span>
+              <AddAssignees
+                projectId={currentProjectId}
+                users={users}
+                projects={projects}
+              />
+            </div>
+          </section>
 
           <section className="w-full flex items-center justify-between max-w-[400px]">
             <div className="flex gap-2.5 items-center">

@@ -4,10 +4,11 @@ const useAddTaskStore = create((set) => ({
   taskName: "",
   Status: "",
   timeEstimate: "",
-  priority: "",
+  priority: "low",
   dueDate: "",
   assignees: [],
   description: "",
+  selectedUsers: [],
 
   setTaskName: (newTaskName) => set({ taskName: newTaskName }),
   setStatus: (newStatus) => set({ Status: newStatus }),
@@ -16,14 +17,16 @@ const useAddTaskStore = create((set) => ({
   setDueDate: (newDueDate) => set({ dueDate: newDueDate }),
   setAssignees: (newAssignees) => set({ assignees: newAssignees }),
   setDescription: (newDescription) => set({ description: newDescription }),
+  setSelectedUsers: (newSelectedUser) =>
+    set({ selectedUsers: newSelectedUser }),
 
   resetForm: () =>
     set({
       taskName: "",
       description: "",
-      Status: "todo",
+      Status: "",
       timeEstimate: "",
-      priority: "low",
+      priority: "",
       dueDate: null,
       assignees: [],
     }),
