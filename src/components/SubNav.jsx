@@ -6,8 +6,6 @@ import { useModal } from "../stores/useModal";
 // import { useSpaces } from "../stores/useSpaces";
 import { Link } from "react-router";
 import lineImg from "../assets/line.svg";
-import chevron from "../assets/chevron-down-2.svg";
-import chevronUp from "/images/chevron-up.svg";
 import CreateSpace from "./createSpace";
 import { useProjectStore } from "../stores/useProjectStore";
 import { ChevronDown, Star } from "lucide-react";
@@ -24,6 +22,7 @@ const SubNav = ({ handleSideBar }) => {
   };
   const [expanded, setExpanded] = useState(null);
   const projects = projectes?.data;
+  console.log(projects);
   // const handleExpand = () => {
   //   setExpanded((prev) => !prev);
   // };
@@ -40,7 +39,7 @@ const SubNav = ({ handleSideBar }) => {
               <img src="/images/add.svg" alt="" />
             </button>
             <button>
-              <ChevronDown className="dark:text-white"/>
+              <ChevronDown className="dark:text-white" />
             </button>
           </div>
         </div>
@@ -61,17 +60,15 @@ const SubNav = ({ handleSideBar }) => {
                   <span className="body-medium-semibold">{space.name}</span>
                   <ChevronDown
                     className={` transition-transform duration-500 ease-in-out ${
-                      expanded === space.id ? "rotate-180 " : "rotate-0"
+                      expanded === space._id ? "rotate-180 " : "rotate-0"
                     }`}
                     alt=""
                   />
                 </button>
               </div>
 
-
-              {expanded === space.id && (
+              {expanded === space._id && (
                 <div className="flex dark:text-white gap-2 pl-6">
-
                   <img src={lineImg} alt="" />
                   <div className="flex gap-1 flex-col">
                     <li className="flex flex-col">

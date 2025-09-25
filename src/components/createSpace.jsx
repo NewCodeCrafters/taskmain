@@ -14,11 +14,18 @@ const CreateSpace = () => {
   const { setCreateSpaceModal, createSpaceModal } = useModal((c) => c);
   const { addProject } = useProjectStore((s) => s);
   const [spaceName, setSpaceName] = useState("");
+  const project = {
+    name: spaceName,
+    description: "A pro",
+    // members: ["u1", "u2"],
+  };
   const handleCreateSpace = () => {
     if (!spaceName.trim()) return;
     addProject(project);
     setSpaceName("");
     setCreateSpaceModal(false);
+    console.log(project.name);
+    console.log(project);
   };
 
   // id: "p1",
@@ -27,14 +34,6 @@ const CreateSpace = () => {
   //   createdAt: "2025-08-01",
   //   members: ["u1", "u2", "u3"],
 
-  const project = {
-    // id: crypto.randomUUID(),
-    name: spaceName,
-    description: "A pro",
-    // createdAt: new Date().toISOString(),
-    members: ["u1", "u2"],
-    // accessToken: localStorage.getItem(ACCESS_TOKEN_KEY),
-  };
   return (
     <Modal
       isOpen={createSpaceModal}

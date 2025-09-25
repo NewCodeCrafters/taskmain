@@ -15,7 +15,7 @@ import DatePick from "./DatePicker";
 import StatusDropdown from "./StatusDropdown";
 import TimeEstimate from "./TimeEstimate";
 import Priority from "./Priority";
-// import attachImg from "../assets/attachment-01.svg";
+import attachImg from "../assets/attachment-01.svg";
 import { useModal } from "../stores/useModal";
 import Button from "./Button";
 import useAddTaskStore from "../stores/useAddTaskStore";
@@ -29,7 +29,7 @@ import { useUserStore } from "../stores/useUserStore";
 const CreateTaskModal = () => {
   const { taskName, setTaskName, description, setDescription } =
     useAddTaskStore((s) => s);
-  const { currentProjectId, projectes, fetchProjects, setProjectName } =
+  const { currentProjectId, projects, fetchProjects, setProjectName } =
     useProjectStore();
   useEffect(() => {
     setProjectName(projectNameFound);
@@ -38,7 +38,7 @@ const CreateTaskModal = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const findProject = projectes?.find(
+  const findProject = projects?.find(
     (p) => String(currentProjectId) === String(p.id)
   );
   const projectNameFound = findProject?.name;
@@ -81,17 +81,17 @@ const CreateTaskModal = () => {
     setDateCreated(date);
   };
   const Task = {
-    id: crypto.randomUUID(),
+    // id: crypto.randomUUID(),
     title: taskName,
-    description: description,
-    projectId: currentProjectId,
-    assignees: assignees,
-    status: Status,
-    dueDate: dueDate,
-    priority: priority,
-    timeEstimate: timeEstimate,
-    image: image,
-    dateCreated: dateCreated,
+    // description: description,
+    spaceId: currentProjectId,
+    assignedTo: "68acc30c63386c085486adbe",
+    // status: Status,
+    // dueDate: dueDate,
+    // priority: priority,
+    // timeEstimate: timeEstimate,
+    // image: image,
+    // dateCreated: dateCreated,
   };
   return (
     <Modal isOpen={modalAddTask}>
@@ -149,11 +149,11 @@ const CreateTaskModal = () => {
               <span className="text-gray-400 body-medium-medium">
                 Assignees
               </span>
-              <AddAssignees
+              {/* <AddAssignees
                 projectId={currentProjectId}
                 users={users}
-                projectes={projectes}
-              />
+                projects={projects}
+              /> */}
             </div>
           </section>
 
@@ -186,7 +186,9 @@ const CreateTaskModal = () => {
           {/* <input type="file" /> */}
           {/* <img src={attachImg} alt="" />
           </input> */}
-          <Button onClick={handleSubmit}>Create Task</Button>
+          <Button type="submit" onClick={handleSubmit}>
+            Create Task
+          </Button>
         </div>
       </form>
     </Modal>

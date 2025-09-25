@@ -18,8 +18,8 @@ import { X } from "lucide-react";
 import { useUserStore } from "../stores/useUserStore";
 import { useProjectStore } from "../stores/useProjectStore";
 import useAddTaskStore from "../stores/useAddTaskStore";
+import { useTaskStore } from "../stores/taskStore";
 // import { useAddTaskStore } from "../stores/useAddTaskStore";
-
 
 const TaskInfoModal = () => {
   const { tasks } = useTaskStore((s) => s);
@@ -29,13 +29,13 @@ const TaskInfoModal = () => {
   );
   const { users } = useUserStore((s) => s);
   const { dateCreated } = useAddTaskStore((s) => s);
-  const task = tasks.find((task) => task.id === taskId);
-  console.log(task);
-  const taskAssignees = task.assignees;
-  // useEffect(()=> {
+  const task = tasks.find((task) => task?.id === "t1");
+  // console.log(task);
+  // const taskAssignees = task.assignees;
+  // // useEffect(()=> {
 
-  // })
-  const tasksFilter = users.filter((user) => taskAssignees.includes(user.id));
+  // // })
+  // const tasksFilter = users?.filter((user) => taskAssignees?.includes(user.id));
   // const projectName = project;
 
   return (
@@ -45,7 +45,6 @@ const TaskInfoModal = () => {
         onClick={(e) => e.stopPropagation()}
         Class="flex flex-col gap-6 w-full max-w-[1000px] overflow-y-auto md:max-h-4/5 max-h-35/36"
       >
-
         <div className="flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6 ">
           <TaskSection projectName={projectName} />
           <div className="flex gap-5 items-center">
@@ -72,7 +71,7 @@ const TaskInfoModal = () => {
               src={expand}
               alt="" // className="absolute top-0 right-0"
             />
-            <X className="cursor-pointer"  onClick={() => setModal(false)}/>
+            <X className="cursor-pointer" onClick={() => setModal(false)} />
           </div>
         </div>
         <div className="flex flex-col gap-6">
@@ -100,10 +99,10 @@ const TaskInfoModal = () => {
               />
             </div>
             <div className="flex flex-col gap-3 w-full">
-              <TaskListItem
+              {/* <TaskListItem
                 icon={user}
                 title="Assignees"
-                taskListInfo={tasksFilter.map((task) => (
+                taskListInfo={tasksFilter?.map((task) => (
                   <figure className="w-8 h-8 rounded-full border border-white shadow-2xl">
                     <img
                       src={task.avatar}
@@ -111,8 +110,8 @@ const TaskInfoModal = () => {
                       className=" rounded-full"
                     />
                   </figure>
-                ))}
-              />
+                ))} 
+              /> */}
               <TaskListItem
                 icon={calendar}
                 title="Project"

@@ -39,9 +39,9 @@ api.interceptors.response.use(
       }
       try {
         const res = await axios.post(
-          "https://tasktonic-backend.onrender.com/refresh",
+          "https://tasktonic-backend.onrender.com/auth/refresh",
           {
-            refresh: refreshToken,
+            refreshToken: refreshToken,
           }
         );
         console.log(res);
@@ -49,7 +49,7 @@ api.interceptors.response.use(
         console.log(newAccessToken);
         localStorage.setItem(ACCESS_TOKEN_KEY, newAccessToken);
         localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
-        error.config.headers["authorization"] = `Bearer ${newAccessToken}`;
+        error.config.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return api(error.config);
       } catch (refreshError) {
         logout();
@@ -156,62 +156,72 @@ export const logout = () => {
   window.location.href = routes.login;
 };
 
-
 export const forgotPassword = async (userEmail) => {
-  try{
-    const res = await api.post('/forgot_password/request', {
-      email : userEmail.email
-    })
-    console.log(res.data)
-    toast.success('Reset Instructions has been sent via email')
-    return res.data
-  } catch(err) {
-    console.error(err)
-    if(!err.response){
-      toast.error('Network error. Please try again')
-      throw new Error('Network error');
-    };
+  try {
+    const res = await api.post("/forgot_password/request", {
+      email: userEmail.email,
+    });
+    console.log(res.data);
+    toast.success("Reset Instructions has been sent via email");
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    if (!err.response) {
+      toast.error("Network error. Please try again");
+      throw new Error("Network error");
+    }
 
     const errorData = err.response?.data;
-    
-    const firstKey = Object.keys(errorData)[0];
-    const errorMessage = Array.isArray(errorData[firstKey]) ? errorData[firstKey][0] : errorData[firstKey];
 
-    toast.error(errorMessage || 'Failed to send reset email');
+    const firstKey = Object.keys(errorData)[0];
+    const errorMessage = Array.isArray(errorData[firstKey])
+      ? errorData[firstKey][0]
+      : errorData[firstKey];
+
+    toast.error(errorMessage || "Failed to send reset email");
     throw new Error(errorMessage || "Failed to send reset email");
   }
-}
+};
 
-export const resetPassword = async ({email, otp, newPassword }) => {
+export const resetPassword = async ({ email, otp, newPassword }) => {
   try {
-    const res = await api.post('/forgot_password/reset', {
+    const res = await api.post("/forgot_password/reset", {
       email,
       otp,
-      newPassword : newPassword,
+      newPassword: newPassword,
     });
 
-    toast.success('Password Reset successful');
-    return res.data
-  } catch(err){
-    console.error(err)
-    if(!err.response){
-      toast.error('Network error. Please try again')
-      throw new Error('Network error');
-    };
+    toast.success("Password Reset successful");
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    if (!err.response) {
+      toast.error("Network error. Please try again");
+      throw new Error("Network error");
+    }
 
     const errorData = err.response?.data;
-    
-    const firstKey = Object.keys(errorData)[0];
-    const errorMessage = Array.isArray(errorData[firstKey]) ? errorData[firstKey][0] : errorData[firstKey];
 
-    toast.error(errorMessage || 'Failed to reset password');
+    const firstKey = Object.keys(errorData)[0];
+    const errorMessage = Array.isArray(errorData[firstKey])
+      ? errorData[firstKey][0]
+      : errorData[firstKey];
+
+    toast.error(errorMessage || "Failed to reset password");
     throw new Error(errorMessage || "Failed to reset password");
   }
-}
+};
 
-export const fetchProjectsApi = () => api.post("/api/space");
+//Api for projects
+export const fetchProjectsApi = () => api.get("/api/space");
 export const addProjectsApi = (space) => api.post("/api/space", space);
 export const updateProjectApi = (id, updates) =>
   api.put(`api/space/${id}`, updates);
 export const deleteProjectApi = (id) => api.delete(`/api/space/${id}`);
 
+//Api for task
+// export const fetchTaskApi = () => api.get("api/task");
+export const addTaskApi = (task) => api.post("api/task", task);
+export const updateTaskApi = (id, updates) =>
+  api.put(`api/task/${id}`, updates);
+export const deleteTaskApi = (id) => api.delete(`/api/task/${id}`);

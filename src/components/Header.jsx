@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from "react";
 
 import Button from "./Button";
@@ -7,15 +6,14 @@ import TaskSection from "./TaskSection";
 import ProfileDropDown from "./ProfileDropDown";
 import ProfileModal from "./ProfileModal";
 import { useModal } from "../stores/useModal";
-import ShareSpace from "./ShareSpace"
+import ShareSpace from "./ShareSpace";
 import Modal from "./modal";
 import NotificationModal from "./NotificationModal";
 import { notifications } from "../data/notifications";
 import { Bell, ChevronDown, LayoutGrid } from "lucide-react";
 import usePerUSerStore from "../stores/usePerUserStore";
 import { getUserProfile } from "../utils/api";
-
-
+import { useProjectStore } from "../stores/useProjectStore";
 
 const Header = ({
   handleSideBar,
@@ -27,6 +25,7 @@ const Header = ({
 }) => {
   // const [user, setUser] = useState(null);
   // console.log(user);
+  const { currentProjectId } = useProjectStore();
   const { user, setUser } = usePerUSerStore((u) => u);
   useEffect(() => {
     const fetchUser = async () => {
@@ -57,6 +56,7 @@ const Header = ({
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -73,12 +73,14 @@ const Header = ({
       <section className="flex md:gap-10 gap-[20px]">
         <div className="flex gap-4 items-center">
           <div className="hidden md:hidden lg:flex items-center gap-1">
-            <img src="/images/clock.svg" alt="" />
-            <span className="text-paragraph">Last edited 10 minutes ago </span>
+            {/* <img src="/images/clock.svg" alt="" /> */}
+            {/* <span className="text-paragraph">Last edited 10 minutes ago </span> */}
           </div>
-          <Button variant="black" onClick={() => setShareSpaceModal(true)}>
-            Share
-          </Button>
+          {currentProjectId && (
+            <Button variant="black" onClick={() => setShareSpaceModal(true)}>
+              Share
+            </Button>
+          )}
           <div className="relative">
             <div
               className={`flex cursor-pointer`}
@@ -146,7 +148,7 @@ const Header = ({
               }`}
             />
           </figure>
-      {dropDown && <ProfileDropDown />}
+          {dropDown && <ProfileDropDown />}
         </div>
       </section>
 
