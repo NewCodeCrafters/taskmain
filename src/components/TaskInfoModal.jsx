@@ -23,20 +23,25 @@ import { useTaskStore } from "../stores/taskStore";
 
 const TaskInfoModal = () => {
   const { tasks } = useTaskStore((s) => s);
-  const { projectName } = useProjectStore((s) => s);
+  console.log(tasks);
+  // const { projectName } = useProjectStore((s) => s);
   const { modal, setModal, taskId, setEditTaskModal, editTaskModal } = useModal(
     (s) => s
   );
   const { users } = useUserStore((s) => s);
   const { dateCreated } = useAddTaskStore((s) => s);
-  const task = tasks.find((task) => task?.id === "t1");
-  // console.log(task);
+  const task = tasks.find((task) => task?._id === taskId);
+  console.log(taskId);
+
+  if (!task) {
+    return null; // prevents "task.title is undefined" error
+  }
   // const taskAssignees = task.assignees;
   // // useEffect(()=> {
 
   // // })
   // const tasksFilter = users?.filter((user) => taskAssignees?.includes(user.id));
-  // const projectName = project;
+  const projectName = task.projectId.name;
 
   return (
     <div className="">
@@ -46,7 +51,7 @@ const TaskInfoModal = () => {
         Class="flex flex-col gap-6 w-full max-w-[1000px] overflow-y-auto md:max-h-4/5 max-h-35/36"
       >
         <div className="flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6 ">
-          <TaskSection projectName={projectName} />
+          <h1 className="heading-4 md:heading-5 text-black">{projectName}</h1>
           <div className="flex gap-5 items-center">
             <div className="flex items-center gap-1">
               <img src={edit} alt="" className="hidden md:flex" />

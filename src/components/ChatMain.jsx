@@ -7,7 +7,7 @@ const emojis = ["👍", "❤️", "😂", "😮", "😢", "👏", "🔥"];
 
 const ChatMain = () => {
   return (
-    <div className="flex p-5 flex-col w-full h-full gap-5 ">
+    <div className="flex p-5 flex-col w-full h-full gap-5">
       {/* Recipient message */}
       <div className="flex flex-col gap-3 w-full">
         <div className="flex items-center gap-3 w-full max-w-2/3">
@@ -35,7 +35,7 @@ const ChatMain = () => {
 
       {/* Sender Message */}
 
-      <div className="flex gap-3 items-center self-end">
+      <div className="flex gap-3 items-center self-end justify-end w-full">
         <button className="">
           <Share />
         </button>
@@ -46,7 +46,7 @@ const ChatMain = () => {
       </div>
       {/* Chat Input here */}
       <div
-        className="px-3 py-2 gap-2 rounded-full  focus-within:inset-shadow-custom-sm focus-within:drop-shadow-sm dark:border-neutral-600 flex w-full dark:text-white dark:bg-background bg-neutral-black-2 self-end"
+        className="px-3 py-2 gap-2 rounded-full  focus-within:inset-shadow-custom-sm focus-within:drop-shadow-sm dark:border-neutral-600 flex w-full dark:text-white dark:bg-background bg-neutral-black-2 self-end justify-end"
         tabIndex={0}
       >
         <input

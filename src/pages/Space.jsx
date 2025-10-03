@@ -24,7 +24,8 @@ const Space = () => {
     setCurrentProjectId(id);
   }, [id, setCurrentProjectId]);
 
-  const filteredTasks = tasks.filter((t) => t.projectId === id);
+  const filteredTasks = tasks.filter((t) => t.projectId._id === id);
+  console.log(tasks);
   console.log(filteredTasks);
 
   const { setModalAddTask } = useModal((s) => s);

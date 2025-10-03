@@ -10,14 +10,15 @@ import { useModal } from "../stores/useModal";
 import { useUserStore } from "../stores/useUserStore";
 
 const TaskCard = ({ task }) => {
-  const { setModal, setTaskId } = useModal((s) => s);
+  const { setModal, setTaskId, taskId } = useModal((s) => s);
   const { users } = useUserStore((s) => s);
   const taskAssignees = task.assignees;
   console.log(taskAssignees);
   // useEffect(() => fetchUsers(), []);
 
   const tasksFilter = users.filter((user) => taskAssignees.includes(user.id));
-  // console.log(tasksss);
+  console.log(task);
+  console.log(taskId);
 
   const handleTaskId = (id) => {
     setTaskId(id);
@@ -29,7 +30,7 @@ const TaskCard = ({ task }) => {
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "TASK",
-    item: { id: task.id, status: task.status },
+    item: { id: task._id, status: task.status },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -41,7 +42,7 @@ const TaskCard = ({ task }) => {
         isDragging ? "opacity-50" : "opacity-100"
       }`}
       ref={drag}
-      onClick={() => handleTaskId(task.id)}
+      onClick={() => handleTaskId(task._id)}
     >
       <div className="flex justify-between items-center">
         <div className="flex gap-1 items-center">

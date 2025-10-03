@@ -220,7 +220,9 @@ export const updateProjectApi = (id, updates) =>
 export const deleteProjectApi = (id) => api.delete(`/api/space/${id}`);
 
 //Api for task
-// export const fetchTaskApi = () => api.get("api/task");
+export const fetchTaskApi = () => api.get("api/task/overview/all");
+export const addMemberApi = (id, data) =>
+  api.post(`api/space/${id}/invite`, data);
 export const addTaskApi = (task) => api.post("api/task", task);
 export const updateTaskApi = (id, updates) =>
   api.put(`api/task/${id}`, updates);

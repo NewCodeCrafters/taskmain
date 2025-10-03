@@ -15,20 +15,26 @@ import DatePick from "./DatePicker";
 import StatusDropdown from "./StatusDropdown";
 import TimeEstimate from "./TimeEstimate";
 import Priority from "./Priority";
-import attachImg from "../assets/attachment-01.svg";
+// import attachImg from "../assets/attachment-01.svg";
 import { useModal } from "../stores/useModal";
 import Button from "./Button";
 import useAddTaskStore from "../stores/useAddTaskStore";
 import { useTaskStore } from "../stores/taskStore";
 import { useProjectStore } from "../stores/useProjectStore";
 import AddAssignees from "./AddAssignees";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useUserStore } from "../stores/useUserStore";
+import usePerUSerStore from "../stores/usePerUserStore";
+import toast from "react-hot-toast";
+import TaskSucessModal from "./TaskSucessModal";
 // import { preview } from "vite";
 
 const CreateTaskModal = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { setTaskSuccessModal } = useModal((s) => s);
   const { taskName, setTaskName, description, setDescription } =
     useAddTaskStore((s) => s);
+  const { user } = usePerUSerStore((s) => s);
   const { currentProjectId, projects, fetchProjects, setProjectName } =
     useProjectStore();
   useEffect(() => {
@@ -52,19 +58,17 @@ const CreateTaskModal = () => {
     priority,
     dueDate,
     resetForm,
-    selectedUsers,
-    image,
+    // selectedUsers,
+    // image,
     setImage,
-    dateCreated,
-    setDateCreated,
   } = useAddTaskStore((s) => s);
-  const now = new Date();
-  const date = now.toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-  const assignees = selectedUsers.map((user) => user.id);
+  // const now = new Date();
+  // const date = now.toLocaleDateString("en-GB", {
+  //   day: "numeric",
+  //   month: "long",
+  //   year: "numeric",
+  // });
+  // const assignees = selectedUsers.map((user) => user.id);
   const handleImageChange = (e) => {
     const selected = e.target.files[0];
     if (selected) {
@@ -72,30 +76,43 @@ const CreateTaskModal = () => {
       setImage(URL.createObjectURL(selected));
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addTask(Task);
-    console.log();
-    setModalAddTask(false);
-    resetForm();
-    setDateCreated(date);
+    setIsLoading(true);
+    try {
+      const result = await addTask(Task);
+      console.log(result);
+      if (result.data) {
+        resetForm();
+        setModalAddTask(false);
+        setTaskSuccessModal(true);
+      } else {
+        toast.error("Failed to create task, try again");
+      }
+    } catch (err) {
+      console.error("Error Creating Task", err);
+    } finally {
+      setIsLoading(false);
+    }
   };
   const Task = {
-    // id: crypto.randomUUID(),
     title: taskName,
-    // description: description,
-    spaceId: currentProjectId,
-    assignedTo: "68acc30c63386c085486adbe",
-    // status: Status,
-    // dueDate: dueDate,
-    // priority: priority,
-    // timeEstimate: timeEstimate,
-    // image: image,
-    // dateCreated: dateCreated,
+    description: description,
+    projectId: currentProjectId,
+    assignees: ["68a1ddf2545d271878713493"],
+    dueDate: dueDate,
+    priority: priority,
+    timeEstimate: timeEstimate,
+    image: "",
+    status: Status,
+    progress: 60,
   };
   return (
     <Modal isOpen={modalAddTask}>
-      <form action="" ClassName="flex flex-col gap-6 w-full max-w-[1000px]">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-6 w-full h-2/3 max-w-[1000px]"
+      >
         <div className="w-full flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6">
           <div className="flex gap-3">
             <img src={filePlus} alt="filePlus" />
@@ -186,7 +203,7 @@ const CreateTaskModal = () => {
           {/* <input type="file" /> */}
           {/* <img src={attachImg} alt="" />
           </input> */}
-          <Button type="submit" onClick={handleSubmit}>
+          <Button className="w-[150px]" isLoading={isLoading} type="submit">
             Create Task
           </Button>
         </div>

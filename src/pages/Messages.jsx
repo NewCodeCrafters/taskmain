@@ -2,8 +2,10 @@ import React from "react";
 import ChatSidebar from "../components/ChatSidebar";
 import ChatHeader from "../components/ChatHeader";
 import ChatMain from "../components/ChatMain";
+import { chats } from "../data/chats";
 
 const Messages = () => {
+  const mappedMessages = chats.map((s) => s.messages);
   return (
     <div className="bg-white w-full grid grid-cols-6 rounded-xl p-5 gap-5 h-full dark:bg-black dark:text-white">
       {/* Chat Sidebar */}

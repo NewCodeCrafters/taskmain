@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useAddTaskStore from "../stores/useAddTaskStore";
 
-const options = ["High", "Mid", "Low"];
+const options = ["high", "Mid", "Low"];
 
 export default function Priority() {
   const { priority, setPriority } = useAddTaskStore((s) => s);

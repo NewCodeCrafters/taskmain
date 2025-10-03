@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 export const useModal = create((set) => ({
   modal: false,
-  taskId: "",
+  taskId: null,
   setModal: (newModal) => set({ modal: newModal }),
   setTaskId: (task) => set({ taskId: task }),
   modalProfile: false,
@@ -20,4 +20,6 @@ export const useModal = create((set) => ({
     set({ shareSpaceModal: showCreateSpace }),
   editTaskModal: false,
   setEditTaskModal: (edit) => set({ editTaskModal: edit }),
+  taskSuccessModal: false,
+  setTaskSuccessModal: (success) => set({ taskSuccessModal: success }),
 }));
