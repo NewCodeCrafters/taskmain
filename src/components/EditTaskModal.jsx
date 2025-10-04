@@ -14,34 +14,30 @@ import Button from "./Button";
 import TaskListItem from "./TaskListItems";
 import ImageFile from "./ImageFile";
 import { useModal } from "../stores/useModal";
-import { X } from "lucide-react";
+import { useTaskStore } from "../stores/taskStore";
 import { useUserStore } from "../stores/useUserStore";
 import { useProjectStore } from "../stores/useProjectStore";
 import useAddTaskStore from "../stores/useAddTaskStore";
-import { useTaskStore } from "../stores/taskStore";
 // import { useAddTaskStore } from "../stores/useAddTaskStore";
 
-const TaskInfoModal = () => {
+const EditTaskModal = () => {
   const { tasks } = useTaskStore((s) => s);
-  console.log(tasks);
-  // const { projectName } = useProjectStore((s) => s);
+  const { projectName } = useProjectStore((s) => s);
   const { modal, setModal, taskId, setEditTaskModal, editTaskModal } = useModal(
     (s) => s
   );
   const { users } = useUserStore((s) => s);
   const { dateCreated } = useAddTaskStore((s) => s);
-  const task = tasks.find((task) => task?._id === taskId);
-  console.log(taskId);
+  const task = tasks.find((task) => task.id === taskId);
+  if (!task) return null;
+  const taskAssignees = task.assignees;
+  // useEffect(()=> {
 
-  if (!task) {
-    return null; // prevents "task.title is undefined" error
-  }
-  // const taskAssignees = task.assignees;
-  // // useEffect(()=> {
+  // })
+  const tasksFilter = users.filter((user) => taskAssignees.includes(user.id));
+  // const projectName = project;
 
-  // // })
-  // const tasksFilter = users?.filter((user) => taskAssignees?.includes(user.id));
-  const projectName = task.projectId.name;
+  if (!editTaskModal) return;
 
   return (
     <div className="">
@@ -51,7 +47,7 @@ const TaskInfoModal = () => {
         Class="flex flex-col gap-6 w-full max-w-[1000px] overflow-y-auto md:max-h-4/5 max-h-35/36"
       >
         <div className="flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6 ">
-          <h1 className="heading-4 md:heading-5 text-black">{projectName}</h1>
+          <TaskSection projectName={projectName} />
           <div className="flex gap-5 items-center">
             <div className="flex items-center gap-1">
               <img src={edit} alt="" className="hidden md:flex" />
@@ -72,16 +68,15 @@ const TaskInfoModal = () => {
               </button>
             )}
             <img
-              className="cursor-pointer"
               src={expand}
               alt="" // className="absolute top-0 right-0"
             />
-            <X className="cursor-pointer" onClick={() => setModal(false)} />
+            <img src={close} alt="" onClick={() => setModal(false)} />
           </div>
         </div>
         <div className="flex flex-col gap-6">
           <h1 className="heading-4">{task.title}</h1>
-          <div className="flex flex-col gap-3 md:flex-row md:gap-[150px] border-b border-neutral-black-5 dark:border-neutral-600 pb-6 mb-6">
+          <div className="flex flex-col gap-3 md:flex-row md:gap-[150px] border-b border-neutral-black-5 pb-6 mb-6">
             <div className="flex flex-col gap-3 w-full">
               <TaskListItem
                 icon={loading}
@@ -90,7 +85,7 @@ const TaskInfoModal = () => {
                 className={`py-1 px-3 ${
                   task.status === "Completed" && "bg-success-300"
                 }  ${task.status === "In Progress" && "bg-secondary-300"}
-                ${task.status === "To Do" && "bg-primary-200"} rounded-lg`}
+                  ${task.status === "To Do" && "bg-primary-200"} rounded-lg`}
               />
               <TaskListItem
                 icon={calendar}
@@ -104,10 +99,10 @@ const TaskInfoModal = () => {
               />
             </div>
             <div className="flex flex-col gap-3 w-full">
-              {/* <TaskListItem
+              <TaskListItem
                 icon={user}
                 title="Assignees"
-                taskListInfo={tasksFilter?.map((task) => (
+                taskListInfo={tasksFilter.map((task) => (
                   <figure className="w-8 h-8 rounded-full border border-white shadow-2xl">
                     <img
                       src={task.avatar}
@@ -115,8 +110,8 @@ const TaskInfoModal = () => {
                       className=" rounded-full"
                     />
                   </figure>
-                ))} 
-              /> */}
+                ))}
+              />
               <TaskListItem
                 icon={calendar}
                 title="Project"
@@ -139,18 +134,18 @@ const TaskInfoModal = () => {
           </p>
         </div>
         {/* {task.image && (
-          <div className="flex flex-col gap-4">
-            <h1 className="heading-5">Attachments</h1>
-            <div className="flex gap-5 flex-wrap">
-              {task.image.map((task) => (
-                <ImageFile task={task} key={task.id} />
-              ))}
+            <div className="flex flex-col gap-4">
+              <h1 className="heading-5">Attachments</h1>
+              <div className="flex gap-5 flex-wrap">
+                {task.image.map((task) => (
+                  <ImageFile task={task} key={task.id} />
+                ))}
+              </div>
             </div>
-          </div>
-        )} */}
+          )} */}
       </Modal>
     </div>
   );
 };
 
-export default TaskInfoModal;
+export default EditTaskModal;

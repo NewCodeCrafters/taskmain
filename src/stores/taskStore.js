@@ -1,16 +1,19 @@
 import { create } from "zustand";
-import tasks from "../data/task";
+import { addTaskApi, fetchTaskApi } from "../utils/api";
+// import tasks from "../data/task";
 
 export const useTaskStore = create((set) => ({
   tasks: [],
   loading: false,
   error: null,
-
   fetchTasks: async () => {
     set({ loading: true, error: null });
     try {
-      await new Promise((res) => setTimeout(res, 500));
-      set({ tasks: tasks, loading: false });
+      const res = await fetchTaskApi();
+
+      const resData = res.data.tasks;
+      console.log(res);
+      set({ tasks: resData, loading: false });
     } catch (err) {
       set({ error: err.message, loading: false });
     }
@@ -19,8 +22,9 @@ export const useTaskStore = create((set) => ({
   addTask: async (task) => {
     set({ loading: true });
     try {
-      await new Promise((res) => setTimeout(res, 500));
-      set((state) => ({ tasks: [...state.tasks, task], loading: false }));
+      const res = await addTaskApi(task);
+      console.log(res);
+      set((state) => ({ tasks: [...state.tasks, res], loading: false }));
     } catch (err) {
       set({ error: err.message, loading: false });
     }

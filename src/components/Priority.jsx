@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import useAddTaskStore from "../stores/useAddTaskStore";
 
-const options = ["High", "Mid", "Low"];
+const options = ["high", "Mid", "Low"];
 
 export default function Priority() {
-  const [selected, setSelected] = useState(null);
+  const { priority, setPriority } = useAddTaskStore((s) => s);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (option) => {
-    setSelected(option);
+    setPriority(option);
     setIsOpen(false);
   };
 
@@ -19,16 +20,16 @@ export default function Priority() {
       >
         <span
           className={`${
-            selected === "High"
-              ? "bg-success-300 "
-              : selected === "Mid"
-              ? "bg-warning-300 "
-              : selected === "Low"
-              ? "bg-gray-400"
-              : "text-gray-400 px-0 py-0"
-          } text-white body-medium-medium px-3 py-1 rounded flex gap-2.5 items-center`}
+            priority === "High"
+              ? "bg-success-300 text-white"
+              : priority === "Mid "
+              ? "bg-warning-300  text-white"
+              : priority === "Low"
+              ? "bg-gray-400  text-white"
+              : ""
+          } text-gray-400 body-medium-medium px-3 py-1 rounded flex gap-2.5 items-center`}
         >
-          {selected || "Empty"}
+          {priority || "Empty"}
         </span>
       </div>
 

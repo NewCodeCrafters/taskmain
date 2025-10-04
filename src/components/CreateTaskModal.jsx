@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import Modal from "./modal";
 import filePlus from "../assets/file-plus-03.svg";
 import expand from "../assets/expand-01.svg";
@@ -15,21 +15,104 @@ import DatePick from "./DatePicker";
 import StatusDropdown from "./StatusDropdown";
 import TimeEstimate from "./TimeEstimate";
 import Priority from "./Priority";
-import attachImg from "../assets/attachment-01.svg";
+// import attachImg from "../assets/attachment-01.svg";
 import { useModal } from "../stores/useModal";
 import Button from "./Button";
-
-// const status = ["Completed", "In Progress", "To Do"];
+import useAddTaskStore from "../stores/useAddTaskStore";
+import { useTaskStore } from "../stores/taskStore";
+import { useProjectStore } from "../stores/useProjectStore";
+import AddAssignees from "./AddAssignees";
+import { useEffect, useState } from "react";
+import { useUserStore } from "../stores/useUserStore";
+import usePerUSerStore from "../stores/usePerUserStore";
+import toast from "react-hot-toast";
+import TaskSucessModal from "./TaskSucessModal";
+// import { preview } from "vite";
 
 const CreateTaskModal = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { setTaskSuccessModal } = useModal((s) => s);
+  const { taskName, setTaskName, description, setDescription } =
+    useAddTaskStore((s) => s);
+  const { user } = usePerUSerStore((s) => s);
+  const { currentProjectId, projects, fetchProjects, setProjectName } =
+    useProjectStore();
+  useEffect(() => {
+    setProjectName(projectNameFound);
+    fetchUsers();
+    fetchProjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const findProject = projects?.find(
+    (p) => String(currentProjectId) === String(p.id)
+  );
+  const projectNameFound = findProject?.name;
+  const { addTask } = useTaskStore((s) => s);
+  const { fetchUsers, users } = useUserStore((s) => s);
+
   const { setModalAddTask, modalAddTask } = useModal((s) => s);
-  // const [close, setClose] = useState(false);
-  // const onClose = () => {
-  //   setClose(!close);
-  // };
+  const {
+    Status,
+    timeEstimate,
+    priority,
+    dueDate,
+    resetForm,
+    // selectedUsers,
+    // image,
+    setImage,
+  } = useAddTaskStore((s) => s);
+  // const now = new Date();
+  // const date = now.toLocaleDateString("en-GB", {
+  //   day: "numeric",
+  //   month: "long",
+  //   year: "numeric",
+  // });
+  // const assignees = selectedUsers.map((user) => user.id);
+  const handleImageChange = (e) => {
+    const selected = e.target.files[0];
+    if (selected) {
+      // setFile(selected);
+      setImage(URL.createObjectURL(selected));
+    }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const result = await addTask(Task);
+      console.log(result);
+      if (result.data) {
+        resetForm();
+        setModalAddTask(false);
+        setTaskSuccessModal(true);
+      } else {
+        toast.error("Failed to create task, try again");
+      }
+    } catch (err) {
+      console.error("Error Creating Task", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const Task = {
+    title: taskName,
+    description: description,
+    projectId: currentProjectId,
+    assignees: ["68a1ddf2545d271878713493"],
+    dueDate: dueDate,
+    priority: priority,
+    timeEstimate: timeEstimate,
+    image: "",
+    status: Status,
+    progress: 60,
+  };
   return (
     <Modal isOpen={modalAddTask}>
-      <form action="" ClassName="flex flex-col gap-6 w-full max-w-[1000px]">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-6 w-full h-2/3 max-w-[1000px]"
+      >
         <div className="w-full flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6">
           <div className="flex gap-3">
             <img src={filePlus} alt="filePlus" />
@@ -49,6 +132,8 @@ const CreateTaskModal = () => {
           className="bg-none border-0 heading-3 focus:outline-0  placeholder:text-gray-400 mb-3
           "
           placeholder="Task Name"
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
         />
         <div className="md:grid md:grid-cols-2 md:grid-rows-4 flex flex-col gap-3 border-b border-neutral-black-5 pb-6 mb-6">
           <section className="w-full flex items-center justify-between max-w-[400px]">
@@ -74,7 +159,20 @@ const CreateTaskModal = () => {
             </div>
             <TimeEstimate />
           </section>
-          <CreateTaskInput Title="Assignees" image={<img src={userImg} />} />
+
+          <section className="w-full flex items-center justify-between max-w-[400px]">
+            <div className="flex gap-8 items-center ">
+              <img src={userImg} />
+              <span className="text-gray-400 body-medium-medium">
+                Assignees
+              </span>
+              {/* <AddAssignees
+                projectId={currentProjectId}
+                users={users}
+                projects={projects}
+              /> */}
+            </div>
+          </section>
 
           <section className="w-full flex items-center justify-between max-w-[400px]">
             <div className="flex gap-2.5 items-center">
@@ -91,13 +189,23 @@ const CreateTaskModal = () => {
             className="w-full h-[120px] focus:outline-0 bg-neutral-black-2 px-3 py-2.5"
             placeholder="Placeholder"
             maxLength={"200"}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
         <div className="flex items-center gap-4 w-full justify-end">
-          <Button className="rounded-full" variant="signIn">
-            <img src={attachImg} alt="" />
+          <input
+            type="file"
+            className="rounded-full"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+          {/* <input type="file" /> */}
+          {/* <img src={attachImg} alt="" />
+          </input> */}
+          <Button className="w-[150px]" isLoading={isLoading} type="submit">
+            Create Task
           </Button>
-          <Button>Create Task</Button>
         </div>
       </form>
     </Modal>

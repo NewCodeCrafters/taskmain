@@ -1,23 +1,22 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router";
 import CollapsedNavLink from "./CollapsedNavLink";
-import UserPlus from "../assets/UserPlus";
-import Building from "../assets/Building";
-import Layers from "../assets/Layers";
 import { MessageCircleMore, Search, Star, User, Users } from "lucide-react";
 import PieChart from "../assets/PieChart";
 import { useThemeStore } from "../stores/useThemeStore";
+import { useProjectStore } from "../stores/useProjectStore";
 
 const CollapsedNav = () => {
   const { theme, setTheme } = useThemeStore((s) => s);
+  const { projectes } = useProjectStore((s) => s);
 
   useEffect(() => {
-      if(theme === 'dark'){
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    })
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  });
   return (
     <div className="lg:flex flex-col items-center p-5 gap-4 dark:bg-black dark:text-white dark:border-neutral-800  border-r border-neutral-black-5  w-[95px]  h-screen md:flex hidden bg-white ">
       {/* <div className="flex flex-col items-center justify-between pt-1 top-0 left-0 z-100 bg-white "> */}
@@ -40,11 +39,6 @@ const CollapsedNav = () => {
             LinkTo="/"
             image={<PieChart className="w-7 h-7" />}
           />
-
-          <CollapsedNavLink
-            LinkTo="/membersettings"
-            image={<Users size={30} />}
-          />
           <CollapsedNavLink LinkTo="/favourites" image={<Star size={30} />} />
           <CollapsedNavLink
             LinkTo="/messages"
@@ -54,11 +48,10 @@ const CollapsedNav = () => {
       </section>
       <section className="flex flex-col items-center gap-5">
         <span className="text-neutral-black-8">Spaces</span>
-        <UserPlus className="w-7 h-7" />
-        <Building className="w-7 h-7" />
-        <Layers className="w-7 h-7" />
       </section>
-      <section className={`flex flex-col bg-neutral-black-4 dark:bg-neutral-black-10 rounded-xl p-1 gap-3 mt-6`}>
+      <section
+        className={`flex flex-col bg-neutral-black-4 dark:bg-neutral-black-10 rounded-xl p-1 gap-3 mt-6`}
+      >
         <button
           className="px-4 py-2 rounded-lg bg-white dark:bg-transparent"
           onClick={() => setTheme("light")}

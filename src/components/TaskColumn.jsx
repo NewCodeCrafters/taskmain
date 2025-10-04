@@ -4,11 +4,7 @@ import TaskCard from "./TaskCard";
 import { useTaskStore } from "../stores/taskStore";
 import { useDrop } from "react-dnd";
 
-const TaskColumn = ({ 
-  status, 
-  className, 
-  filteredTask
- }) => {
+const TaskColumn = ({ status, className, filteredTask, image }) => {
   const { updateTaskStatus } = useTaskStore((s) => s);
 
   const [{ isOver }, drop] = useDrop(() => ({
@@ -30,8 +26,9 @@ const TaskColumn = ({
         className={className}
         taskQuantity={filteredTask.length}
       />
-      { filteredTask.map((task) => (
-        <TaskCard key={task.id} task={task} />
+
+      {filteredTask.map((task) => (
+        <TaskCard key={task.id} task={task} image={image} />
       ))}
     </div>
   );

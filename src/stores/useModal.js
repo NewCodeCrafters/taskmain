@@ -18,4 +18,8 @@ export const useModal = create((set) => ({
   shareSpaceModal: false,
   setShareSpaceModal: (showCreateSpace) =>
     set({ shareSpaceModal: showCreateSpace }),
+  editTaskModal: false,
+  setEditTaskModal: (edit) => set({ editTaskModal: edit }),
+  taskSuccessModal: false,
+  setTaskSuccessModal: (success) => set({ taskSuccessModal: success }),
 }));

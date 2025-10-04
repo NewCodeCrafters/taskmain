@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
+
 import Button from "./Button";
-import { getUserProfile } from "../utils/api";
+// import { getUserProfile } from "../utils/api";
 import TaskSection from "./TaskSection";
 import ProfileDropDown from "./ProfileDropDown";
 import ProfileModal from "./ProfileModal";
@@ -10,6 +11,9 @@ import Modal from "./modal";
 import NotificationModal from "./NotificationModal";
 import { notifications } from "../data/notifications";
 import { Bell, ChevronDown, LayoutGrid } from "lucide-react";
+import usePerUSerStore from "../stores/usePerUserStore";
+import { getUserProfile } from "../utils/api";
+import { useProjectStore } from "../stores/useProjectStore";
 
 const Header = ({
   handleSideBar,
@@ -19,20 +23,26 @@ const Header = ({
   handleSetMobileBar,
   setDropDown,
 }) => {
-  const [user, setUser] = useState(null);
-  console.log(user);
+  // const [user, setUser] = useState(null);
+  // console.log(user);
+  const { currentProjectId } = useProjectStore();
+  const { user, setUser } = usePerUSerStore((u) => u);
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUser = async () => {
       try {
-        const userData = await getUserProfile();
-        setUser(userData);
-        console.log(userData);
-      } catch (error) {
-        console.error(error);
+        const users = await getUserProfile();
+        console.log("Logged in user:", users);
+        setUser(users);
+      } catch (err) {
+        console.log(err.message);
+        console.error("Not logged in or token invalid");
       }
     };
-    fetchUserData();
+    fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(user);
   const { setShareSpaceModal } = useModal((s) => s);
   const [showNotificationModal, setShowNotificationModal] = useState(false);
 
@@ -46,6 +56,7 @@ const Header = ({
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -62,12 +73,14 @@ const Header = ({
       <section className="flex md:gap-10 gap-[20px]">
         <div className="flex gap-4 items-center">
           <div className="hidden md:hidden lg:flex items-center gap-1">
-            <img src="/images/clock.svg" alt="" />
-            <span className="text-paragraph">Last edited 10 minutes ago </span>
+            {/* <img src="/images/clock.svg" alt="" /> */}
+            {/* <span className="text-paragraph">Last edited 10 minutes ago </span> */}
           </div>
-          <Button variant="black" onClick={() => setShareSpaceModal(true)}>
-            Share
-          </Button>
+          {currentProjectId && (
+            <Button variant="black" onClick={() => setShareSpaceModal(true)}>
+              Share
+            </Button>
+          )}
           <div className="relative">
             <div
               className={`flex cursor-pointer`}
@@ -120,8 +133,13 @@ const Header = ({
             <img src="/images/avatar.svg" alt="" />
           </figure>
           <div className="lg:flex flex-col md:flex hidden">
-            <span className="body-small-medium">{user}</span>
-            <span className="body-xsmall-medium text-paragraph">@fajar123</span>
+            <div className="flex gap-1">
+              <span className="body-small-medium">{user.firstname}</span>
+              <span className="body-small-medium">{user.lastname}</span>
+            </div>
+            <span className="body-xsmall-medium text-paragraph">
+              {user.email}
+            </span>
           </div>
           <figure>
             <ChevronDown
@@ -130,7 +148,7 @@ const Header = ({
               }`}
             />
           </figure>
-      {dropDown && <ProfileDropDown />}
+          {dropDown && <ProfileDropDown />}
         </div>
       </section>
 

@@ -7,17 +7,33 @@ import Button from "./Button";
 import { useModal } from "../stores/useModal";
 import { useSpaces } from "../stores/useSpaces";
 import { X } from "lucide-react";
+import { useProjectStore } from "../stores/useProjectStore";
+import { ACCESS_TOKEN_KEY } from "../utils/constant";
 
 const CreateSpace = () => {
   const { setCreateSpaceModal, createSpaceModal } = useModal((c) => c);
-  const addSpace = useSpaces((state) => state.addSpace);
+  const { addProject } = useProjectStore((s) => s);
   const [spaceName, setSpaceName] = useState("");
+  const project = {
+    name: spaceName,
+    description: "A pro",
+    // members: ["u1", "u2"],
+  };
   const handleCreateSpace = () => {
     if (!spaceName.trim()) return;
-    addSpace(spaceName.trim());
+    addProject(project);
     setSpaceName("");
     setCreateSpaceModal(false);
+    console.log(project.name);
+    console.log(project);
   };
+
+  // id: "p1",
+  //   name: "Website Redesign",
+  //   description: "Revamp the company website with a modern design",
+  //   createdAt: "2025-08-01",
+  //   members: ["u1", "u2", "u3"],
+
   return (
     <Modal
       isOpen={createSpaceModal}

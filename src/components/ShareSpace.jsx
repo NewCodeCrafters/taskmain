@@ -6,10 +6,24 @@ import TextInput from "./Input";
 import mail from "../assets/mail-01.svg";
 import Button from "./Button";
 import { X } from "lucide-react";
+import { useProjectStore } from "../stores/useProjectStore";
+import { addMemberApi } from "../utils/api";
 
 const ShareSpace = () => {
+  const { currentProjectId } = useProjectStore((s) => s);
   const [shareSpace, setShareSpace] = useState("");
   const { shareSpaceModal, setShareSpaceModal } = useModal((s) => s);
+  const data = {
+    email: shareSpace,
+    role: "member",
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addMemberApi(currentProjectId, data);
+    setShareSpaceModal(false);
+    setShareSpace("");
+    // console.log(proje?ctId);
+  };
   return (
     <Modal
       isOpen={shareSpaceModal}
@@ -32,7 +46,7 @@ const ShareSpace = () => {
           value={shareSpace}
           onChange={(e) => setShareSpace(e.target.value)}
         />
-        <Button>Share</Button>
+        <Button onClick={handleSubmit}>Share</Button>
       </div>
     </Modal>
   );

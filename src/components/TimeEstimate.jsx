@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import chevronDown from "../assets/chevron-down.svg";
+// import chevronDown from "../assets/chevron-down.svg";
+import useAddTaskStore from "../stores/useAddTaskStore";
 
 const options = ["3 days", "1 week", "2 weeks", "1 month", "3 months"];
 
 export default function TimeEstimate() {
-  const [selected, setSelected] = useState(null);
+  const { timeEstimate, setTimeEstimate } = useAddTaskStore((s) => s);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (option) => {
-    setSelected(option);
+    setTimeEstimate(option);
     setIsOpen(false);
   };
 
@@ -20,12 +21,12 @@ export default function TimeEstimate() {
       >
         <span
           className={`${
-            selected
+            timeEstimate
               ? "body-medium-semibold"
               : "body-medium-medium text-gray-400"
           }`}
         >
-          {selected || "Empty"}
+          {timeEstimate || "Empty"}
         </span>
       </div>
 

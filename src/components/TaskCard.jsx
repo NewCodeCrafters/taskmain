@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import calendar from "../assets/calendar.svg";
 import dots from "../assets/dots-horizontal.svg";
 import plus from "../assets/plus.svg";
@@ -6,9 +7,19 @@ import messages from "../assets/message-text-square-01.svg";
 import { useDrag } from "react-dnd";
 import TaskInfoModal from "./taskInfoModal";
 import { useModal } from "../stores/useModal";
+import { useUserStore } from "../stores/useUserStore";
 
 const TaskCard = ({ task }) => {
-  const { setModal, setTaskId } = useModal((s) => s);
+  const { setModal, setTaskId, taskId } = useModal((s) => s);
+  const { users } = useUserStore((s) => s);
+  const taskAssignees = task.assignees;
+  console.log(taskAssignees);
+  // useEffect(() => fetchUsers(), []);
+
+  const tasksFilter = users.filter((user) => taskAssignees.includes(user.id));
+  console.log(task);
+  console.log(taskId);
+
   const handleTaskId = (id) => {
     setTaskId(id);
     setModal(true);
@@ -19,7 +30,7 @@ const TaskCard = ({ task }) => {
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "TASK",
-    item: { id: task.id, status: task.status },
+    item: { id: task._id, status: task.status },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -31,7 +42,7 @@ const TaskCard = ({ task }) => {
         isDragging ? "opacity-50" : "opacity-100"
       }`}
       ref={drag}
-      onClick={() => handleTaskId(task.id)}
+      onClick={() => handleTaskId(task._id)}
     >
       <div className="flex justify-between items-center">
         <div className="flex gap-1 items-center">
@@ -47,12 +58,7 @@ const TaskCard = ({ task }) => {
         </figure>
       </div>
       <h1 className="heading-4">{task.title}</h1>
-      {task.image && (
-        <img
-          src={task.image}
-          className="h-[200px] w-full rounded-lg object-cover"
-        />
-      )}
+      {task.image && <img src={task.image} />}
       <div className="flex items-center gap-2.5">
         {/* {task.tags.map((tag, index) => (
           <span
@@ -66,11 +72,11 @@ const TaskCard = ({ task }) => {
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="flex">
-            {/* {task.assignees.map((user) => (
+            {tasksFilter.map((user) => (
               <figure className="w-full max-w-12 max-h-12 rounded-full overflow-hidden ">
                 <img src={user.avatar} alt={user.name} key={user.id} />
               </figure>
-            ))} */}
+            ))}
           </div>
           <button>
             <img src={plus} alt="" />

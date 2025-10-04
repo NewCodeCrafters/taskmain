@@ -15,7 +15,7 @@ import userX from "../assets/user-x-01.svg";
 const ProfileSettings = () => {
   return (
     <div className="p-6 bg-white dark:bg-black dark:text-white rounded-lg flex gap-6 w-full flex-col">
-      <div className="grid grid-cols-3 gap-10 w-full border-b border-neutral-black-5 dark:border-neutral-800 pb-6 ">
+      <div className="lg:grid grid-cols-3 gap-10 w-full border-b border-neutral-black-5 dark:border-neutral-800 pb-6 ">
         <ProfileUserInfo
           title="Profile"
           body="Your personal information and account 
@@ -24,7 +24,7 @@ const ProfileSettings = () => {
         />
         <div className="flex gap-5 flex-col w-full col-span-2">
           <ProfileUserInfo title="Avatar" body={<img src={avatar} />} />
-          <div className="flex gap-2 w-full">
+          <div className="lg:flex gap-2 w-full">
             <TextInput
               placeholder="Fajar Gunawan"
               className="w-full"
@@ -47,13 +47,13 @@ const ProfileSettings = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-10 w-full border-b border-neutral-black-5 dark:border-neutral-800 pb-6">
+      <div className="lg:grid grid-cols-3 gap-10 w-full border-b border-neutral-black-5 dark:border-neutral-800 pb-6">
         <ProfileUserInfo
           title="Language & Region"
           body="Customize your language and region."
           className="w-full"
         />
-        <div className="w-full flex gap-2 col-span-2">
+        <div className="w-full lg:flex gap-2 col-span-2">
           <TextInput
             className="w-full"
             label="Email"
@@ -70,9 +70,9 @@ const ProfileSettings = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-10">
+      <div className="lg:grid grid-cols-3 lg:gap-10 gap-5 flex flex-col">
         <ProfileUserInfo title="Danger zone" body="Proceed with Caution" />
-        <div className="flex gap-5 col-span-2">
+        <div className="lg:flex gap-5 col-span-2 flex  flex-col w-full">
           <Button variant="stroke" leftIcon={<img src={logOut} />}>
             Logout of all sessions
           </Button>

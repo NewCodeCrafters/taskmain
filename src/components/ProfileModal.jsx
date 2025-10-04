@@ -8,7 +8,11 @@ import { useTaskStore } from "../stores/taskStore";
 import { useModal } from "../stores/useModal";
 import { X } from "lucide-react";
 
+import usePerUSerStore from "../stores/usePerUserStore";
+
 const ProfileModal = () => {
+  const { user } = usePerUSerStore((u) => u);
+
   const { tasks } = useTaskStore((s) => s);
   const { setModalProfile } = useModal((s) => s);
   const handleProfileModal = () => {
@@ -29,7 +33,7 @@ const ProfileModal = () => {
        h-full w-[600px] p-6 gap-6 rounded-l-[20px] flex flex-col min-h-svh overflow-y-auto scrollBar"
         >
           <div className="flex justify-between">
-            <ProfileStatus />
+            <ProfileStatus user={user} />
             <button className="flex gap-3 bg-primary-50 px-4 py-2.5 items-center rounded-full  ">
               <img src={settings} alt="" />
               <span className="body-small-medium text-primary-500">
@@ -37,11 +41,11 @@ const ProfileModal = () => {
               </span>
             </button>
           </div>
-          <div className="flex gap-10 pb-6 border-b border-neutral-500">
+          {/* <div className="flex gap-10 pb-6 border-b border-neutral-500">
             <ProfileUserInfo title="Title" body="Manager" />
-            <ProfileUserInfo title="Email" body="fajar123@gmail.com" />
-            <ProfileUserInfo title="Local Time" body="08:15" />
-          </div>
+            <ProfileUserInfo title="Email" body={user.email} />
+            <ProfileUserInfo title="Local Time" body="07:15" />
+          </div> */}
           <span className="body-medium-semibold">My work</span>
           <div className="flex flex-col gap-3">
             {tasks.map((task) => (
