@@ -42,7 +42,11 @@ const TaskInfoModal = () => {
   // // })
   // const tasksFilter = users?.filter((user) => taskAssignees?.includes(user.id));
   const projectName = task.projectId.name;
-
+  const handleEditModal = () => {
+    setEditTaskModal(true);
+    console.log("My name is Samuel");
+    setModal(false);
+  };
   return (
     <div className="">
       <Modal
@@ -54,7 +58,6 @@ const TaskInfoModal = () => {
           <h1 className="heading-4 md:heading-5 text-black">{projectName}</h1>
           <div className="flex gap-5 items-center">
             <div className="flex items-center gap-1">
-              <img src={edit} alt="" className="hidden md:flex" />
               <span className="hidden md:flex body-small-regular text-paragraph">
                 {dateCreated}
               </span>
@@ -63,14 +66,9 @@ const TaskInfoModal = () => {
               Share
             </Button>
             <img src={star} alt="" />
-            {!editTaskModal && (
-              <button
-                className="hover:cursor-pointer"
-                onClick={() => setEditTaskModal(true)}
-              >
-                <img src={edit} alt="" />
-              </button>
-            )}
+            <button className="hover:cursor-pointer" onClick={handleEditModal}>
+              <img src={edit} alt="" />
+            </button>
             <img
               className="cursor-pointer"
               src={expand}

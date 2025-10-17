@@ -12,6 +12,7 @@ import DailyTaskBoardView from "../components/DailyTaskBoardView";
 import DailyTaskListView from "../components/DailyTaskListView";
 import DailyTaskCalenderView from "../components/DailyTaskCalenderView";
 import { useProjectStore } from "../stores/useProjectStore";
+import EditTaskModal from "../components/EditTaskModal";
 
 // import tasks from "../data/task";
 
@@ -24,7 +25,7 @@ const Space = () => {
     setCurrentProjectId(id);
   }, [id, setCurrentProjectId]);
 
-  const filteredTasks = tasks.filter((t) => t.projectId._id === id);
+  const filteredTasks = tasks.filter((t) => t?.projectId?._id === id);
   console.log(tasks);
   console.log(filteredTasks);
 
@@ -39,7 +40,7 @@ const Space = () => {
 
   return (
     <div className="relative flex flex-col gap-6 ">
-      <section className="flex justify-between">
+      <section className="flex justify-between w-full">
         <div className="hidden md:flex gap-1 items-start">
           <HomeLink
             onClick={() => setViewParams({ view: "board" })}
@@ -60,12 +61,14 @@ const Space = () => {
             isActive={view === "calendar"}
           />
         </div>
-        <div className="flex gap-3">
-          <Filter />
-          <SortBy />
+        <div className="flex justify-between w-full">
+          <div className="flex items-center gap-3">
+            <Filter />
+            <SortBy />
+          </div>
           <Button
             leftIcon={<img src={plus} />}
-            className="hidden md:flex ml-2 "
+            className="flex ml-2 "
             onClick={() => setModalAddTask(true)}
           >
             Add Task
@@ -81,6 +84,7 @@ const Space = () => {
         {view === "calendar" && <DailyTaskCalenderView />}
       </div>
       <CreateTaskModal />
+      <EditTaskModal />
     </div>
   );
 };

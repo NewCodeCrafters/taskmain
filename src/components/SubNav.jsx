@@ -10,7 +10,7 @@ import CreateSpace from "./createSpace";
 import { useProjectStore } from "../stores/useProjectStore";
 import { ChevronDown, Star } from "lucide-react";
 
-const SubNav = ({ handleSideBar }) => {
+const SubNav = ({ onClickMain }) => {
   const { setCreateSpaceModal } = useModal((s) => s);
   const { projectes, fetchProjects } = useProjectStore((s) => s);
   useEffect(() => {
@@ -76,6 +76,7 @@ const SubNav = ({ handleSideBar }) => {
                         to={`/${space.name}/${space._id}/teamdailytask`}
                         className="py-3 px-4   hover:cursor-pointer
                         rounded-4 w-full"
+                        onClick={onClickMain}
                       >
                         Team Daily Task
                       </Link>
@@ -83,6 +84,7 @@ const SubNav = ({ handleSideBar }) => {
                         to={`/${space.name}/${space._id}/memberssettings`}
                         className="py-3 px-4   hover:cursor-pointer
                         rounded-4 w-full"
+                        onClick={onClickMain}
                       >
                         Member Settings
                       </Link>

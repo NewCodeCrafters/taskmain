@@ -24,7 +24,7 @@ import { useProjectStore } from "../stores/useProjectStore";
 import AddAssignees from "./AddAssignees";
 import { useEffect, useState } from "react";
 import { useUserStore } from "../stores/useUserStore";
-import usePerUSerStore from "../stores/usePerUserStore";
+// import usePerUSerStore from "../stores/usePerUserStore";
 import toast from "react-hot-toast";
 import TaskSucessModal from "./TaskSucessModal";
 // import { preview } from "vite";
@@ -34,7 +34,7 @@ const CreateTaskModal = () => {
   const { setTaskSuccessModal } = useModal((s) => s);
   const { taskName, setTaskName, description, setDescription } =
     useAddTaskStore((s) => s);
-  const { user } = usePerUSerStore((s) => s);
+  // const { user } = usePerUSerStore((s) => s);
   const { currentProjectId, projects, fetchProjects, setProjectName } =
     useProjectStore();
   useEffect(() => {
@@ -49,7 +49,7 @@ const CreateTaskModal = () => {
   );
   const projectNameFound = findProject?.name;
   const { addTask } = useTaskStore((s) => s);
-  const { fetchUsers, users } = useUserStore((s) => s);
+  const { fetchUsers } = useUserStore((s) => s);
 
   const { setModalAddTask, modalAddTask } = useModal((s) => s);
   const {
@@ -78,14 +78,44 @@ const CreateTaskModal = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Simple validation check
+    if (
+      !taskName.trim() ||
+      !description.trim() ||
+      !currentProjectId ||
+      !dueDate ||
+      !priority ||
+      !timeEstimate ||
+      !Status
+    ) {
+      toast.error("Please fill in all required fields before submitting.");
+      return; // stop form submission
+    }
     setIsLoading(true);
+    const Task = {
+      title: taskName,
+      description: description,
+      projectId: currentProjectId,
+      assignees: ["68a1ddf2545d271878713493"],
+      dueDate: dueDate,
+      priority: priority,
+      timeEstimate: timeEstimate,
+      image: "https://example.com/homepage.png",
+      status: Status,
+      progress: 0,
+    };
     try {
       const result = await addTask(Task);
       console.log(result);
-      if (result.data) {
+      console.log(result.data);
+      if (result.status === 201) {
+        console.log("Message:", result.data.message);
+        console.log("Created Task:", result.data.task);
         resetForm();
         setModalAddTask(false);
         setTaskSuccessModal(true);
+        toast("Task Created succesfully");
       } else {
         toast.error("Failed to create task, try again");
       }
@@ -95,24 +125,10 @@ const CreateTaskModal = () => {
       setIsLoading(false);
     }
   };
-  const Task = {
-    title: taskName,
-    description: description,
-    projectId: currentProjectId,
-    assignees: ["68a1ddf2545d271878713493"],
-    dueDate: dueDate,
-    priority: priority,
-    timeEstimate: timeEstimate,
-    image: "",
-    status: Status,
-    progress: 60,
-  };
+
   return (
-    <Modal isOpen={modalAddTask}>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-6 w-full h-2/3 max-w-[1000px]"
-      >
+    <Modal isOpen={modalAddTask} Class="h-full max-h-[80.0vh] overflow-y-auto">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <div className="w-full flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6">
           <div className="flex gap-3">
             <img src={filePlus} alt="filePlus" />
