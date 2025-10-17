@@ -8,6 +8,7 @@ import { useDrag } from "react-dnd";
 import TaskInfoModal from "./taskInfoModal";
 import { useModal } from "../stores/useModal";
 import { useUserStore } from "../stores/useUserStore";
+import EditTaskModal from "./EditTaskModal";
 
 const TaskCard = ({ task }) => {
   const { setModal, setTaskId, taskId } = useModal((s) => s);
@@ -87,6 +88,7 @@ const TaskCard = ({ task }) => {
           <span className="body-small-medium text-paragraph">7</span>
         </div>
         <TaskInfoModal />
+        <EditTaskModal />
       </div>
     </div>
   );

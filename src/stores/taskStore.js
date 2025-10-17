@@ -25,6 +25,7 @@ export const useTaskStore = create((set) => ({
       const res = await addTaskApi(task);
       console.log(res);
       set((state) => ({ tasks: [...state.tasks, res], loading: false }));
+      return res;
     } catch (err) {
       set({ error: err.message, loading: false });
     }
@@ -45,6 +46,11 @@ export const useTaskStore = create((set) => ({
     }
   },
 
+  editTask: async () => {
+    // try{
+    // }catch(){
+    // }
+  },
   deleteTask: async (taskId) => {
     set({ loading: true });
     try {

@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import ProfileSettings from "./components/ProfileSettings";
 import Space from "./pages/Space";
 import ResetPassword from "./pages/ResetPassword";
+import ProfileMobile from "./components/ProfileMobile";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path={routes.favourites} element={<Favourites />} />
             <Route path={routes.messages} element={<Messages />} />
             <Route path="/profileSettings" element={<ProfileSettings />} />
+            <Route path="/profile" element={<ProfileMobile />} />
             {/* <Route path="/pro"> */}
             <Route path=":name/:id/teamdailytask" element={<Space />} />
             <Route

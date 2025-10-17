@@ -6,25 +6,32 @@ import { Link } from "react-router";
 import { MessageCircleMore, Star, Users } from "lucide-react";
 import PieChart from "../assets/PieChart";
 
-const MainNav = ({}) => {
+const MainNav = ({ onClickMain }) => {
   return (
     <div>
       {" "}
       <section>
         <div className="flex flex-col gap-3 border-b dark:border-neutral-700 border-neutral-black-5 pb-4">
           <span className="text-neutral-black-8">General</span>
-          <RouteLink leftIcon={<PieChart />} linkDesc="Overview" LinkTo="/" />
+          <RouteLink
+            leftIcon={<PieChart />}
+            linkDesc="Overview"
+            LinkTo="/"
+            onClick={onClickMain}
+          />
 
           <RouteLink
             leftIcon={<Star />}
             linkDesc="Favourites"
             LinkTo="/favourites"
+            onClick={onClickMain}
           />
 
           <RouteLink
             leftIcon={<MessageCircleMore />}
             linkDesc="Messages"
             LinkTo="/messages"
+            onClick={onClickMain}
           />
         </div>
       </section>

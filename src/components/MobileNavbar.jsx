@@ -10,6 +10,8 @@ const MobileNavbar = ({ handleSetMobileBar }) => {
       <Navbar
         className="flex bg-white flex-grow overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
+        onClicked={handleSetMobileBar}
+        onClickMain={handleSetMobileBar}
       />
     </div>
   );

@@ -3,21 +3,29 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useThemeStore } from "../stores/useThemeStore";
 
-const Theme = () => {
+const Theme = ({ onClickMain }) => {
   const { theme, setTheme } = useThemeStore((s) => s);
-  
+  const setThemeDark = () => {
+    setTheme("dark");
+    onClickMain();
+  };
+  const setThemeLight = () => {
+    setTheme("light");
+    onClickMain();
+  };
+
   useEffect(() => {
-    if(theme === 'dark'){
-      document.documentElement.classList.add('dark')
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove("dark");
     }
-  })
+  });
 
   return (
     <section className="bg-neutral-black-4 dark:bg-background flex gap-3 p-1 rounded-xl justify-center items-center w-full">
       <button
-        onClick={() => setTheme("light")}
+        onClick={setThemeLight}
         className={`flex justify-center items-center rounded-lg gap-2 px-2.5 py-2 w-full max-w-[120px]
           transition-all duration-300 ease-in-out ${
             theme === "light" ? "bg-white" : "bg-transparent"
@@ -36,7 +44,7 @@ const Theme = () => {
         </span>
       </button>
       <button
-        onClick={() => setTheme("dark")}
+        onClick={setThemeDark}
         className={`flex justify-center items-center rounded-lg gap-2 px-2.5 py-2 w-full max-w-[120px]
           transition-all duration-300 dark:text-white ease-in-out ${
             theme === "dark" ? "text-white dark:bg-black" : "bg-transparent"
