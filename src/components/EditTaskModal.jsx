@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Modal from "./modal";
+import Modal from "./Modal";
 import editIcon from "../assets/edit-05.svg";
 import expand from "../assets/expand-01.svg";
 import CloseIcon from "../assets/x-close.svg";

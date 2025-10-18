@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Modal from "./modal";
+import Modal from "./Modal";
 import TaskSection from "./TaskSection";
 import edit from "../assets/edit-05.svg";
 import star from "../assets/star-01.svg";
