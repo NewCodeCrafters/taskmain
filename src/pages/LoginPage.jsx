@@ -45,7 +45,9 @@ const LoginPage = () => {
       await logIn(val);
       setSuccess(true);
       setError(null);
+
       // localStorage.setItem(ACCESS_TOKEN_KEY, Response.accessToken);
+
     } catch (error) {
       console.error(error);
       setSuccess(false);

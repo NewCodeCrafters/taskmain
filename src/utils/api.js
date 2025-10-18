@@ -92,6 +92,7 @@ export const signup = async (userData) => {
 
 export const logIn = async (credentials) => {
   try {
+
     const res = await api.post("/api/signin", credentials);
 
     // ✅ log response (for debugging only)
@@ -106,6 +107,7 @@ export const logIn = async (credentials) => {
 
     // ✅ save user in your store
     // usePerUSerStore.getState().setUser(user);
+
 
     return res.data;
   } catch (error) {

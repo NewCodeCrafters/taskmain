@@ -1,3 +1,4 @@
+
 import { MoonIcon } from "lucide-react";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -22,13 +23,16 @@ const Theme = ({ onClickMain }) => {
     }
   });
 
+
   return (
     <section className="bg-neutral-black-4 dark:bg-background flex gap-3 p-1 rounded-xl justify-center items-center w-full">
       <button
+
         onClick={setThemeLight}
         className={`flex justify-center items-center rounded-lg gap-2 px-2.5 py-2 w-full max-w-[120px]
           transition-all duration-300 ease-in-out ${
             theme === "light" ? "bg-white" : "bg-transparent"
+
           }
        `}
       >
@@ -44,6 +48,7 @@ const Theme = ({ onClickMain }) => {
         </span>
       </button>
       <button
+
         onClick={setThemeDark}
         className={`flex justify-center items-center rounded-lg gap-2 px-2.5 py-2 w-full max-w-[120px]
           transition-all duration-300 dark:text-white ease-in-out ${

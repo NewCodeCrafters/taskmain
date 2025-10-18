@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import ProfileLink from "./ProfileLink";
+
 import { logout } from "../utils/api";
 
 import ProfileSettings from "./ProfileSettings";
