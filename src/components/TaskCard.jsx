@@ -5,7 +5,7 @@ import dots from "../assets/dots-horizontal.svg";
 import plus from "../assets/plus.svg";
 import messages from "../assets/message-text-square-01.svg";
 import { useDrag } from "react-dnd";
-import TaskInfoModal from "./taskInfoModal";
+import TaskInfoModal from "./TaskInfoModal";
 import { useModal } from "../stores/useModal";
 import { useUserStore } from "../stores/useUserStore";
 import EditTaskModal from "./EditTaskModal";

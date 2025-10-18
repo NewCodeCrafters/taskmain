@@ -1,4 +1,4 @@
-import { RotateCw } from "lucide-react";
+import { RotateCw, Trash } from "lucide-react";
 import React from "react";
 
 const TrashTableActions = () => {
