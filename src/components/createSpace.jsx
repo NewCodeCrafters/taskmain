@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Modal from "./modal";
+import Modal from "./Modal";
 import closeIcon from "../assets/x-close.svg";
 import TextInput from "./Input";
 import mail from "../assets/mail-01.svg";
