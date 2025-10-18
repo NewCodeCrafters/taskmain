@@ -1,4 +1,4 @@
-import Checkbox from "../Checkbox";
+import Checkbox from "../CheckBox";
 import ProgressBar from "../ProgressBar";
 import { useModal } from "../../stores/useModal";
 import TaskInfoModal from "../taskInfoModal";
