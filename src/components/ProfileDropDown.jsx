@@ -1,45 +1,60 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import ProfileLink from "./ProfileLink";
-import { useTheme } from "../stores/theme-store";
+
+import { logout } from "../utils/api";
+
+import ProfileSettings from "./ProfileSettings";
+import { useModal } from "../stores/useModal";
+import { ChevronRight, Moon, Settings, Trash2, Users } from "lucide-react";
+import ToggleSwitch from "../assets/ToggleSwitch";
+import { useThemeStore } from "../stores/useThemeStore";
 
 const ProfileDropDown = () => {
-  const { theme, toggleTheme } = useTheme((s) => s);
+  const { setModalProfile } = useModal((s) => s);
+  const { theme, toggleTheme } = useThemeStore((s) => s);
+  const darkMode = theme === "dark" ? true : false;
 
   return (
-    <section>
-      <div className="top-0 right-0 absolute mt-2 md:mt-4  mr-5 w-full md:max-w-[276px] max-w-[220px] p-2 bg-white rounded-xl flex flex-col gap-2 transition-all ease-in-out duration-500">
-        <div className="flex flex-col gap-2 border-b pb-2 border-neutral-black-5">
+    <>
+      <div className="-bottom-80 right-0 absolute mt-2 md:mt-4  mr-5 w-full md:max-w-[276px] max-w-[220px] p-2 bg-white dark:bg-black dark:text-white rounded-xl flex flex-col gap-2 transition-all ease-in-out duration-500 z-50">
+        <div className="flex flex-col gap-2 border-b pb-2 border-neutral-black-5 dark:border-neutral-800">
           <ProfileLink
-            leftIcon={<img src="/images/users-01.svg" />}
+            leftIcon={<Users />}
             linkDesc="Profile"
-            rightIcon={<img src="/images/chevron-right.svg" />}
+            rightIcon={<ChevronRight />}
+            onClick={() => setModalProfile(true)}
+            LinkTo="/profile"
           />
+
           <ProfileLink
-            leftIcon={<img src="/images/settings-02.svg" />}
+            LinkTo="/profileSettings"
+            leftIcon={<Settings />}
             linkDesc="Settings"
-            rightIcon={<img src="/images/chevron-right.svg" />}
+            rightIcon={<ChevronRight />}
           />
           <ProfileLink
-            leftIcon={<img src="/images/moon.svg" />}
+            leftIcon={<Moon />}
             linkDesc="Dark Mode"
-            rightIcon={<img src="/images/Toggle.svg" />}
+            onClick={toggleTheme}
+            rightIcon={<ToggleSwitch isOn={darkMode} />}
           />
           <ProfileLink
-            leftIcon={<img src="/images/trash-01.svg" />}
+            leftIcon={<Trash2 />}
             linkDesc="Trash"
-            rightIcon={<img src="/images/chevron-right.svg" />}
+            rightIcon={<ChevronRight />}
           />
         </div>
 
         <div>
           <ProfileLink
+            onClick={() => logout()}
             leftIcon={<img src="/images/log-out-01.svg" />}
             linkDesc="Logout"
             rightIcon={<img src="/images/chevron-right-red.svg" />}
           />
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

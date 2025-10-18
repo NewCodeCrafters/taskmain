@@ -4,7 +4,7 @@ import { Outlet } from "react-router";
 
 const AuthLayout = () => {
   return (
-    <div className="bg-black min-h-screen w-full h-full grid  lg:grid-cols-2 md:grid-cols-2 p-5  ">
+    <div className="bg-black dark:bg-background min-h-screen w-full h-full grid place-items-center md:place-items-stretch lg:grid-cols-2 md:grid-cols-2 p-5  ">
       <section className=" text-white lg:flex flex-col justify-between h-full md:flex hidden ">
         <div className="text-white flex gap-2 items-center">
           <figure>
@@ -22,7 +22,7 @@ const AuthLayout = () => {
           </p>
         </div>
       </section>
-      <section className="bg-white rounded-3xl flex items-center justify-center p-8 ">
+      <section className="bg-white dark:text-white dark:bg-black h-fit md:h-full  rounded-3xl flex items-center justify-center p-8 ">
         <Outlet />
       </section>
     </div>

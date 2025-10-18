@@ -1,36 +1,37 @@
 import React from "react";
 import RouteLink from "./RouteLink";
+import picChart01 from "/images/pie-chart-01.svg";
+import picChart02 from "/images/pie-chart-02.svg";
 import { Link } from "react-router";
+import { MessageCircleMore, Star, Users } from "lucide-react";
+import PieChart from "../assets/PieChart";
 
-const MainNav = () => {
+const MainNav = ({ onClickMain }) => {
   return (
     <div>
       {" "}
       <section>
-        <div className="flex flex-col gap-3 border-b border-neutral-black-5 pb-4">
+        <div className="flex flex-col gap-3 border-b dark:border-neutral-700 border-neutral-black-5 pb-4">
           <span className="text-neutral-black-8">General</span>
           <RouteLink
-            leftIcon={<img src="/images/pie-chart-02.svg" />}
+            leftIcon={<PieChart />}
             linkDesc="Overview"
             LinkTo="/"
+            onClick={onClickMain}
           />
 
           <RouteLink
-            leftIcon={<img src="/images/users-01.svg" />}
-            linkDesc="Member settings"
-            LinkTo="/membersettings"
-          />
-
-          <RouteLink
-            leftIcon={<img src="/images/star-01.svg" />}
+            leftIcon={<Star />}
             linkDesc="Favourites"
             LinkTo="/favourites"
+            onClick={onClickMain}
           />
 
           <RouteLink
-            leftIcon={<img src="/images/message-text-circle-02.svg" />}
+            leftIcon={<MessageCircleMore />}
             linkDesc="Messages"
             LinkTo="/messages"
+            onClick={onClickMain}
           />
         </div>
       </section>

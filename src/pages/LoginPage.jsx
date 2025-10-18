@@ -45,7 +45,9 @@ const LoginPage = () => {
       await logIn(val);
       setSuccess(true);
       setError(null);
-      // localStorage.setItem(ACCESS_TOKEN_KEY, Response.access_token);
+
+      // localStorage.setItem(ACCESS_TOKEN_KEY, Response.accessToken);
+
     } catch (error) {
       console.error(error);
       setSuccess(false);
@@ -76,7 +78,7 @@ const LoginPage = () => {
           <img src={logo} alt="" />
         </figure>
         <div className="heading-3">Hi, Welcome</div>
-        <p className="text-neutral-black-9 body-medium-medium">
+        <p className="text-neutral-black-9 dark:text-neutral-400 body-medium-medium">
           Please login your account
         </p>
       </div>
@@ -91,6 +93,7 @@ const LoginPage = () => {
             leftIcon={<img src={mail} />}
             placeholder="Your email"
             className="w-full body-small-medium text-neutral-900 "
+            errorBorder=" border-error-100"
             label="Email"
             error={errors.email?.message}
           />
@@ -105,6 +108,7 @@ const LoginPage = () => {
             }
             placeholder="Your password"
             className={"w-full body-small-medium text-neutral-900"}
+            errorBorder={`${error ? "bor" : ""}`}
             label="password"
             type={showPassword ? "text" : "password"}
             error={errors.password?.message}
@@ -120,13 +124,13 @@ const LoginPage = () => {
         </form>
 
         <div className="flex justify-between gap-4">
-          <label className="flex gap-2  border-hidden body-small-medium text-paragraph ">
+          <label className="flex gap-2  border-hidden body-small-medium dark:text-neutral-400 text-paragraph ">
             <TextInput className="" type="checkbox" />
             Remember me
           </label>
           <Link
             to="/forgotpassword"
-            className="body-small-medium text-paragraph"
+            className="body-small-medium dark:text-neutral-400 text-paragraph"
           >
             forgot password?
           </Link>
@@ -135,7 +139,7 @@ const LoginPage = () => {
 
       <OrSignIn />
       <div className="flex justify-center gap-2 mt-6">
-        <span className="text-neutral-900 body-small-medium ">
+        <span className="text-neutral-900  dark:text-white body-small-medium ">
           Don't have an account?
         </span>
         <Link to="/signup" className="text-primary-500 body-medium-semibold ">

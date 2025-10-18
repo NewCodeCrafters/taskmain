@@ -7,11 +7,15 @@ import Messages from "./pages/Messages";
 import AuthLayout from "./components/AuthLayout";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import ForgetPassword from "./pages/Forgetpassword";
+import ForgetPassword from "./pages/ForgetPassword";
 import OtpPage from "./pages/OtpPage";
 import { Toaster } from "react-hot-toast";
 import { routes } from "./utils/constant";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProfileSettings from "./components/ProfileSettings";
+import Space from "./pages/Space";
+import ResetPassword from "./pages/ResetPassword";
+import ProfileMobile from "./components/ProfileMobile";
 
 function App() {
   return (
@@ -20,21 +24,28 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
-            <Route path={routes.home} element={<Home />} />
-            <Route
-              path={routes.membersettings}
-              element={<MembersSetttings />}
-            />
+            <Route path="/*" element={<Home />} />
+
             <Route path={routes.favourites} element={<Favourites />} />
             <Route path={routes.messages} element={<Messages />} />
+            <Route path="/profileSettings" element={<ProfileSettings />} />
+            <Route path="/profile" element={<ProfileMobile />} />
+            {/* <Route path="/pro"> */}
+            <Route path=":name/:id/teamdailytask" element={<Space />} />
+            <Route
+              path=":name/:id/memberssettings"
+              element={<MembersSetttings />}
+            />
           </Route>
         </Route>
+        {/* </Route> */}
         <Route element={<AuthLayout />}>
           <Route path={routes.login} element={<LoginPage />} />
           <Route path={routes.signup} element={<SignUpPage />} />
           <Route path={routes.forgotpassword} element={<ForgetPassword />} />
           <Route path={routes.confirmotp} element={<OtpPage />} />
-          {/* <Route path="/confirmotp" element={<OtpPage />} /> */}
+          <Route path={routes.passwordpeset} element={<ResetPassword />} />
+          {/* <Route path={routes.Checkbox} element={<Checkbox />} /> */}
         </Route>
       </Routes>
     </main>

@@ -36,8 +36,8 @@ const SignUpPage = () => {
     values: {
       email: "",
       password: "",
-      first_name: "",
-      last_name: "",
+      firstname: "",
+      lastname: "",
     },
   });
 
@@ -71,7 +71,7 @@ const SignUpPage = () => {
       <Logo className="md:hidden" />
       <div className="flex flex-col gap-3 items-center ">
         <h1 className="heading-4 md:heading-3">Create Your Account</h1>
-        <span className="text-paragraph body-medium-medium">
+        <span className="text-paragraph dark:text-neutral-400 body-medium-medium">
           Please input to your account
         </span>
       </div>
@@ -81,21 +81,21 @@ const SignUpPage = () => {
       >
         <section className="flex flex-col lg:flex-row gap-3 w-full">
           <TextInput
-            {...register("first_name")}
+            {...register("firstname")}
             label="First name"
             leftIcon={<img src={userIcon} />}
             placeholder="Input your first name"
             className="w-full"
-            error={errors.first_name?.message}
+            error={errors.firstname?.message}
           />
 
           <TextInput
-            {...register("last_name")}
+            {...register("lastname")}
             label="Last name"
             leftIcon={<img src={userIcon} />}
             placeholder="Input your last name"
             className="w-full"
-            error={errors.last_name?.message}
+            error={errors.lastname?.message}
           />
         </section>
         <TextInput
@@ -122,7 +122,7 @@ const SignUpPage = () => {
           error={errors.password?.message}
         />
 
-        <Button className="mt-3" type="submit" isLoading={isLoading}>
+        <Button className="mt-3 h-10" type="submit" isLoading={isLoading}>
           Register
         </Button>
       </form>
