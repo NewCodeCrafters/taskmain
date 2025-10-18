@@ -7,7 +7,6 @@ import ProfileDropDown from "./ProfileDropDown";
 import ProfileModal from "./ProfileModal";
 import { useModal } from "../stores/useModal";
 import ShareSpace from "./ShareSpace";
-import Modal from "./modal";
 import NotificationModal from "./NotificationModal";
 import { notifications } from "../data/notifications";
 import { Bell, ChevronDown, LayoutGrid } from "lucide-react";
