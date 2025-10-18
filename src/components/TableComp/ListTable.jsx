@@ -1,7 +1,7 @@
 import Checkbox from "../CheckBox";
 import ProgressBar from "../ProgressBar";
 import { useModal } from "../../stores/useModal";
-import TaskInfoModal from "../taskInfoModal";
+import TaskInfoModal from "../TaskInfoModal";
 import Interactions from "./Interactions";
 import { useTaskStore } from "./store/useTableTaskStore";
 import SeeActions from "./SeeActions";
