@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useModal } from "../stores/useModal";
 import Modal from "./Modal";
-import closeIcon from "../assets/x-close.svg";
 import TextInput from "./Input";
 import mail from "../assets/mail-01.svg";
 import Button from "./Button";
@@ -13,22 +12,27 @@ const ShareSpace = () => {
   const { currentProjectId } = useProjectStore((s) => s);
   const [shareSpace, setShareSpace] = useState("");
   const { shareSpaceModal, setShareSpaceModal } = useModal((s) => s);
+  const [isLoading, setIsLoading] = useState(false); // ✅ fixed
+
   const data = {
     email: shareSpace,
     role: "member",
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addMemberApi(currentProjectId, data);
+    setIsLoading(true);
+    await addMemberApi(currentProjectId, data); // ✅ use dynamic ID
+    setIsLoading(false);
     setShareSpaceModal(false);
     setShareSpace("");
-    // console.log(proje?ctId);
   };
+
   return (
     <Modal
       isOpen={shareSpaceModal}
       onClick={(e) => e.stopPropagation()}
-      Class="flex gap-5 flex-col p-6 "
+      Class="flex gap-5 flex-col p-6"
     >
       <div className="border-b border-neutral-black-5 pb-6 mb-6 flex items-center justify-between">
         <h1 className="body-medium-semibold">Share this space</h1>
@@ -39,6 +43,7 @@ const ShareSpace = () => {
           <X />
         </button>
       </div>
+
       <div className="flex items-center gap-3">
         <TextInput
           leftIcon={<img src={mail} />}
@@ -46,7 +51,9 @@ const ShareSpace = () => {
           value={shareSpace}
           onChange={(e) => setShareSpace(e.target.value)}
         />
-        <Button onClick={handleSubmit}>Share</Button>
+        <Button onClick={handleSubmit} isLoading={isLoading}>
+          Share
+        </Button>
       </div>
     </Modal>
   );

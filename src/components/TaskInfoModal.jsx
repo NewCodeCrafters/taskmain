@@ -21,17 +21,23 @@ import useAddTaskStore from "../stores/useAddTaskStore";
 import { useTaskStore } from "../stores/taskStore";
 // import { useAddTaskStore } from "../stores/useAddTaskStore";
 
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 const TaskInfoModal = () => {
   const { tasks } = useTaskStore((s) => s);
-  console.log(tasks);
-  // const { projectName } = useProjectStore((s) => s);
   const { modal, setModal, taskId, setEditTaskModal, editTaskModal } = useModal(
     (s) => s
   );
   const { users } = useUserStore((s) => s);
   const { dateCreated } = useAddTaskStore((s) => s);
   const task = tasks.find((task) => task?._id === taskId);
-  console.log(taskId);
 
   if (!task) {
     return null; // prevents "task.title is undefined" error
@@ -44,7 +50,6 @@ const TaskInfoModal = () => {
   const projectName = task.projectId.name;
   const handleEditModal = () => {
     setEditTaskModal(true);
-    console.log("My name is Samuel");
     setModal(false);
   };
   return (
@@ -52,7 +57,7 @@ const TaskInfoModal = () => {
       <Modal
         isOpen={modal}
         onClick={(e) => e.stopPropagation()}
-        Class="flex flex-col gap-6 w-full max-w-[1000px] overflow-y-auto md:max-h-4/5 max-h-35/36"
+        Class="flex flex-col gap-6 w-full max-w-[1000px] overflow-y-auto md:max-h-4/5 max-h-35/36 mx-5"
       >
         <div className="flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6 ">
           <h1 className="heading-4 md:heading-5 text-black">{projectName}</h1>
@@ -93,7 +98,7 @@ const TaskInfoModal = () => {
               <TaskListItem
                 icon={calendar}
                 title="Due date"
-                taskListInfo={task.dueDate}
+                taskListInfo={formatDate(task.dueDate)}
               />
               <TaskListItem
                 icon={hourglass}

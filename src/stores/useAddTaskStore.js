@@ -4,7 +4,7 @@ const useAddTaskStore = create((set) => ({
   taskName: "",
   Status: "",
   timeEstimate: "",
-  priority: "low",
+  priority: "Empty",
   dueDate: "",
   assignees: [],
   description: "",

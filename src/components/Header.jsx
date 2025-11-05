@@ -30,11 +30,9 @@ const Header = ({
     const fetchUser = async () => {
       try {
         const users = await getUserProfile();
-        console.log("Logged in user:", users);
         setUser(users);
       } catch (err) {
-        console.log(err.message);
-        console.error("Not logged in or token invalid");
+        console.error("Error:", err);
       }
     };
     fetchUser();

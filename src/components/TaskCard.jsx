@@ -10,24 +10,27 @@ import { useModal } from "../stores/useModal";
 import { useUserStore } from "../stores/useUserStore";
 import EditTaskModal from "./EditTaskModal";
 
+// helper function
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 const TaskCard = ({ task }) => {
   const { setModal, setTaskId, taskId } = useModal((s) => s);
   const { users } = useUserStore((s) => s);
   const taskAssignees = task.assignees;
-  console.log(taskAssignees);
-  // useEffect(() => fetchUsers(), []);
 
   const tasksFilter = users.filter((user) => taskAssignees.includes(user.id));
-  console.log(task);
-  console.log(taskId);
 
   const handleTaskId = (id) => {
     setTaskId(id);
     setModal(true);
   };
-
-  // console.log(modal);
-  // console.log(task);
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "TASK",
@@ -51,7 +54,7 @@ const TaskCard = ({ task }) => {
             <img src={calendar} alt="" />
           </figure>
           <span className="text-paragraph body-small-medium">
-            {task.dueDate}
+            {formatDate(task.dueDate)}
           </span>
         </div>
         <figure>

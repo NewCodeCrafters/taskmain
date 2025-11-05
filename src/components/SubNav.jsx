@@ -19,10 +19,11 @@ const SubNav = ({ onClickMain }) => {
   // console.log(projects);
   const handleCrateSpaceModal = () => {
     setCreateSpaceModal(true);
+    onClickMain();
   };
   const [expanded, setExpanded] = useState(null);
   const projects = projectes?.data;
-  console.log(projects);
+
   // const handleExpand = () => {
   //   setExpanded((prev) => !prev);
   // };

@@ -20,7 +20,7 @@ const Messages = () => {
 
         {/* main chat */}
         <div className="row-span-5">
-          <ChatMain />
+          <ChatMain mappedMessages={mappedMessages} />
         </div>
       </section>
     </div>

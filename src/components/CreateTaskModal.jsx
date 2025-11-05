@@ -48,7 +48,7 @@ const CreateTaskModal = () => {
     (p) => String(currentProjectId) === String(p.id)
   );
   const projectNameFound = findProject?.name;
-  const { addTask } = useTaskStore((s) => s);
+  const { addTask, fetchTasks } = useTaskStore((s) => s);
   const { fetchUsers } = useUserStore((s) => s);
 
   const { setModalAddTask, modalAddTask } = useModal((s) => s);
@@ -60,7 +60,7 @@ const CreateTaskModal = () => {
     resetForm,
     // selectedUsers,
     // image,
-    setImage,
+    // setImage,
   } = useAddTaskStore((s) => s);
   // const now = new Date();
   // const date = now.toLocaleDateString("en-GB", {
@@ -69,13 +69,13 @@ const CreateTaskModal = () => {
   //   year: "numeric",
   // });
   // const assignees = selectedUsers.map((user) => user.id);
-  const handleImageChange = (e) => {
-    const selected = e.target.files[0];
-    if (selected) {
-      // setFile(selected);
-      setImage(URL.createObjectURL(selected));
-    }
-  };
+  // const handleImageChange = (e) => {
+  //   const selected = e.target.files[0];
+  //   if (selected) {
+  //     // setFile(selected);
+  //     setImage(URL.createObjectURL(selected));
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -97,7 +97,7 @@ const CreateTaskModal = () => {
       title: taskName,
       description: description,
       projectId: currentProjectId,
-      assignees: ["68a1ddf2545d271878713493"],
+      assignees: [""],
       dueDate: dueDate,
       priority: priority,
       timeEstimate: timeEstimate,
@@ -115,7 +115,7 @@ const CreateTaskModal = () => {
         resetForm();
         setModalAddTask(false);
         setTaskSuccessModal(true);
-        toast("Task Created succesfully");
+        await fetchTasks();
       } else {
         toast.error("Failed to create task, try again");
       }
@@ -125,11 +125,19 @@ const CreateTaskModal = () => {
       setIsLoading(false);
     }
   };
+  // const handleKeyPress = (e) => {
+  //   if (e.key === "Enter") {
+  //     handleSubmit();
+  //   }
+  // };
 
   return (
-    <Modal isOpen={modalAddTask} Class="h-full max-h-[80.0vh] overflow-y-auto">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <div className="w-full flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6">
+    <Modal
+      isOpen={modalAddTask}
+      Class=" h-full max-h-[90.0vh] overflow-y-auto rounded-2xl"
+    >
+      <form onSubmit={handleSubmit} className="w-full flex flex-col md:gap-6">
+        <div className=" flex items-center justify-between border-b border-neutral-black-5 pb-6 mb-6">
           <div className="flex gap-3">
             <img src={filePlus} alt="filePlus" />
             <p className="heading-5">Create New Task</p>
@@ -151,22 +159,22 @@ const CreateTaskModal = () => {
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
         />
-        <div className="md:grid md:grid-cols-2 md:grid-rows-4 flex flex-col gap-3 border-b border-neutral-black-5 pb-6 mb-6">
-          <section className="w-full flex items-center justify-between max-w-[400px]">
+        <div className="md:grid md:grid-cols-2 md:grid-rows-4 flex flex-col gap-3 border-b border-neutral-black-5 pb-6 mb-6 w-full">
+          <section className="w-full flex items-center justify-between ">
             <div className="flex gap-2.5 items-center">
               <img src={loadingImg} />
               <span className="text-gray-400 body-medium-medium">Status</span>
             </div>
             <StatusDropdown />
           </section>
-          <section className="w-full flex items-center justify-between max-w-[400px]">
+          <section className="w-full flex items-center justify-between ">
             <div className="flex gap-2.5 items-center">
               <img src={calendarImg} />
               <span className="text-gray-400 body-medium-medium">Due Date</span>
             </div>
             <DatePick />
           </section>
-          <section className="w-full flex items-center justify-between max-w-[400px]">
+          <section className="w-full flex items-center justify-between ">
             <div className="flex gap-2.5 items-center">
               <img src={hourGlass} />
               <span className="text-gray-400 body-medium-medium">
@@ -176,7 +184,7 @@ const CreateTaskModal = () => {
             <TimeEstimate />
           </section>
 
-          <section className="w-full flex items-center justify-between max-w-[400px]">
+          <section className="w-full flex items-center justify-between">
             <div className="flex gap-8 items-center ">
               <img src={userImg} />
               <span className="text-gray-400 body-medium-medium">
@@ -190,7 +198,7 @@ const CreateTaskModal = () => {
             </div>
           </section>
 
-          <section className="w-full flex items-center justify-between max-w-[400px]">
+          <section className="w-full flex items-center justify-between">
             <div className="flex gap-2.5 items-center">
               <img src={PriorityImg} />
               <span className="text-gray-400 body-medium-medium">Priority</span>
@@ -198,24 +206,24 @@ const CreateTaskModal = () => {
             <Priority />
           </section>
         </div>
-        <div className="mb-6">
+        <div className="mb-6 flex flex-col gap-2">
           <span className="body-small-medium">Add Description</span>
           <input
             type="text"
-            className="w-full h-[120px] focus:outline-0 bg-neutral-black-2 px-3 py-2.5"
+            className="h-[120px] w-full focus:outline-0 bg-neutral-black-2 px-3 py-2.5"
             placeholder="Placeholder"
-            maxLength={"200"}
+            // maxLength={"200"}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
         <div className="flex items-center gap-4 w-full justify-end">
-          <input
+          {/* <input
             type="file"
             className="rounded-full"
             accept="image/*"
             onChange={handleImageChange}
-          />
+          /> */}
           {/* <input type="file" /> */}
           {/* <img src={attachImg} alt="" />
           </input> */}
