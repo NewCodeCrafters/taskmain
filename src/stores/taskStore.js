@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { addTaskApi, fetchTaskApi } from "../utils/api";
+import { addTaskApi, fetchTaskApi, updateTaskApi } from "../utils/api";
 // import tasks from "../data/task";
 
 export const useTaskStore = create((set) => ({
@@ -12,7 +12,6 @@ export const useTaskStore = create((set) => ({
       const res = await fetchTaskApi();
 
       const resData = res.data.tasks;
-      console.log(res);
       set({ tasks: resData, loading: false });
     } catch (err) {
       set({ error: err.message, loading: false });
@@ -46,11 +45,43 @@ export const useTaskStore = create((set) => ({
     }
   },
 
-  editTask: async () => {
-    // try{
-    // }catch(){
-    // }
+  // Alternative: Separate editTask function
+  editTask: async (taskId, updatedData) => {
+    set({ loading: true, error: null });
+
+    // const previousTasks = get().tasks;
+
+    try {
+      // Optimistic update with all fields
+      set((state) => ({
+        tasks: state.tasks.map((t) =>
+          t._id === taskId ? { ...t, ...updatedData } : t
+        ),
+      }));
+
+      // Send all updated fields to API
+      const res = await updateTaskApi(taskId, updatedData);
+      console.log(res);
+
+      // Validate response
+      if (!res || !res.task) {
+        throw new Error("Invalid response from server");
+      }
+
+      // Update with server data
+      set((state) => ({
+        tasks: state.tasks.map((t) =>
+          t._id === taskId ? { ...t, ...res.task } : t
+        ),
+        loading: false,
+      }));
+
+      return res;
+    } catch (err) {
+      set({ loading: false, error: err.message });
+    }
   },
+
   deleteTask: async (taskId) => {
     set({ loading: true });
     try {

@@ -19,7 +19,6 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem(ACCESS_TOKEN_KEY);
-  console.log(token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -44,9 +43,7 @@ api.interceptors.response.use(
             refreshToken: refreshToken,
           }
         );
-        console.log(res);
         const newAccessToken = res.data.accessToken;
-        console.log(newAccessToken);
         localStorage.setItem(ACCESS_TOKEN_KEY, newAccessToken);
         localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
         error.config.headers["Authorization"] = `Bearer ${newAccessToken}`;
@@ -63,7 +60,6 @@ export const signup = async (userData) => {
   try {
     const res = await api.post("/api/signup", userData);
     const { accessToken, refreshToken } = res.data;
-    console.log(res);
 
     // usePerUSerStore.getState().setUser(user);
 
@@ -92,22 +88,17 @@ export const signup = async (userData) => {
 
 export const logIn = async (credentials) => {
   try {
-
     const res = await api.post("/api/signin", credentials);
-
-    // ✅ log response (for debugging only)
-    console.log("Login response:", res);
 
     // ✅ correct keys from backend
     const { accessToken, refreshToken } = res.data;
-    console.log(accessToken, refreshToken);
+
     // ✅ save tokens
     localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
 
     // ✅ save user in your store
     // usePerUSerStore.getState().setUser(user);
-
 
     return res.data;
   } catch (error) {
@@ -133,10 +124,7 @@ export const logIn = async (credentials) => {
 
 export const getUserProfile = async () => {
   try {
-    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
-    console.log(token);
     const res = await api.get("/auth/me");
-    console.log(res.data);
     return res.data;
   } catch (error) {
     throw error.response?.data?.message || "Unauthorized";
@@ -163,7 +151,6 @@ export const forgotPassword = async (userEmail) => {
     const res = await api.post("/forgot_password/request", {
       email: userEmail.email,
     });
-    console.log(res.data);
     toast.success("Reset Instructions has been sent via email");
     return res.data;
   } catch (err) {
@@ -227,5 +214,5 @@ export const addMemberApi = (id, data) =>
   api.post(`api/space/${id}/invite`, data);
 export const addTaskApi = (task) => api.post("api/task", task);
 export const updateTaskApi = (id, updates) =>
-  api.put(`api/task/${id}`, updates);
+  api.patch(`api/task/${id}`, updates);
 export const deleteTaskApi = (id) => api.delete(`/api/task/${id}`);

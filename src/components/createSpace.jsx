@@ -9,25 +9,54 @@ import { useSpaces } from "../stores/useSpaces";
 import { X } from "lucide-react";
 import { useProjectStore } from "../stores/useProjectStore";
 import { ACCESS_TOKEN_KEY } from "../utils/constant";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const CreateSpace = () => {
+  const navigate = useNavigate();
   const { setCreateSpaceModal, createSpaceModal } = useModal((c) => c);
   const { addProject } = useProjectStore((s) => s);
   const [spaceName, setSpaceName] = useState("");
-  const project = {
-    name: spaceName,
-    description: "A pro",
-    // members: ["u1", "u2"],
-  };
-  const handleCreateSpace = () => {
-    if (!spaceName.trim()) return;
-    addProject(project);
-    setSpaceName("");
-    setCreateSpaceModal(false);
-    console.log(project.name);
-    console.log(project);
+  const [isLoading, setIsloading] = useState(false);
+
+  const handleCreateSpace = async () => {
+    if (!spaceName.trim()) {
+      toast.error("Space name is required");
+      return;
+    }
+
+    setIsloading(true);
+
+    const project = {
+      name: spaceName,
+      description: "A pro",
+      // members: ["u1", "u2"],
+    };
+    try {
+      //  Send and await response
+      const response = await addProject(project);
+      console.log(response);
+      if (response && response.status == 201) {
+        const spaceData = response.data.space;
+        const spaceId = spaceData._id;
+        setSpaceName("");
+        setCreateSpaceModal(false);
+        toast.success("Space Created Successfully");
+        // Navigate to the SpaceUrl
+        navigate(`/${spaceName}/${spaceId}/teamdailytask`);
+      }
+    } catch (err) {
+      console.error("Error Creating Project:", err);
+    } finally {
+      setIsloading(false);
+    }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleCreateSpace();
+    }
+  };
   // id: "p1",
   //   name: "Website Redesign",
   //   description: "Revamp the company website with a modern design",
@@ -55,8 +84,15 @@ const CreateSpace = () => {
           placeholder="Input space name..."
           value={spaceName}
           onChange={(e) => setSpaceName(e.target.value)}
+          onKeyPress={handleKeyPress}
         />
-        <Button onClick={handleCreateSpace}>Create</Button>
+        <Button
+          className="w-[85px]"
+          onClick={handleCreateSpace}
+          isLoading={isLoading}
+        >
+          Create
+        </Button>
       </div>
     </Modal>
   );

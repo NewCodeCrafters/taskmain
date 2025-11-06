@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useAddTaskStore from "../stores/useAddTaskStore";
 
-const options = ["high", "Mid", "Low"];
+const options = ["High", "Mid", "Low"];
 
 export default function Priority() {
   const { priority, setPriority } = useAddTaskStore((s) => s);
@@ -21,11 +21,11 @@ export default function Priority() {
         <span
           className={`${
             priority === "High"
-              ? "bg-success-300 text-white"
-              : priority === "Mid "
-              ? "bg-warning-300  text-white"
+              ? "bg-error-100/50 text-white"
+              : priority === "Mid"
+              ? "bg-gray-400 text-white"
               : priority === "Low"
-              ? "bg-gray-400  text-white"
+              ? "bg-warning-300  text-white"
               : ""
           } text-gray-400 body-medium-medium px-3 py-1 rounded flex gap-2.5 items-center`}
         >

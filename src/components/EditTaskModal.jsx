@@ -19,12 +19,15 @@ import { useModal } from "../stores/useModal";
 import { useTaskStore } from "../stores/taskStore";
 import { useUserStore } from "../stores/useUserStore";
 import { useProjectStore } from "../stores/useProjectStore";
+// import { progress } from "framer-motion";
+import { updateTaskApi } from "../utils/api";
+import useAddTaskStore from "../stores/useAddTaskStore";
 
 const EditTaskModal = () => {
   const { editTaskModal, setEditTaskModal, taskId, setModal } = useModal(
     (s) => s
   );
-  const { tasks, editTask } = useTaskStore((s) => s);
+  const { tasks, editTask, fetchTasks } = useTaskStore((s) => s);
   const { users, fetchUsers } = useUserStore((s) => s);
   const { projects, fetchProjects } = useProjectStore((s) => s);
 
@@ -34,10 +37,10 @@ const EditTaskModal = () => {
   // local state for editable fields
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("");
-  const [priority, setPriority] = useState("");
-  const [timeEstimate, setTimeEstimate] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  const { Status, setStatus } = useAddTaskStore((s) => s);
+  const { dueDate, setDueDate } = useAddTaskStore((s) => s);
+  const { priority, setPriority, resetForm } = useAddTaskStore((s) => s);
+  const { timeEstimate, setTimeEstimate } = useAddTaskStore((s) => s);
   const [assignees, setAssignees] = useState([]);
 
   useEffect(() => {
@@ -57,6 +60,7 @@ const EditTaskModal = () => {
       setDueDate(task.dueDate || "");
       setAssignees(task.assignees || []);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [task]);
 
   if (!editTaskModal || !task) return null;
@@ -66,21 +70,22 @@ const EditTaskModal = () => {
     setIsLoading(true);
     try {
       const updatedTask = {
-        title,
-        description,
-        status,
-        priority,
-        timeEstimate,
-        dueDate,
-        assignees,
+        title: title,
+        description: description,
+        priority: priority,
+        status: Status,
+        progress: 0,
+        dueDate: dueDate,
+        timeEstimate: timeEstimate,
       };
 
-      await editTask(task._id, updatedTask);
+      const response = await editTask(task._id, updatedTask);
+      fetchTasks();
       toast.success("Task updated successfully!");
       setEditTaskModal(false);
+      resetForm(); // optional, only if it doesn't mess up the add modal
     } catch (err) {
       console.error(err);
-      toast.error("Failed to update task. Try again.");
     } finally {
       setIsLoading(false);
     }

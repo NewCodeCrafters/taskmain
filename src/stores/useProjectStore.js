@@ -34,13 +34,16 @@ export const useProjectStore = create((set) => ({
   addProject: async (project) => {
     set({ loading: true });
     try {
-      await addProjectsApi(project);
+      const addTaskResponse = await addProjectsApi(project);
+
       const res = await fetchProjectsApi();
 
       set(() => ({
         projectes: res,
         loading: false,
       }));
+
+      return addTaskResponse;
     } catch (err) {
       set({ error: err.message, loading: false });
     }
