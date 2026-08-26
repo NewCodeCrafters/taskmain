@@ -6,13 +6,6 @@ import { googleLogin } from "../utils/api";
 
 /* global google */
 const OrSignIn = () => {
-  useEffect(() => {
-    google.accounts.id.initialize({
-      client_id: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
-  }, []);
-
   const handleCallbackResponse = async (response) => {
     const idToken = response.credential;
 
